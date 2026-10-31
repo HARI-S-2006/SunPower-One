@@ -72,5 +72,15 @@ describe('Solar System BOM Calculator & Business Logic', () => {
     // 5 kW: still capped at ₹78,000 residential maximum
     const bom5 = calculateBOM(5, 'on-grid')
     expect(bom5.estimatedSubsidyAmount).toBe(78000)
+
+    // Commercial / Factory connections: ₹0 residential CFA subsidy (Accelerated Depreciation applies)
+    const bomComm = calculateBOM(5, 'on-grid', 30, 'commercial')
+    expect(bomComm.estimatedSubsidyAmount).toBe(0)
+    expect(bomComm.subsidyEligibilityNote).toContain('Commercial/Industrial')
+
+    // Off-Grid systems: ₹0 central grid-tie subsidy
+    const bomOff = calculateBOM(3, 'off-grid')
+    expect(bomOff.estimatedSubsidyAmount).toBe(0)
+    expect(bomOff.subsidyEligibilityNote).toContain('Off-Grid')
   })
 })

@@ -15,6 +15,7 @@ export interface BOMItem {
 export interface BOMResult {
   systemCapacityKw: number
   systemType: 'on-grid' | 'off-grid'
+  customerCategory?: 'residential' | 'commercial'
   items: BOMItem[]
   totalEquipmentCost: number
   installationCost: number
@@ -22,6 +23,7 @@ export interface BOMResult {
   taxAmount: number
   totalAmount: number
   estimatedSubsidyAmount: number
+  subsidyEligibilityNote: string
   netPayableAfterSubsidy: number
   recommendedPanelCount: number
   estimatedRoofAreaSqFt: number
@@ -31,7 +33,8 @@ export interface BOMResult {
 export function calculateBOM(
   capacityKw: number,
   systemType: 'on-grid' | 'off-grid',
-  customCableLengthMeters = 30
+  customCableLengthMeters = 30,
+  customerCategory: 'residential' | 'commercial' = 'residential'
 ): BOMResult {
   const kw = Math.min(Math.max(capacityKw, 1), 5)
   const isOffGrid = systemType === 'off-grid'
@@ -240,18 +243,29 @@ export function calculateBOM(
   const taxAmount = Math.round(totalEquipmentCost * 0.12 + installationCost * 0.18)
   const totalAmount = subtotal + taxAmount
 
-  // PM Surya Ghar / State Rooftop Subsidy (approx ₹30,000 for 1kW, ₹60,000 for 2kW, ₹78,000 for 3kW+)
+  // PM Surya Ghar / State Rooftop Subsidy: Strictly for Residential Grid-Connected Systems
   let estimatedSubsidyAmount = 0
-  if (!isOffGrid) {
+  let subsidyEligibilityNote = ''
+
+  if (isOffGrid) {
+    estimatedSubsidyAmount = 0
+    subsidyEligibilityNote = 'Off-Grid systems are not eligible for central grid-tie CFA subsidy under PM Surya Ghar.'
+  } else if (customerCategory === 'commercial') {
+    estimatedSubsidyAmount = 0
+    subsidyEligibilityNote = 'Commercial/Industrial connections are not eligible for residential CFA subsidies (Eligible for 40% Accelerated Depreciation under Section 32).'
+  } else {
+    // Residential On-Grid Scheme: ₹30,000 for 1kW, ₹60,000 for 2kW, capped at ₹78,000 for 3kW+
     if (kw === 1) estimatedSubsidyAmount = 30000
     else if (kw === 2) estimatedSubsidyAmount = 60000
     else estimatedSubsidyAmount = 78000
+    subsidyEligibilityNote = `Eligible for PM Surya Ghar: Muft Bijli Yojana CFA subsidy of up to ₹${estimatedSubsidyAmount.toLocaleString()} upon DISCOM technical feasibility and net-meter inspection.`
   }
   const netPayableAfterSubsidy = Math.max(0, totalAmount - estimatedSubsidyAmount)
 
   return {
     systemCapacityKw: actualKw,
     systemType,
+    customerCategory,
     items,
     totalEquipmentCost,
     installationCost,
@@ -259,6 +273,7 @@ export function calculateBOM(
     taxAmount,
     totalAmount,
     estimatedSubsidyAmount,
+    subsidyEligibilityNote,
     netPayableAfterSubsidy,
     recommendedPanelCount: panelCount,
     estimatedRoofAreaSqFt: panelCount * 24, // approx 24 sq ft per panel

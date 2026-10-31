@@ -65,3 +65,4 @@ Inspection of `supabase/migrations/002_rls_policies.sql` confirms strict multi-t
    - All forms use `react-hook-form` and `zod` schemas (`enquirySchema`, `surveySchema`, `signatureSchema`) to prevent injection attacks and enforce structural validity.
 3. **Audit Notifications:**
    - Sensitive operational events (order dispatch, warranty activation, complaint resolution) are logged to `/app/notifications` with user attribution and timestamps.
+

@@ -37,3 +37,4 @@
 - **Status:** **BLOCKED BY CLOUD CREDENTIALS (LOCAL RESILIENT STORE ACTIVE)**
 - The application includes all 4 SQL migrations (`001_initial_schema.sql` through `004_seed_data.sql`), complete TypeScript database types (`src/types/database.ts`), and Supabase client abstraction (`src/lib/supabase/client.ts`).
 - Because live Supabase cloud credentials (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) are not provided in the environment, the frontend runs autonomously via the reactive `solarStore` layer with `localStorage` persistence and 1-click administrative reset in `/app/settings`.
+

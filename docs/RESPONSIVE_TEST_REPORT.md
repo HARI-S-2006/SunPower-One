@@ -41,3 +41,4 @@ Testing was conducted across standard responsive tiers specified by Google Stitc
 
 ### 4. Modals & Dialogs
 - `SerialScannerModal` and Warranty Certificate modals render as centered dialogs with warm ambient drop-shadows on desktop, and collapse to full-width bottom sheets on mobile.
+
