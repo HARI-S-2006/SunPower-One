@@ -224,11 +224,11 @@ test('Ticket closure requires customer confirmation', async ({ page }) => {
       
       await page.goto('/app/service')
       await expect(page.getByText(/Service Desk & After-Sales Complaints/i)).toBeVisible()
-      // Click on the ticket to open resolution modal
-      await page.getByText(/SRV-TKT-2026-092/i).first().click()
-      // Try to resolve without customer confirmation - should show error
-      await page.getByText(/Resolve/i).first().click()
-      await expect(page.getByText(/Customer confirmation must be explicitly recorded/i)).toBeVisible()
+      // Click the "Resolve Ticket" button for the ticket
+      await page.getByText(/Resolve Ticket/i).first().click()
+      // Try to confirm without customer confirmation - should show error
+      await page.getByText(/Confirm & Close Ticket/i).first().click()
+      await expect(page.getByText(/Mandatory: Customer confirmation must be explicitly recorded before resolving ticket/i)).toBeVisible()
     })
   })
 

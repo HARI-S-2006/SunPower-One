@@ -11,3 +11,4 @@ https.get('https://sunpower-one.netlify.app/', (res) => {
     console.log('...\n' + data.slice(-500));
   });
 });
+
