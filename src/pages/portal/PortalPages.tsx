@@ -47,12 +47,12 @@ export function PortalDashboardPage() {
           {/* Quick Real-Time Pill */}
           <div className="rounded-2xl bg-white/10 backdrop-blur-md p-4 border border-white/10 min-w-[200px] text-center">
             <span className="text-[11px] uppercase tracking-wider text-[#E9DDCA] font-semibold block">
-              Live Solar Output
+              Live Solar Output (Demonstration Telemetry)
             </span>
             <span className="text-3xl font-bold text-white tabular-nums block mt-1">
               3.84 kW
             </span>
-            <span className="text-xs text-emerald-300 font-medium">96% of peak capacity</span>
+            <span className="text-xs text-emerald-300 font-medium">96% of peak • Synced 2m ago</span>
           </div>
         </div>
       </div>

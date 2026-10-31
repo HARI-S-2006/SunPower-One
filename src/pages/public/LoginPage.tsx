@@ -184,17 +184,17 @@ export function LoginPage() {
                 </div>
               </div>
 
-              {/* Solar Array Image Hero */}
-              <div className="relative z-10 my-6 rounded-xl overflow-hidden shadow-md border border-white/10 group">
-                <img
-                  className="w-full h-36 object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                  alt="Modern commercial rooftop solar panel array"
-                  src="https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172747]/90 via-transparent to-transparent flex items-end p-3">
-                  <div className="flex items-center justify-between w-full text-white text-xs">
+              {/* Solar Array Visual Hero */}
+              <div className="relative z-10 my-6 rounded-xl overflow-hidden shadow-md border border-white/10 bg-gradient-to-br from-[#1E345E] to-[#0A1A3A] h-36 flex items-center justify-center group">
+                <svg className="w-full h-full opacity-40 absolute inset-0" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 150 L100 80 L300 80 L400 150 Z" fill="#172747" stroke="#FFDDB7" strokeWidth="1.5" />
+                  <path d="M50 150 L120 80 M100 150 L150 80 M150 150 L180 80 M200 150 L210 80 M250 150 L240 80 M300 150 L270 80 M350 150 L300 80" stroke="#FFDDB7" strokeWidth="1" strokeDasharray="2 2" />
+                  <circle cx="200" cy="50" r="28" fill="#B18751" fillOpacity="0.3" stroke="#FFDDB7" strokeWidth="1.5" />
+                </svg>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#172747]/95 via-transparent to-transparent flex items-end p-3">
+                  <div className="flex items-center justify-between w-full text-white text-xs z-10">
                     <span className="font-semibold text-[11px] uppercase tracking-wide opacity-90">
-                      Site ID #AZ-8422 • Interconnect Live
+                      Site ID #AZ-8422 • Interconnect Verified
                     </span>
                     <span className="inline-flex items-center gap-1 text-[11px] bg-[#172747]/90 px-2 py-0.5 rounded-full text-[#FFDDB7]">
                       99.98% Pr

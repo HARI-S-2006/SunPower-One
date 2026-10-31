@@ -49,7 +49,7 @@ export function DashboardPage() {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#FFDDB7] text-xs font-semibold uppercase tracking-wider border border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse" />
-              <span>SCADA Telemetry Grid Active • 99.98% Pr</span>
+              <span>SCADA Telemetry Grid Active (Demonstration Data) • 99.98% Pr</span>
             </div>
             <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white">
               Solar Operations Command Center
@@ -93,7 +93,7 @@ export function DashboardPage() {
           value="74.2"
           unit="MW DC"
           trend={{ value: '+4.2%', direction: 'up', label: 'vs last month' }}
-          subtext="846 active solar installations"
+          subtext="846 active sites • Demonstration data"
           icon={<span className="material-symbols-outlined text-[20px]">solar_power</span>}
         />
 

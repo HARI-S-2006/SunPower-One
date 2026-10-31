@@ -23,6 +23,9 @@ export function SolarCalculatorPage() {
   const [results, setResults] = useState<{
     recommendedKw: number
     estimatedPrice: number
+    subsidyAmount: number
+    netPrice: number
+    subsidyNote: string
     monthlySavings: number
     paybackYears: number
     co2Offset: number
@@ -40,15 +43,37 @@ export function SolarCalculatorPage() {
 
     const pricePerKw = formData.systemType === 'on-grid' ? 60000 : 100000
     const estimatedPrice = finalKw * pricePerKw
+
+    // Subsidy eligibility calculation (PM Surya Ghar / MNRE guidelines)
+    let subsidyAmount = 0
+    let subsidyNote = ''
+    if (formData.systemType === 'off-grid') {
+      subsidyAmount = 0
+      subsidyNote = 'Off-grid battery storage systems are not eligible for central grid-tie subsidies under PM Surya Ghar.'
+    } else if (formData.customerType === 'commercial') {
+      subsidyAmount = 0
+      subsidyNote = 'Commercial & Industrial connections are not eligible for residential CFA subsidies (Eligible for 40% Accelerated Depreciation under Section 32).'
+    } else {
+      // Residential On-grid PM Surya Ghar
+      if (finalKw === 1) subsidyAmount = 30000
+      else if (finalKw === 2) subsidyAmount = 60000
+      else subsidyAmount = 78000
+      subsidyNote = `Eligible for PM Surya Ghar: Muft Bijli Yojana Central Financial Assistance (CFA) of up to ₹${subsidyAmount.toLocaleString()} upon technical feasibility & DISCOM net-meter inspection.`
+    }
+
+    const netPrice = Math.max(0, estimatedPrice - subsidyAmount)
     const monthlySavings = Math.min(bill * 0.9, finalKw * 1200)
-    const paybackYears = estimatedPrice / (monthlySavings * 12)
-    const co2Offset = finalKw * 1.33 * 365 / 1000 // tons per year
-    const panelsNeeded = finalKw * 2 // 500W panels
-    const roofAreaNeeded = finalKw * 100
+    const paybackYears = monthlySavings > 0 ? netPrice / (monthlySavings * 12) : 0
+    const co2Offset = (finalKw * 1.33 * 365) / 1000 // tons per year
+    const panelsNeeded = Math.ceil((finalKw * 1000) / 540)
+    const roofAreaNeeded = panelsNeeded * 24
 
     setResults({
       recommendedKw: finalKw,
       estimatedPrice,
+      subsidyAmount,
+      netPrice,
+      subsidyNote,
       monthlySavings: Math.round(monthlySavings),
       paybackYears: Math.round(paybackYears * 10) / 10,
       co2Offset: Math.round(co2Offset * 10) / 10,
@@ -248,14 +273,26 @@ export function SolarCalculatorPage() {
               <h2 className="text-2xl font-bold text-foreground mb-6">Estimated Results</h2>
               {results ? (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg bg-primary/5 border">
-                      <div className="text-3xl font-bold text-primary">{results.recommendedKw} kW</div>
-                      <div className="text-sm text-muted-foreground">Recommended System</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="p-3.5 rounded-lg bg-primary/5 border">
+                      <div className="text-2xl font-bold text-primary">{results.recommendedKw} kW</div>
+                      <div className="text-xs text-muted-foreground">Capacity</div>
                     </div>
-                    <div className="p-4 rounded-lg bg-primary/5 border">
-                      <div className="text-3xl font-bold text-primary">₹{results.estimatedPrice.toLocaleString()}</div>
-                      <div className="text-sm text-muted-foreground">Estimated Cost</div>
+                    <div className="p-3.5 rounded-lg bg-primary/5 border">
+                      <div className="text-xl font-bold text-foreground">₹{results.estimatedPrice.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Gross Equipment Price</div>
+                    </div>
+                    <div className="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                      <div className="text-xl font-bold text-emerald-700">₹{results.netPrice.toLocaleString()}</div>
+                      <div className="text-xs text-emerald-700 font-semibold">Net After Subsidy</div>
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+                    <Info className="h-4 w-4 text-amber-700 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold block">Subsidy & Financial Policy:</span>
+                      <p className="mt-0.5 leading-relaxed">{results.subsidyNote}</p>
                     </div>
                   </div>
 

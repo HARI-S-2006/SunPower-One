@@ -13,9 +13,10 @@ import { calculateBOM, type BOMResult } from '@/lib/bom/calculator'
 export function ConfiguratorPage() {
   const [capacityKw, setCapacityKw] = useState(3)
   const [systemType, setSystemType] = useState<'on-grid' | 'off-grid'>('on-grid')
+  const [customerCategory, setCustomerCategory] = useState<'residential' | 'commercial'>('residential')
   const [cableLengthMeters, setCableLengthMeters] = useState(30)
 
-  const bom: BOMResult = calculateBOM(capacityKw, systemType, cableLengthMeters)
+  const bom: BOMResult = calculateBOM(capacityKw, systemType, cableLengthMeters, customerCategory)
 
   return (
     <div className="space-y-6 animate-fade-in pb-12">
@@ -91,6 +92,37 @@ export function ConfiguratorPage() {
                 <p className="text-[11px] text-[#827B73]">
                   Requires approximately ~{bom.estimatedRoofAreaSqFt} sq ft of shadow-free rooftop space.
                 </p>
+              </div>
+
+              {/* Customer Category Toggle */}
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-[#292522] block">
+                  Customer Consumer Category
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setCustomerCategory('residential')}
+                    className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all text-center ${
+                      customerCategory === 'residential'
+                        ? 'bg-[#172747] text-white border-[#172747]'
+                        : 'bg-[#F7F3EC] text-[#292522] border-[#E8E0D6] hover:bg-[#EAE1DC]'
+                    }`}
+                  >
+                    Residential (CFA Eligible)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCustomerCategory('commercial')}
+                    className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all text-center ${
+                      customerCategory === 'commercial'
+                        ? 'bg-[#172747] text-white border-[#172747]'
+                        : 'bg-[#F7F3EC] text-[#292522] border-[#E8E0D6] hover:bg-[#EAE1DC]'
+                    }`}
+                  >
+                    Commercial / Factory (Sec 32)
+                  </button>
+                </div>
               </div>
 
               {/* System Type Toggle */}
@@ -271,10 +303,15 @@ export function ConfiguratorPage() {
                   </span>
                 </div>
 
-                {bom.estimatedSubsidyAmount > 0 && (
+                {bom.estimatedSubsidyAmount > 0 ? (
                   <div className="flex justify-between text-xs font-semibold text-[#2D5A43] bg-[#2D5A43]/10 p-2 rounded-lg">
                     <span>Estimated PM Surya Ghar Central Financial Assistance:</span>
                     <span className="font-mono">- ₹{bom.estimatedSubsidyAmount.toLocaleString()}</span>
+                  </div>
+                ) : (
+                  <div className="p-2.5 rounded-lg bg-[#F7F3EC] border border-[#E8E0D6] text-[11px] text-[#827B73] leading-relaxed">
+                    <span className="font-bold text-[#172747] block mb-0.5">Subsidy Policy Note:</span>
+                    {bom.subsidyEligibilityNote}
                   </div>
                 )}
 
