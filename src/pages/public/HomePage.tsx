@@ -64,14 +64,14 @@ export function HomePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/request-survey"
-                className="w-full sm:w-auto rounded-md bg-primary px-8 py-3 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center justify-center w-full sm:w-auto rounded-md bg-primary px-8 py-3 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
               >
-                Request a Survey
-                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                <span>Request a Survey</span>
+                <ArrowRight className="ml-2 h-5 w-5 shrink-0" aria-hidden="true" />
               </Link>
               <Link
                 to="/solar-calculator"
-                className="w-full sm:w-auto rounded-md border bg-background px-8 py-3 text-lg font-medium hover:bg-accent transition-colors"
+                className="inline-flex items-center justify-center w-full sm:w-auto rounded-md border bg-background px-8 py-3 text-lg font-medium hover:bg-accent transition-colors whitespace-nowrap"
               >
                 Try Solar Calculator
               </Link>
@@ -210,14 +210,14 @@ export function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/request-survey"
-              className="w-full sm:w-auto rounded-md bg-primary-foreground px-8 py-3 text-lg font-medium text-primary hover:bg-primary-foreground/90 transition-colors"
+              className="inline-flex items-center justify-center w-full sm:w-auto rounded-md bg-primary-foreground px-8 py-3 text-lg font-medium text-primary hover:bg-primary-foreground/90 transition-colors whitespace-nowrap"
             >
-              Get Started Free
-              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+              <span>Get Started Free</span>
+              <ArrowRight className="ml-2 h-5 w-5 shrink-0" aria-hidden="true" />
             </Link>
             <Link
               to="/contact"
-              className="w-full sm:w-auto rounded-md border-2 border-primary-foreground px-8 py-3 text-lg font-medium hover:bg-primary-foreground/10 transition-colors"
+              className="inline-flex items-center justify-center w-full sm:w-auto rounded-md border-2 border-primary-foreground px-8 py-3 text-lg font-medium hover:bg-primary-foreground/10 transition-colors whitespace-nowrap"
             >
               Contact Sales
             </Link>

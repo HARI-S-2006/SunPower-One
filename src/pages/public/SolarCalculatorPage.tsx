@@ -339,10 +339,9 @@ export function SolarCalculatorPage() {
                   <div className="pt-4 border-t">
                     <a
                       href="/request-survey"
-                      className="inline-flex items-center gap-2 w-full sm:w-auto rounded-md bg-primary px-6 py-3 text-center font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-                    >
-                      Request Site Survey
-                      <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                      className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-md bg-primary px-6 py-3 text-center font-medium text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap">
+                      <span>Request Site Survey</span>
+                      <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
                     </a>
                     <p className="text-xs text-muted-foreground mt-3 text-center">
                       Final quotation issued only after approved site survey

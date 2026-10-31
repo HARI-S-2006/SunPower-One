@@ -112,10 +112,10 @@ export function SolutionsPage() {
 
                 <Link
                   to={`/solutions/${system.id}`}
-                  className="inline-flex items-center gap-2 w-full rounded-md bg-primary px-6 py-3 text-center font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 w-full rounded-md bg-primary px-6 py-3 text-center font-medium text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
                 >
-                  Learn More
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <span>Learn More</span>
+                  <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </Link>
               </article>
             ))}
