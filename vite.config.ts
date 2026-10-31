@@ -26,11 +26,33 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge'],
-          recharts: ['recharts'],
-          supabase: ['@supabase/supabase-js'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor'
+            }
+            if (id.includes('lucide-react') || id.includes('class-variance-authority') || id.includes('clsx') || id.includes('tailwind-merge') || id.includes('radix-ui')) {
+              return 'ui'
+            }
+            if (id.includes('recharts') || id.includes('d3-') || id.includes('victory-vendor')) {
+              return 'recharts'
+            }
+            if (id.includes('@supabase')) {
+              return 'supabase'
+            }
+          }
+          if (id.includes('/pages/app/')) {
+            return 'erp-app'
+          }
+          if (id.includes('/pages/technician/')) {
+            return 'technician-app'
+          }
+          if (id.includes('/pages/portal/')) {
+            return 'portal-app'
+          }
+          if (id.includes('/pages/public/')) {
+            return 'public-site'
+          }
         },
       },
     },
