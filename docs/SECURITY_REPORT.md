@@ -79,17 +79,17 @@ SunPower One implements defense-in-depth security across all layers:
 
 ---
 
-## 3. Supabase Row Level Security (RLS)
+## 3. Supabase Row Level Security (RLS) Policy Specifications
 
-### Coverage
-| Table Count | RLS Enabled | Policies |
-|-------------|-------------|----------|
-| 10 core tables | 100% | 50+ policies |
+### Migration Specifications (`supabase/migrations/002_rls_policies.sql`)
+| Table Count | RLS SQL Authored | Policies Defined |
+|-------------|------------------|------------------|
+| 10 core tables | 100% in migrations | 50+ policies authored |
 
-### Key RLS Policies (Verified)
-| Table | Policy | Condition |
-|-------|--------|-----------|
-| `leads` | Sales see own + director sees all | `assigned_to = auth.uid() OR has_role('director')` |
+### Key RLS Policies Defined in SQL
+| Table | Policy Name | SQL Condition |
+|-------|-------------|---------------|
+| `leads` | Staff lead visibility | `assigned_to = auth.uid() OR has_role('director')` |
 | `customers` | Org isolation | `organization_id = get_user_org_id()` |
 | `serial_units` | Tenant isolation + customer access | `customer_id = auth.uid() OR has_role('warehouse')` |
 | `warranties` | Customer + support + warehouse | Multi-role policy |
@@ -97,12 +97,13 @@ SunPower One implements defense-in-depth security across all layers:
 | `invoices` | Customer + finance + director | Multi-role policy |
 | `technician_payables` | Technician + finance + director | `technician_id = get_my_tech_id()` |
 
-### RLS Enforcement Test
-```sql
--- All return zero rows for unauthorized access
-SELECT * FROM leads WHERE assigned_to != auth.uid() AND NOT has_role('director');
--- Result: 0 rows ✅
-```
+### Production Backend Connection & RLS Verification Status
+> [!IMPORTANT]
+> **RLS Live Verification Status: BLOCKED / NOT CONNECTED TO PRODUCTION BACKEND**
+> - The application is currently operating in **DEMO MODE** using in-memory state and browser `localStorage`.
+> - Environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are not configured in `.env`.
+> - Automated Playwright and Vitest test suites validate client-side route guards and in-memory authorization.
+> - PostgreSQL server-side RLS enforcement cannot and must not be reported as production-verified until live Supabase cloud credentials are provided and migrations are executed against a live database instance.
 
 ---
 

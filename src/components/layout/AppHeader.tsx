@@ -14,6 +14,7 @@ import {
   AlertTriangle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useSolarStore } from '@/lib/store/solarStore'
 
 interface AppHeaderProps {
   onMenuClick: () => void
@@ -65,6 +66,7 @@ const mockNotifications: NotificationItem[] = [
 
 export function Header({ onMenuClick }: AppHeaderProps) {
   const navigate = useNavigate()
+  const { backendMode } = useSolarStore()
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -119,6 +121,26 @@ export function Header({ onMenuClick }: AppHeaderProps) {
 
       {/* Right Controls */}
       <div className="flex items-center gap-2 sm:gap-3 ml-4">
+        {/* Backend Environment Indicator Badge */}
+        <div
+          title={
+            backendMode === 'production'
+              ? 'Connected to live Supabase PostgreSQL managed database.'
+              : 'Running in Demonstration Mode with simulated state in local storage. Configure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env for live backend synchronization.'
+          }
+          className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[#E8E0D6] bg-[#F7F3EC] text-[11px] font-semibold tracking-wide"
+        >
+          <span
+            className={cn(
+              'h-2 w-2 rounded-full shrink-0',
+              backendMode === 'production' ? 'bg-[#2D5A43] animate-pulse' : 'bg-[#B68B55]'
+            )}
+          />
+          <span className="text-[#172747]">
+            {backendMode === 'production' ? 'Production Mode' : 'Demo Mode (Local Storage)'}
+          </span>
+        </div>
+
         {/* Telemetry Status Strip - Hidden on small mobile */}
         <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#F7F3EC] border border-[#E8E0D6] text-xs">
           <ShieldCheck className="h-4 w-4 text-[#2D5A43]" />

@@ -5,6 +5,8 @@ import { calculateBOM, type BOMResult } from '@/lib/bom/calculator'
 // 1. DATA MODELS ACROSS THE 7 MODULES
 // ==========================================
 
+import { isSupabaseConfigured, backendMode } from '@/lib/supabase/client'
+
 export interface Lead {
   id: string
   referenceNo: string
@@ -683,6 +685,8 @@ interface SolarStoreContextType {
   serviceTickets: ServiceTicket[]
   subsidies: SubsidyRecord[]
   techPayments: TechnicianPaymentRecord[]
+  backendMode: 'demo' | 'production'
+  isBackendConnected: boolean
 
   // Action Methods
   createLead: (data: Omit<Lead, 'id' | 'referenceNo' | 'createdAt' | 'status'>) => Lead
@@ -1216,6 +1220,8 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
         serviceTickets,
         subsidies,
         techPayments,
+        backendMode,
+        isBackendConnected: isSupabaseConfigured,
         createLead,
         scheduleSurvey,
         approveSurvey,
