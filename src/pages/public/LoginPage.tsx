@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eye, EyeOff, ArrowRight, Shield, RefreshCw } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight, Shield, RefreshCw, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface DemoCredential {
@@ -52,6 +52,7 @@ export function LoginPage() {
   const [rememberTerminal, setRememberTerminal] = useState(true)
   const [authState, setAuthState] = useState<'idle' | 'verifying' | 'success'>('idle')
   const [statusMessage, setStatusMessage] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleSelectDemo = (cred: DemoCredential) => {
     setSelectedCred(cred)
@@ -241,21 +242,40 @@ export function LoginPage() {
             <div className="lg:col-span-7 bg-[#FBF2ED] p-6 sm:p-8 lg:p-12 flex flex-col justify-center items-center">
               <div className="w-full max-w-lg bg-white rounded-xl shadow-warm-sm border border-[#E8E0D6] p-6 sm:p-8">
                 {/* Header */}
-                <div className="mb-6">
+                <div className="mb-5">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#B18751] bg-[#F5ECE7] px-2.5 py-1 rounded-md">
-                      Operations Gateway
+                      SolarSync 360 • Operations Gateway
                     </span>
                     <span className="text-xs text-[#827B73] flex items-center gap-1.5 font-semibold">
                       <span className="w-2 h-2 rounded-full bg-[#2D5A43]" /> System Nominal
                     </span>
                   </div>
                   <h2 className="font-display text-2xl text-[#172747] font-bold tracking-tight">
-                    Command Center Sign In
+                    SolarSync 360 Command Center Sign In
                   </h2>
                   <p className="text-xs sm:text-sm text-[#827B73] mt-1">
                     Authenticate via verified multi-factor credentials or enterprise federated directory.
                   </p>
+                </div>
+
+                {/* Demonstration Search Bar */}
+                <div className="mb-6">
+                  <label htmlFor="solarsync-login-search" className="sr-only">
+                    Search SolarSync 360
+                  </label>
+                  <div className="relative w-full group">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#827B73] transition-colors group-hover:text-[#B18751] group-focus-within:text-[#172747] pointer-events-none" />
+                    <input
+                      id="solarsync-login-search"
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search SolarSync 360..."
+                      className="w-full h-10 pl-10 pr-4 rounded-xl border border-[#E8E0D6] bg-[#FBF2ED] text-sm text-[#292522] shadow-sm transition-all duration-200 placeholder:text-[#827B73] hover:border-[#B18751]/60 hover:bg-white focus:bg-white focus:border-[#172747] focus:outline-none focus:ring-2 focus:ring-[#172747]/15"
+                      aria-label="Search SolarSync 360"
+                    />
+                  </div>
                 </div>
 
                 {/* Quick Simulation Profile Selector */}
