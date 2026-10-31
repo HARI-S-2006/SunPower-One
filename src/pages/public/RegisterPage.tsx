@@ -686,13 +686,13 @@ export function RegisterPage() {
                       <button
                         type="submit"
                         disabled={registerState !== 'idle'}
-                        className="h-11 bg-[#172747] text-white rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-warm-sm hover:bg-[#1E345E] transition-all duration-200 disabled:opacity-75 cursor-pointer group"
+                        className="h-11 bg-[#172747] text-white rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-warm-sm hover:bg-[#1E345E] transition-all duration-200 disabled:opacity-75 cursor-pointer group whitespace-nowrap"
                       >
                         {registerState === 'idle' ? (
                           <>
                             <span className="material-symbols-outlined text-[18px]" aria-hidden="true">how_to_reg</span>
                             <span>REGISTER</span>
-                            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            <ArrowRight className="h-4 w-4 shrink-0 group-hover:translate-x-1 transition-transform" />
                           </>
                         ) : registerState === 'submitting' ? (
                           <>
@@ -846,12 +846,12 @@ export function RegisterPage() {
                       <button
                         type="submit"
                         disabled={loginState !== 'idle'}
-                        className="h-11 bg-[#172747] text-white rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-warm-sm hover:bg-[#1E345E] transition-all duration-200 disabled:opacity-75 cursor-pointer group"
+                        className="h-11 bg-[#172747] text-white rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-warm-sm hover:bg-[#1E345E] transition-all duration-200 disabled:opacity-75 cursor-pointer group whitespace-nowrap"
                       >
                         {loginState === 'idle' ? (
                           <>
                             <span>LOGIN</span>
-                            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            <ArrowRight className="h-4 w-4 shrink-0 group-hover:translate-x-1 transition-transform" />
                           </>
                         ) : (
                           <>

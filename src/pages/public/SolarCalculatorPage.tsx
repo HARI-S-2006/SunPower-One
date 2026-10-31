@@ -250,9 +250,9 @@ export function SolarCalculatorPage() {
 
                 <button
                   type="submit"
-                  className="w-full rounded-md bg-primary px-6 py-3 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                  className="w-full inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
                 >
-                  <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
+                  <Calculator className="mr-2 h-5 w-5 shrink-0" aria-hidden="true" />
                   Calculate Estimate
                 </button>
               </form>
