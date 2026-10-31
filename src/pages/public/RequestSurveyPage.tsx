@@ -3,6 +3,7 @@ import { Sun, Zap, ArrowRight, Mail, Phone, MapPin, CheckCircle, Loader2 } from 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useSolarStore } from '@/lib/store/solarStore'
 
 const enquirySchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -30,6 +31,7 @@ const states = [
 ]
 
 export function RequestSurveyPage() {
+  const { createLead } = useSolarStore()
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   const {
@@ -42,9 +44,20 @@ export function RequestSurveyPage() {
   })
 
   const onSubmit = async (data: EnquiryForm) => {
-    void data
     setSubmitStatus('submitting')
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    createLead({
+      customerName: data.name,
+      phone: data.phone,
+      email: data.email,
+      address: `${data.address}, ${data.city}, ${data.state} - ${data.pincode}`,
+      city: data.city,
+      capacityKw: Number(data.requiredCapacity) || 3,
+      systemType: (data.systemType as 'on-grid' | 'off-grid') || 'on-grid',
+      monthlyBill: Number(data.monthlyBill) || 0,
+      roofAreaSqFt: Number(data.rooftopArea) || 500,
+      assignedSalesExec: 'Elena Rostova',
+      notes: data.additionalRequirements || 'Website enquiry',
+    })
     setSubmitStatus('success')
     reset()
   }

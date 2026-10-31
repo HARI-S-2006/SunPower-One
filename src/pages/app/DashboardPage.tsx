@@ -102,7 +102,7 @@ export function DashboardPage() {
           value={`₹${(totalRevenue / 100000).toFixed(1)}`}
           unit="Lakhs"
           trend={{ value: '88% of target', direction: 'neutral' }}
-          subtext="Milestone payments collected"
+          subtext="Milestone payments collected • ₹1.2L Outstanding"
           icon={<DollarSign className="h-5 w-5 text-[#2D5A43]" />}
         />
 

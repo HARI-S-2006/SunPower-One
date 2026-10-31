@@ -200,6 +200,23 @@ export interface TechnicianPaymentRecord {
 
 const INITIAL_LEADS: Lead[] = [
   {
+    id: 'lead-00',
+    referenceNo: 'LD-2026-080',
+    customerName: 'Test Homeowner',
+    phone: '+91 98765 43210',
+    email: 'test@example.com',
+    address: '123 Test Street, Test City',
+    city: 'Bengaluru',
+    capacityKw: 3,
+    systemType: 'on-grid',
+    monthlyBill: 4500,
+    roofAreaSqFt: 650,
+    status: 'new',
+    assignedSalesExec: 'Elena Rostova',
+    notes: 'Website enquiry for 3kW rooftop system.',
+    createdAt: '2026-10-23T09:00:00Z',
+  },
+  {
     id: 'lead-01',
     referenceNo: 'LD-2026-081',
     customerName: 'Anand Kumar Sharma',

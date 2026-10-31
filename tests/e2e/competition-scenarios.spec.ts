@@ -84,7 +84,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
       await page.selectOption('select[name="capacity"]', '3')
       
       // Verify BOM components
-      await expect(page.locator('text=6')).toBeVisible() // 6 panels
+      await expect(page.locator('text=6').first()).toBeVisible() // 6 panels
       await expect(page.locator('text=3kW Inverter')).toBeVisible()
       await expect(page.locator('text=Mounting Kit')).toBeVisible()
     })
@@ -172,9 +172,9 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
       
       await page.goto('/app/dashboard')
       // Verify KPIs visible
-      await expect(page.locator('text=Revenue')).toBeVisible()
-      await expect(page.locator('text=Installations')).toBeVisible()
-      await expect(page.locator('text=Outstanding')).toBeVisible()
+      await expect(page.locator('text=Revenue').first()).toBeVisible()
+      await expect(page.locator('text=Installations').first()).toBeVisible()
+      await expect(page.locator('text=Outstanding').first()).toBeVisible()
     })
 
     test('Director views project profitability', async ({ page }) => {
@@ -235,7 +235,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
           await expect(page).not.toHaveURL(/\/login/)
         }
       })
-    })
+    }
   })
 })
 

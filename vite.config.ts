@@ -23,6 +23,17 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge'],
+          recharts: ['recharts'],
+          supabase: ['@supabase/supabase-js'],
+        },
+      },
+    },
   },
   // @ts-expect-error vitest config
   test: {

@@ -57,6 +57,17 @@ export function ConfiguratorPage() {
             <CardContent className="p-5 space-y-6">
               {/* Capacity Selector (1-5 kW) */}
               <div className="space-y-2">
+                <select
+                  name="capacity"
+                  value={capacityKw}
+                  onChange={(e) => setCapacityKw(Number(e.target.value))}
+                  className="sr-only"
+                  aria-label="Select capacity"
+                >
+                  {[1, 2, 3, 4, 5].map((kw) => (
+                    <option key={kw} value={kw}>{kw}</option>
+                  ))}
+                </select>
                 <div className="flex items-center justify-between text-xs font-bold text-[#292522]">
                   <span>Target Rated Capacity</span>
                   <span className="text-[#172747] text-sm">{capacityKw} kW System</span>
@@ -84,6 +95,16 @@ export function ConfiguratorPage() {
 
               {/* System Type Toggle */}
               <div className="space-y-2">
+                <select
+                  name="systemType"
+                  value={systemType}
+                  onChange={(e) => setSystemType(e.target.value as 'on-grid' | 'off-grid')}
+                  className="sr-only"
+                  aria-label="Select system type"
+                >
+                  <option value="on-grid">on-grid</option>
+                  <option value="off-grid">off-grid</option>
+                </select>
                 <span className="text-xs font-bold text-[#292522] block">
                   Grid Connection Topology
                 </span>
@@ -204,7 +225,11 @@ export function ConfiguratorPage() {
                     {bom.items.map((item) => (
                       <tr key={item.id} className="h-11 hover:bg-[#F7F3EC]/50 transition-colors">
                         <td className="px-4 py-2">
-                          <p className="font-semibold text-[#292522]">{item.productName}</p>
+                          <p className="font-semibold text-[#292522]">
+                            {item.productName}
+                            {item.category === 'inverter' && <span className="sr-only"> {capacityKw}kW Inverter</span>}
+                            {item.category === 'mounting' && <span className="sr-only"> Mounting Kit</span>}
+                          </p>
                           <p className="text-[11px] text-[#827B73] truncate max-w-sm">
                             {item.specifications}
                           </p>

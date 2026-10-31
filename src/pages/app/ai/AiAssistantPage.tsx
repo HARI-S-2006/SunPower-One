@@ -90,7 +90,6 @@ export function AiAssistantPage() {
         availableTables: []
       }
 
-      const { processNaturalLanguageQuery } = await import('@/lib/ai/assistant')
       const result = await processNaturalLanguageQuery(userMessage, context)
 
       const assistantMsg: ChatMessage = {

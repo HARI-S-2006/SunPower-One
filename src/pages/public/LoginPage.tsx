@@ -31,9 +31,21 @@ const demoCredentials: DemoCredential[] = [
   },
 ]
 
+const roleRedirectMap: Record<string, { email: string; name: string; url: string }> = {
+  director: { email: 'director@demo.com', name: 'Executive Director', url: '/app/dashboard' },
+  sales: { email: 'sales@demo.com', name: 'Sales Executive', url: '/app/crm/leads' },
+  survey: { email: 'survey@demo.com', name: 'Survey Engineer', url: '/app/surveys' },
+  warehouse: { email: 'warehouse@demo.com', name: 'Warehouse Manager', url: '/app/inventory' },
+  technician: { email: 'tech@demo.com', name: 'Field Technician', url: '/technician/dashboard' },
+  finance: { email: 'finance@demo.com', name: 'Finance Controller', url: '/app/invoices' },
+  support: { email: 'support@demo.com', name: 'Service Desk Support', url: '/app/service' },
+  customer: { email: 'customer@demo.com', name: 'Solar Customer', url: '/portal/dashboard' },
+}
+
 export function LoginPage() {
   const navigate = useNavigate()
   const [selectedCred, setSelectedCred] = useState<DemoCredential>(demoCredentials[0])
+  const [selectedRole, setSelectedRole] = useState('director')
   const [email, setEmail] = useState(demoCredentials[0].email)
   const [password, setPassword] = useState('••••••••••••••••')
   const [showPassword, setShowPassword] = useState(false)
@@ -47,23 +59,25 @@ export function LoginPage() {
     setPassword('••••••••••••••••')
   }
 
+  const handleRoleChange = (role: string) => {
+    setSelectedRole(role)
+    const match = roleRedirectMap[role]
+    if (match) {
+      setEmail(match.email)
+      setPassword('••••••••••••••••')
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setAuthState('verifying')
-    setStatusMessage('Verifying biometric credentials with HSM cluster #US-WEST-4...')
+    setStatusMessage('Authentication successful! Launching workspace...')
 
-    setTimeout(() => {
-      setStatusMessage('MFA challenge cleared. Provisioning telemetry workspace...')
-    }, 800)
-
+    const destination = roleRedirectMap[selectedRole]?.url || selectedCred.redirectUrl || '/app/dashboard'
     setTimeout(() => {
       setAuthState('success')
-      setStatusMessage('Authentication successful! Launching workspace...')
-    }, 1500)
-
-    setTimeout(() => {
-      navigate(selectedCred.redirectUrl)
-    }, 2000)
+      navigate(destination)
+    }, 150)
   }
 
   const handleSSO = (provider: string) => {
@@ -278,6 +292,32 @@ export function LoginPage() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Role / Workspace Selection */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center text-xs">
+                      <label className="font-semibold text-[#292522]" htmlFor="role-select">
+                        Operational Role & Terminal
+                      </label>
+                      <span className="text-[#827B73]">RBAC Mode</span>
+                    </div>
+                    <select
+                      id="role-select"
+                      name="role"
+                      value={selectedRole}
+                      onChange={(e) => handleRoleChange(e.target.value)}
+                      className="w-full h-10 px-3 bg-[#FBF2ED] text-[#292522] rounded-[10px] text-sm border border-[#E8E0D6] focus:bg-white focus:border-[#172747] focus:outline-none focus:ring-3 focus:ring-[#172747]/12 transition-all cursor-pointer font-medium"
+                    >
+                      <option value="director">Executive Director (Director Console)</option>
+                      <option value="sales">Sales Executive (CRM & Quotations)</option>
+                      <option value="survey">Site Survey Engineer (Rooftop Feasibility)</option>
+                      <option value="warehouse">Warehouse Manager (Inventory & Dispatch)</option>
+                      <option value="technician">Field Technician (Mobile Checklist)</option>
+                      <option value="finance">Finance Controller (Invoicing & P&L)</option>
+                      <option value="support">Service Desk Support (Warranty & RMA)</option>
+                      <option value="customer">Solar Customer (Self-Service Portal)</option>
+                    </select>
+                  </div>
+
                   {/* Corporate Email */}
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-xs">
