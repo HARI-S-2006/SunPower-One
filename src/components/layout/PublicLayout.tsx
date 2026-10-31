@@ -4,7 +4,7 @@ import { Footer } from './Footer'
 
 export function PublicLayout() {
   const location = useLocation()
-  const isAuthPage = location.pathname === '/login'
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register'
 
   return (
     <div className="min-h-screen flex flex-col">

@@ -1,12 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Sun, Zap, Search } from 'lucide-react'
+import { Menu, X, Sun, Zap } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 export function Header() {
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
 
   const navigation = [
     { name: 'Solutions', href: '/solutions' },
@@ -46,21 +45,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Search Bar - Positioned in between Contact and Sign In */}
-        <div className="hidden md:flex items-center flex-1 max-w-[200px] lg:max-w-[240px] xl:max-w-xs mx-4 lg:mx-6">
-          <div className="relative w-full group">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary group-focus-within:text-primary pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search SolarSync 360..."
-              className="w-full h-9 pl-10 pr-4 rounded-full border border-input bg-background/90 text-sm shadow-sm transition-all duration-200 placeholder:text-muted-foreground hover:border-primary/50 hover:bg-background focus:border-primary focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20"
-              aria-label="Search SolarSync 360"
-            />
-          </div>
-        </div>
-
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -82,10 +66,10 @@ export function Header() {
             Sign In
           </Link>
           <Link
-            to="/request-survey"
+            to="/register"
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
-            Get Started
+            Register
           </Link>
         </div>
       </nav>
@@ -93,21 +77,6 @@ export function Header() {
       {mobileMenuOpen && (
         <div id="mobile-menu" className="lg:hidden border-t bg-background">
           <div className="space-y-2 px-4 py-4">
-            {/* Mobile Search Bar in menu */}
-            <div className="pb-2">
-              <div className="relative w-full group">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search SolarSync 360..."
-                  className="w-full h-9 pl-10 pr-4 rounded-full border border-input bg-background text-sm shadow-sm transition-all placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  aria-label="Search SolarSync 360"
-                />
-              </div>
-            </div>
-
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -132,11 +101,11 @@ export function Header() {
                 Sign In
               </Link>
               <Link
-                to="/request-survey"
+                to="/register"
                 className="rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground hover:bg-primary/90"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Get Started
+                Register
               </Link>
             </div>
           </div>

@@ -514,6 +514,17 @@ export function LoginPage() {
                     <span>Microsoft Azure AD</span>
                   </button>
                 </div>
+
+                {/* Registration Link */}
+                <div className="mt-5 pt-4 border-t border-[#E8E0D6] text-center text-xs text-[#827B73]">
+                  <span>Don&apos;t have an account? </span>
+                  <Link
+                    to="/register"
+                    className="font-semibold text-[#172747] hover:text-[#B18751] hover:underline transition-colors"
+                  >
+                    Register here
+                  </Link>
+                </div>
               </div>
 
               {/* Footer Regulatory Notice */}

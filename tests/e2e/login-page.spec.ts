@@ -120,4 +120,72 @@ test.describe('SunPower One - Updated Login Page Verification', () => {
     await expect(page.locator('button[type="submit"]')).toHaveText(/LOGIN/i)
     await expect(page.getByRole('button', { name: 'Google', exact: true })).toBeVisible()
   })
+
+  test('Requirement 6: Header contains Register button, search bar removed, navigates to /register', async ({ page }) => {
+    await page.goto('/')
+
+    // Header has "Register" button
+    const headerRegisterBtn = page.locator('header nav').getByRole('link', { name: 'Register', exact: true })
+    await expect(headerRegisterBtn).toBeVisible()
+
+    // "Get Started" is removed from header
+    await expect(page.locator('header nav').getByRole('link', { name: 'Get Started', exact: true })).not.toBeVisible()
+
+    // Header search bar is removed
+    await expect(page.locator('header nav input[placeholder*="Search"]')).not.toBeVisible()
+
+    // Clicking Register navigates to /register
+    await headerRegisterBtn.click()
+    await expect(page).toHaveURL(/.*register/, { timeout: 10000 })
+    await expect(page.getByRole('heading', { name: 'Create Your Account' })).toBeVisible()
+  })
+
+  test('Requirement 7: Dedicated Registration Page collects details and handles registration flow', async ({ page }) => {
+    await page.goto('/register')
+
+    // Account Type options
+    await expect(page.getByRole('button', { name: /Residential Customer/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Commercial & Industrial/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Solar Partner \/ EPC/i })).toBeVisible()
+
+    // Form fields
+    await expect(page.locator('#reg-name')).toBeVisible()
+    await expect(page.locator('#reg-phone')).toBeVisible()
+    await expect(page.locator('#reg-email')).toBeVisible()
+    await expect(page.locator('#reg-password')).toBeVisible()
+    await expect(page.locator('#reg-confirm-password')).toBeVisible()
+
+    // Fill registration form
+    await page.fill('#reg-name', 'Aditi Sharma')
+    await page.fill('#reg-phone', '+91 9876543210')
+    await page.fill('#reg-email', 'aditi.sharma@example.com')
+    await page.fill('#reg-property', 'Green Acres Villa #4')
+    await page.fill('#reg-address', 'Bengaluru, 560034')
+    await page.fill('#reg-password', 'SolarSecure2026!')
+    await page.fill('#reg-confirm-password', 'SolarSecure2026!')
+    await page.check('input[type="checkbox"]')
+
+    // Submit registration
+    await page.click('button[type="submit"]')
+
+    // Successful provisioning and redirect
+    await expect(page).toHaveURL(/.*portal\/dashboard/, { timeout: 10000 })
+  })
+
+  test('Requirement 8: Bi-directional navigation between Login and Register', async ({ page }) => {
+    // Start at login
+    await page.goto('/login')
+    const registerLink = page.getByRole('link', { name: /Register here/i })
+    await expect(registerLink).toBeVisible()
+    await registerLink.click()
+    await expect(page).toHaveURL(/.*register/, { timeout: 10000 })
+
+    // On register page, link to sign in
+    const signInLink = page.getByRole('link', { name: /Sign In here/i })
+    await expect(signInLink).toBeVisible()
+    await signInLink.click()
+    await expect(page).toHaveURL(/.*login/, { timeout: 10000 })
+  })
 })
+
+

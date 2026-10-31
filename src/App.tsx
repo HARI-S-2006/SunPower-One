@@ -14,6 +14,7 @@ import { SolarCalculatorPage } from '@/pages/public/SolarCalculatorPage'
 import { RequestSurveyPage } from '@/pages/public/RequestSurveyPage'
 import { ContactPage } from '@/pages/public/ContactPage'
 import { LoginPage } from '@/pages/public/LoginPage'
+import { RegisterPage } from '@/pages/public/RegisterPage'
 import { NotFoundPage } from '@/pages/public/NotFoundPage'
 
 // App pages
@@ -87,6 +88,7 @@ function App() {
         <Route path="/request-survey" element={<RequestSurveyPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
 
       {/* Admin app routes - protected */}
