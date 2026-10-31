@@ -181,11 +181,41 @@ test.describe('SunPower One - Updated Login Page Verification', () => {
     await expect(page).toHaveURL(/.*register/, { timeout: 10000 })
 
     // On register page, link to sign in
+    await page.goto('/register')
     const signInLink = page.getByRole('link', { name: /Sign In here/i })
     await expect(signInLink).toBeVisible()
     await signInLink.click()
-    await expect(page).toHaveURL(/.*login/, { timeout: 10000 })
+    // It toggles mode to login
+    await expect(page.locator('#login-email')).toBeVisible()
+  })
+
+  test('Requirement 9: Side-by-side Login and Register action buttons and dynamic mode toggle', async ({ page }) => {
+    await page.goto('/register')
+
+    // On Register page, both LOGIN and REGISTER buttons are placed beside each other
+    const registerBtn = page.locator('button[type="submit"]')
+    const loginSwitchBtn = page.getByRole('button', { name: /^LOGIN$/i })
+    await expect(registerBtn).toBeVisible()
+    await expect(registerBtn).toHaveText(/REGISTER/i)
+    await expect(loginSwitchBtn).toBeVisible()
+
+    // Clicking LOGIN switches form to Sign In / Login mode
+    await loginSwitchBtn.click()
+    await expect(page.locator('#login-email')).toBeVisible()
+    await expect(page.locator('#login-password')).toBeVisible()
+
+    // Now submit button is LOGIN, and REGISTER switch button is beside it
+    const loginSubmitBtn = page.locator('button[type="submit"]')
+    const registerSwitchBtn = page.getByRole('button', { name: /^REGISTER$/i })
+    await expect(loginSubmitBtn).toHaveText(/LOGIN/i)
+    await expect(registerSwitchBtn).toBeVisible()
+
+    // Clicking REGISTER switches back to Register mode
+    await registerSwitchBtn.click()
+    await expect(page.locator('#reg-name')).toBeVisible()
+    await expect(page.locator('#reg-email')).toBeVisible()
   })
 })
+
 
 

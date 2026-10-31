@@ -302,6 +302,21 @@ export function LoginPage() {
                   </div>
                 </div>
 
+                {/* Top Tab Mode Switcher: Sign In vs Register */}
+                <div className="grid grid-cols-2 gap-1.5 p-1.5 bg-[#F5ECE7] rounded-xl border border-[#E8E0D6] mb-5">
+                  <div className="py-2 px-3 text-center rounded-lg text-xs font-bold bg-white text-[#172747] shadow-warm-sm border border-[#E8E0D6] flex items-center justify-center gap-1.5">
+                    <span className="material-symbols-outlined text-[17px]">login</span>
+                    <span>Sign In</span>
+                  </div>
+                  <Link
+                    to="/register"
+                    className="py-2 px-3 text-center rounded-lg text-xs font-bold text-[#827B73] hover:text-[#292522] hover:bg-[#EFE6E1] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[17px]">how_to_reg</span>
+                    <span>Register</span>
+                  </Link>
+                </div>
+
                 {/* Quick Simulation Profile Selector */}
                 <div className="mb-6 p-2.5 bg-[#F5ECE7] rounded-xl border border-[#E8E0D6]">
                   <div className="flex items-center justify-between mb-2 px-1">
@@ -434,24 +449,34 @@ export function LoginPage() {
                     </span>
                   </div>
 
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={authState !== 'idle'}
-                    className="w-full h-11 bg-[#172747] text-white rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-warm-sm hover:bg-[#1E345E] transition-all duration-200 mt-4 disabled:opacity-75 cursor-pointer group"
-                  >
-                    {authState === 'idle' ? (
-                      <>
-                        <span>LOGIN</span>
-                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      </>
-                    ) : (
-                      <>
-                        <RefreshCw className="h-4 w-4 animate-spin text-[#FFDDB7]" />
-                        <span>Verifying HSM Cluster...</span>
-                      </>
-                    )}
-                  </button>
+                  {/* Dual Action Buttons: Login beside Register */}
+                  <div className="grid grid-cols-2 gap-3 mt-4">
+                    <button
+                      type="submit"
+                      disabled={authState !== 'idle'}
+                      className="h-11 bg-[#172747] text-white rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-warm-sm hover:bg-[#1E345E] transition-all duration-200 disabled:opacity-75 cursor-pointer group"
+                    >
+                      {authState === 'idle' ? (
+                        <>
+                          <span>LOGIN</span>
+                          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      ) : (
+                        <>
+                          <RefreshCw className="h-4 w-4 animate-spin text-[#FFDDB7]" />
+                          <span>Verifying...</span>
+                        </>
+                      )}
+                    </button>
+
+                    <Link
+                      to="/register"
+                      className="h-11 rounded-[10px] text-sm font-semibold tracking-wide flex items-center justify-center gap-1.5 border-2 border-[#172747] text-[#172747] hover:bg-[#172747]/5 transition-all duration-200 cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-[18px]" aria-hidden="true">how_to_reg</span>
+                      <span>REGISTER</span>
+                    </Link>
+                  </div>
                 </form>
 
                 {/* Audit Status Notice */}
