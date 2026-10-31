@@ -53,22 +53,15 @@ export function AiAssistantPage() {
 • "Which warranties are expiring in 90 days?"
 
 **Quick suggestions based on your role (${userRole}):**`,
-        timestamp: new Date(),
-        result: {
-          success: true,
-          data: [],
-          explanation: 'Welcome to AI Assistant',
-          chartType: 'table'
-        }
+        timestamp: new Date()
       }])
     }
   }, [userRole])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim() || isLoading) return
+  const executeQuery = async (queryText: string) => {
+    const text = queryText.trim()
+    if (!text || isLoading) return
 
-    const userMessage = input.trim()
     setInput('')
     setShowSuggestions(false)
     setIsLoading(true)
@@ -76,7 +69,7 @@ export function AiAssistantPage() {
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
       role: 'user',
-      content: userMessage,
+      content: text,
       timestamp: new Date()
     }
 
@@ -90,7 +83,7 @@ export function AiAssistantPage() {
         availableTables: []
       }
 
-      const result = await processNaturalLanguageQuery(userMessage, context)
+      const result = await processNaturalLanguageQuery(text, context)
 
       const assistantMsg: ChatMessage = {
         id: `assistant-${Date.now()}`,
@@ -118,9 +111,13 @@ export function AiAssistantPage() {
     }
   }
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    executeQuery(input)
+  }
+
   const handleSuggestionClick = (query: string) => {
-    setInput(query)
-    handleSubmit({ preventDefault: () => {} } as React.FormEvent<HTMLFormElement>)
+    executeQuery(query)
   }
 
   const copySQL = (sql: string) => {
@@ -140,6 +137,46 @@ export function AiAssistantPage() {
 
     const data = result.data as Record<string, unknown>[]
 
+    const formatCellValue = (key: string, val: unknown) => {
+      if (val === null || val === undefined) {
+        return <span className="text-muted-foreground">-</span>
+      }
+      const lowerKey = key.toLowerCase()
+      if (typeof val === 'number') {
+        if (
+          lowerKey.includes('revenue') ||
+          lowerKey.includes('cost') ||
+          lowerKey.includes('profit') ||
+          lowerKey.includes('amount') ||
+          lowerKey.includes('inr') ||
+          lowerKey.includes('price') ||
+          lowerKey.includes('balance') ||
+          lowerKey.includes('overdue')
+        ) {
+          return <span className="font-mono tabular-nums font-medium text-emerald-700 dark:text-emerald-400">₹{val.toLocaleString('en-IN')}</span>
+        }
+        if (lowerKey.includes('margin') || lowerKey.includes('rate') || lowerKey.includes('percentage') || lowerKey.includes('pct') || lowerKey.includes('growth')) {
+          return <span className="font-mono tabular-nums font-medium">{val > 0 ? `+${val}%` : `${val}%`}</span>
+        }
+        return <span className="font-mono tabular-nums">{val.toLocaleString('en-IN')}</span>
+      }
+      const str = String(val)
+      if (lowerKey === 'urgency' || lowerKey === 'status' || lowerKey === 'priority') {
+        const isCritical = ['critical', 'high', 'overdue', 'breached'].includes(str.toLowerCase())
+        const isGood = ['completed', 'resolved', 'active', 'low', 'healthy', 'approved', 'installed'].includes(str.toLowerCase())
+        return (
+          <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${
+            isCritical ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400' :
+            isGood ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400' :
+            'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
+          }`}>
+            {str}
+          </span>
+        )
+      }
+      return <span>{str}</span>
+    }
+
     switch (result.chartType) {
       case 'table':
         return (
@@ -157,15 +194,9 @@ export function AiAssistantPage() {
               <tbody>
                 {data.slice(0, 50).map((row, i) => (
                   <tr key={i} className="border-b border-border/50 hover:bg-muted/50">
-                    {Object.values(row).map((val, j) => (
+                    {Object.entries(row).map(([key, val], j) => (
                       <td key={j} className="p-2">
-                        {val === null || val === undefined ? (
-                          <span className="text-muted-foreground">-</span>
-                        ) : typeof val === 'number' ? (
-                          <span className="font-mono tabular-nums">{val.toLocaleString()}</span>
-                        ) : (
-                          <span>{String(val)}</span>
-                        )}
+                        {formatCellValue(key, val)}
                       </td>
                     ))}
                   </tr>
@@ -188,11 +219,19 @@ export function AiAssistantPage() {
               const valueKey = keys.find(k => typeof row[k] === 'number')
               const value = valueKey ? Number(row[valueKey]) : 0
               const maxVal = Math.max(...data.slice(0, 20).map(r => Number(r[valueKey || keys[1]]) || 0))
+              const isCurrency = valueKey && (
+                valueKey.toLowerCase().includes('revenue') || 
+                valueKey.toLowerCase().includes('inr') || 
+                valueKey.toLowerCase().includes('cost') || 
+                valueKey.toLowerCase().includes('amount')
+              )
               return (
                 <div key={i} className="space-y-1">
                   <div className="flex justify-between text-xs">
-                    <span className="truncate max-w-[150px]">{label}</span>
-                    <span className="font-mono tabular-nums">{value.toLocaleString()}</span>
+                    <span className="truncate max-w-[150px] font-medium">{label}</span>
+                    <span className="font-mono tabular-nums font-semibold text-emerald-700 dark:text-emerald-400">
+                      {isCurrency ? `₹${value.toLocaleString('en-IN')}` : value.toLocaleString('en-IN')}
+                    </span>
                   </div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div 
