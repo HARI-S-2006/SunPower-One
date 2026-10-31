@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"error-container":"#ffdad6","on-tertiary":"#ffffff","on-secondary":"#ffffff","surface-container-high":"#efe6e1","surface-tint":"#4f5e81","surface":"#fff8f5","primary-fixed-dim":"#b7c6ef","tertiary-fixed":"#ffddb7","secondary-container":"#ffd7ca","primary-fixed":"#d9e2ff","on-tertiary-fixed":"#2a1700","primary-container":"#172747","on-secondary-container":"#7a5c51","surface-container-lowest":"#ffffff","on-background":"#1f1b18","secondary-fixed":"#ffdbcf","on-secondary-fixed-variant":"#5c4037","on-surface":"#1f1b18","surface-container-highest":"#eae1dc","inverse-surface":"#34302c","surface-variant":"#eae1dc","on-primary-fixed-variant":"#374668","surface-container":"#f5ece7","tertiary-container":"#3a2200","tertiary-fixed-dim":"#eebe83","on-primary-fixed":"#091b3a","inverse-primary":"#b7c6ef","surface-dim":"#e1d8d3","surface-container-low":"#fbf2ed","on-error-container":"#93000a","on-tertiary-fixed-variant":"#614011","error":"#ba1a1a","on-secondary-fixed":"#2b160e","tertiary":"#1f1000","background":"#fff8f5","inverse-on-surface":"#f8efea","on-primary-container":"#7f8eb4","on-primary":"#ffffff","primary":"#011232","on-error":"#ffffff","secondary":"#75584d","on-surface-variant":"#45464e","outline":"#75777f","outline-variant":"#c5c6cf","secondary-fixed-dim":"#e5beb1","surface-bright":"#fff8f5","on-tertiary-container":"#b18751"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-sm":"1rem","space-md":"0.75rem","margin-sm":"1rem","space-xl":"2rem","space-sm":"0.5rem","gutter-lg":"2rem","margin":"2rem","space-lg":"1.25rem","margin-lg":"3rem","gutter":"1.5rem","space-xs":"0.25rem"},"fontFamily":{"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Inter"],"data-tabular":["Inter"],"body-md":["Inter"],"data-metric":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"title-md":["Inter"],"body-sm":["Inter"],"display":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","letterSpacing":"0","fontWeight":"400"}],"headline-md":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg-mobile":["1.625rem",{"lineHeight":"2.125rem","letterSpacing":"-0.015em","fontWeight":"600"}],"label-md":["0.8125rem",{"lineHeight":"1.125rem","letterSpacing":"0.02em","fontWeight":"600"}],"data-tabular":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0","fontWeight":"500"}],"body-md":["0.875rem",{"lineHeight":"1.375rem","letterSpacing":"0","fontWeight":"400"}],"data-metric":["1.875rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"title-md":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1.125rem","letterSpacing":"0.01em","fontWeight":"400"}],"display":["2.75rem",{"lineHeight":"3.25rem","letterSpacing":"-0.025em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(73,48,39,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-xl"><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">solar_power</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">SUNPOWER</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-high px-space-md py-1.5 rounded-lg text-on-surface"><span class="material-symbols-outlined text-secondary text-[18px]">apartment</span><span class="font-label-md text-label-md">Bayview Logistics Park (Array A & B)</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-label-md rounded-lg"><a aria-current="page" class="px-3 py-2 transition-colors bg-primary-container text-on-primary font-label-md rounded-lg" data-path="client-portfolio-overview" href="#">Overview</a><a class="px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="solar-production-and-savings" href="#">Production & Savings</a><a class="px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="billing-and-escrow" href="#">Invoices & Escrow</a><a class="px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="warranty-and-support-desk" href="#">Warranty & Support</a><a class="px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="asset-documentation-vault" href="#">System Documents</a></nav><div class="flex items-center gap-space-md"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl"><div class="flex flex-col w-full">
+<!-- Asset Selector and Live Telemetry Banner -->
+<section class="mb-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md p-space-md rounded-xl bg-surface-container shadow-sm">
+<div class="flex flex-wrap items-center gap-space-sm w-full md:w-auto">
+<div class="relative inline-block text-left" id="facility-dropdown-container">
+<button class="inline-flex items-center justify-between gap-space-sm px-space-md py-2 bg-surface-container-lowest text-primary rounded-lg shadow-sm hover:bg-surface-container-low transition-colors" id="facilityMenuBtn" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary">domain</span>
+<div class="text-left">
+<span class="block font-label-md text-label-md text-primary leading-tight">Apex Cold Storage</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant leading-tight">120.0 kW Carport & Rooftop â€¢ Reno, NV</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-outline ml-space-xs">expand_more</span>
+</button>
+<!-- Dropdown Menu -->
+<div class="hidden absolute left-0 mt-1 w-80 rounded-xl bg-surface-container-lowest shadow-xl z-30 p-1.5" id="facilityMenuDropdown">
+<a class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low text-primary" href="#">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<div>
+<p class="font-label-md text-label-md text-primary font-semibold">Apex Cold Storage (Primary)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">120.0 kW Microgrid â€¢ Commercial PTO</p>
+</div>
+</a>
+<a class="flex items-center gap-space-sm p-space-sm rounded-lg hover:bg-surface-container-low text-on-surface transition-colors mt-1" href="#">
+<span class="material-symbols-outlined text-outline text-[20px]">agriculture</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Helios Vineyards</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">45.0 kW Ground Mount â€¢ Sonoma, CA</p>
+</div>
+</a>
+<a class="flex items-center gap-space-sm p-space-sm rounded-lg hover:bg-surface-container-low text-on-surface transition-colors mt-1" href="#">
+<span class="material-symbols-outlined text-outline text-[20px]">cottage</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Executive Residence (Tahoe)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">9.6 kW Rooftop Storage â€¢ Incline Village</p>
+</div>
+</a>
+</div>
+</div>
+<div class="h-6 w-px bg-surface-variant hidden md:block"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">verified</span> PTO Confirmed: Nov 14, 2024
+      </span>
+</div>
+<!-- Live Telemetry Pill -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-lowest shadow-sm">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary-container"></span>
+</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wide">Array Status:</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">100% Operational</span>
+<span class="text-outline text-[12px]">â€¢</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">84.6 kW Live</span>
+</div>
+</section>
+<!-- Executive Welcome and Microgrid Specification Hero -->
+<section class="mb-space-xl p-space-xl rounded-xl bg-surface-container-lowest shadow-sm relative overflow-hidden">
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="max-w-2xl">
+<div class="flex items-center gap-2 mb-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">High-Capital Microgrid</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">NV Energy Grid Synchronized</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Welcome back, Apex Logistics Facilities Team</h1>
+<p class="mt-space-xs font-body-md text-body-md text-on-surface-variant">
+          120.0 kW Hybrid Microgrid with Battery Energy Storage System (2Ã— Tesla Powerwall 3 â€¢ SMA Sunny Tripower CORE1). Real-time telemetry operating normally with maximum peak load shaving active.
+        </p>
+</div>
+<!-- Facility Snapshot Badges -->
+<div class="flex flex-wrap lg:flex-nowrap gap-space-md">
+<div class="p-space-md rounded-lg bg-surface-container-low min-w-[140px]">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Inverter Core</span>
+<span class="font-headline-sm text-headline-sm text-primary block mt-0.5">SMA 62.5 kW</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">98.8% Peak Eff.</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low min-w-[140px]">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block">BESS Capacity</span>
+<span class="font-headline-sm text-headline-sm text-primary block mt-0.5">27.0 kWh</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">92% State of Charge</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low min-w-[140px]">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Tariff Structure</span>
+<span class="font-headline-sm text-headline-sm text-primary block mt-0.5">TOU-LGS-3</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">$0.28 / kWh Export</span>
+</div>
+</div>
+</div>
+</section>
+<!-- KPI Metric Cards Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg mb-space-xl">
+<!-- Real-Time Generation -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Live Solar Generation</span>
+<span class="p-1.5 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">solar_power</span>
+</span>
+</div>
+<div class="my-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">84.6</span>
+<span class="font-label-md text-label-md text-secondary font-bold">kW</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">94% of rated noon peak</span>
+<span class="inline-flex items-center font-medium text-secondary">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> Peak Output
+        </span>
+</div>
+</div>
+<!-- Today's Energy Yield -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Today's Total Yield</span>
+<span class="p-1.5 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">electric_meter</span>
+</span>
+</div>
+<div class="my-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">512.4</span>
+<span class="font-label-md text-label-md text-on-surface-variant">kWh</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Target baseline: 450 kWh / day</p>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Solar Irradiation 7.2 kWh/mÂ²</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+          +14% vs Forecast
+        </span>
+</div>
+</div>
+<!-- Lifetime Utility Savings -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lifetime Net Savings</span>
+<span class="p-1.5 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">savings</span>
+</span>
+</div>
+<div class="my-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">$38,420</span>
+<span class="font-label-md text-label-md text-on-surface-variant">USD</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Includes $14.2k Demand Reduction</p>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Est. Payback: 4.8 yrs</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Verified Meter</span>
+</div>
+</div>
+<!-- Carbon Offset Impact -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Carbon Offset Index</span>
+<span class="p-1.5 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">eco</span>
+</span>
+</div>
+<div class="my-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">28.4</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Metric Tons</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Equivalent to 648 Trees Planted</p>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Avoided Coal: 31,400 lbs</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">EPA Formula</span>
+</div>
+</div>
+</section>
+<!-- Interactive Live Power Flow Diagram -->
+<section class="mb-space-xl p-space-lg rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm mb-space-lg">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Live Microgrid Power Dispatch</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Telemetry updated 4 seconds ago. Active islanding capability standby.</p>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-1 rounded-lg">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary">Active Flow Direction: Solar Dominant</span>
+</div>
+</div>
+<!-- Flow Diagram Node Canvas -->
+<div class="p-space-lg rounded-xl bg-surface-container-low">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md items-center relative">
+<!-- Node 1: Solar Generation -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col items-center text-center relative z-10">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[24px]">solar_power</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Carport & Rooftop PV</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-1">84.6 kW</span>
+<span class="font-body-sm text-body-sm text-secondary font-semibold mt-0.5">Primary Source</span>
+</div>
+<!-- Node 2: Facility Load -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col items-center text-center relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center mb-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[24px]">ac_unit</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Facility Cooling Load</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-1">42.1 kW</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">100% Solar-Powered</span>
+</div>
+<!-- Node 3: BESS Storage -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col items-center text-center relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-secondary flex items-center justify-center mb-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[24px]">battery_charging_full</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">BESS Charging</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-1">28.5 kW</span>
+<span class="font-body-sm text-body-sm text-secondary font-semibold mt-0.5">92% SOC Reserve</span>
+</div>
+<!-- Node 4: Grid Export -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col items-center text-center relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center mb-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[24px]">grid_goldenratio</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">NV Energy Feed-In</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-1">14.0 kW</span>
+<span class="font-body-sm text-body-sm text-secondary font-semibold mt-0.5">Exporting @ $0.28/kWh</span>
+</div>
+</div>
+<!-- Linear Telemetry Energy Bar -->
+<div class="mt-space-lg pt-space-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant mb-1.5">
+<span>Total Generated: 84.6 kW</span>
+<span>Self-Consumption: 70.6 kW (83.5%) â€¢ Export: 14.0 kW (16.5%)</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container-high flex overflow-hidden">
+<div class="bg-primary h-full" style="width: 49.7%" title="Facility Demand: 42.1 kW"></div>
+<div class="bg-secondary h-full" style="width: 33.7%" title="Battery Storage: 28.5 kW"></div>
+<div class="bg-primary-container h-full" style="width: 16.6%" title="Grid Feed-In: 14.0 kW"></div>
+</div>
+<div class="flex flex-wrap items-center gap-space-lg mt-space-sm font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary inline-block"></span>
+<span>Facility Industrial Chillers (42.1 kW)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary inline-block"></span>
+<span>Tesla Powerwall 3 Absorption (28.5 kW)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container inline-block"></span>
+<span>Net-Metered Surplus to Grid (14.0 kW)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Production vs Consumption Chart and Visual Facility Overview -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-space-xl mb-space-xl">
+<!-- 24-Hour Production vs Facility Demand Chart -->
+<div class="lg:col-span-2 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs mb-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">24-Hour Generation vs. Facility Demand</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Highlighting solar peak production shaving the 12:00 PM â€“ 4:00 PM utility rate spike.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Peak Shaving Active</span>
+</div>
+</div>
+<!-- SVG Bell Curve Chart -->
+<div class="w-full mt-space-md">
+<div class="relative w-full h-56">
+<svg aria-label="Energy Bell Curve" class="w-full h-full" preserveaspectratio="none" viewbox="0 0 600 200">
+<defs>
+<lineargradient id="solarGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#B68B55" stop-opacity="0.55"></stop>
+<stop offset="100%" stop-color="#B68B55" stop-opacity="0.02"></stop>
+</lineargradient>
+<lineargradient id="peakHighlight" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#172747" stop-opacity="0.08"></stop>
+<stop offset="100%" stop-color="#172747" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Peak Tariff Shaving Window Shading (12pm to 4pm -> x: 300 to 420) -->
+<rect fill="url(#peakHighlight)" height="150" rx="4" width="130" x="290" y="20"></rect>
+<text class="font-label-sm text-[9px] fill-secondary font-bold" text-anchor="middle" x="355" y="35">PEAK TARIFF WINDOW ($0.42/kWh)</text>
+<!-- Grid Horizontal Lines -->
+<line stroke="#EAE1DC" stroke-width="1" x1="40" x2="580" y1="170" y2="170"></line>
+<line stroke="#EAE1DC" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="580" y1="120" y2="120"></line>
+<line stroke="#EAE1DC" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="580" y1="70" y2="70"></line>
+<line stroke="#EAE1DC" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="580" y1="20" y2="20"></line>
+<!-- Solar Bell Curve Fill -->
+<path d="M 60 170 C 140 170, 200 160, 240 120 C 280 80, 320 30, 350 30 C 380 30, 420 70, 460 130 C 490 165, 520 170, 560 170 Z" fill="url(#solarGradient)"></path>
+<!-- Solar Generation Curve Line -->
+<path d="M 60 170 C 140 170, 200 160, 240 120 C 280 80, 320 30, 350 30 C 380 30, 420 70, 460 130 C 490 165, 520 170, 560 170" fill="none" stroke="#B68B55" stroke-width="2.5"></path>
+<!-- Facility Demand Line (Navy Blue) -->
+<path d="M 60 130 C 120 125, 180 135, 230 115 C 280 95, 320 90, 360 85 C 410 80, 460 90, 510 110 C 540 120, 560 125, 580 125" fill="none" stroke="#172747" stroke-dasharray="4 2" stroke-width="2"></path>
+<!-- Active Live Indicator at Noon (350, 30) -->
+<circle class="animate-ping" cx="350" cy="30" fill="#B68B55" r="4"></circle>
+<circle cx="350" cy="30" fill="#493027" r="4"></circle>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between px-6 font-label-sm text-label-sm text-on-surface-variant pt-2">
+<span>04:00 AM</span>
+<span>08:00 AM</span>
+<span class="font-bold text-primary">12:00 PM (NOW)</span>
+<span>04:00 PM</span>
+<span>08:00 PM</span>
+<span>11:59 PM</span>
+</div>
+</div>
+</div>
+<!-- Legend and Analysis Note -->
+<div class="mt-space-md pt-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-2">
+<span class="w-3 h-1 bg-secondary rounded-full inline-block"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Solar Array Generation</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-0.5 border-t-2 border-dashed border-primary inline-block"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Facility Load Demand</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">
+          100% Demand Deflected During Peak Tariff
+        </span>
+</div>
+</div>
+<!-- Facility Overview Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-primary">Installation Asset</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">Array A & B</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          Commercial carport canopy and industrial cool-roof installation engineered for high-altitude thermal resistance.
+        </p>
+<!-- Aerial Image Placeholder -->
+<div class="w-full h-40 rounded-lg overflow-hidden relative shadow-sm mb-space-md">
+<img class="w-full h-full object-cover" data-alt="Aerial overhead high-resolution photograph of a pristine commercial solar carport and white cool roof array on an industrial cold storage facility in Reno Nevada, glowing in clear desert sunlight with clean steel racking and deep navy photovoltaic solar panels." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtbTOu_Qp0rHYRbpPsoN342eZ97ThsieDbnmjKNXH2u_9Fl8cKkhwSOfyyg6MfhfXU6Zq3IPLeMDNJjN_QRuZieEh69bpJWktOLwEuDNa198zMThwHiCnrfdi-Njm9vcZcgTbKc6TC4ujGu55vnJgpWBrGt7Vhzv_lzj6qMC_QKXLFexHy28lMAZxTSv_ZQZghbg_77nMcaMockccYQBRro50mmM209m-yrlCHPbmN"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-primary/80 backdrop-blur-md text-on-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">photo_camera</span> Drone Telemetry Verified
+          </div>
+</div>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Racking Structure</span>
+<span class="text-primary font-medium">Baja SunShield Carport</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Total Module Count</span>
+<span class="text-primary font-medium">220Ã— High-Output Monos</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Annual Projected Offset</span>
+<span class="text-primary font-medium">186,400 kWh / yr</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm">
+<a class="inline-flex items-center justify-center w-full gap-2 px-space-md py-2 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors" href="#documents-vault">
+<span class="material-symbols-outlined text-[18px]">engineering</span> View Engineering Blueprints
+        </a>
+</div>
+</div>
+</section>
+<!-- Commercial Milestone Escrow & Invoicing Status -->
+<section class="mb-space-xl p-space-lg rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-primary">Commercial Escrow & Milestone Billing</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">Tier 1 Protected</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          EPC Contract #SP-2024-8842-NV â€¢ Western Alliance Bank Third-Party Escrow Depository
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span> View Payment Receipts
+        </button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">fingerprint</span> Download Cryptographic Invoice PDF
+        </button>
+</div>
+</div>
+<!-- Escrow Breakdown Visual Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-low mb-space-lg">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Turnkey Contract</span>
+<p class="font-headline-md text-headline-md text-primary mt-1">$57,450.00</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Fully bonded EPC delivery</p>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Disbursed to Date (75%)</span>
+<p class="font-headline-md text-headline-md text-secondary mt-1">$43,087.50</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">3 Milestones Verified & Signed</p>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Escrow Vault Balance (25%)</span>
+<p class="font-headline-md text-headline-md text-primary mt-1">$14,362.50</p>
+<p class="font-body-sm text-body-sm text-secondary font-medium mt-0.5">Pending PTO Confirmation Audit</p>
+</div>
+</div>
+<!-- Multi-step Milestone Tracker -->
+<div class="mt-space-lg pt-space-md">
+<div class="grid grid-cols-1 sm:grid-cols-4 gap-space-md">
+<!-- Step 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">MILESTONE 1</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<p class="font-label-md text-label-md text-primary font-semibold">Engineering & Permitting</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">$14,362.50 (25%) â€¢ Disbursed</p>
+</div>
+<!-- Step 2 -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">MILESTONE 2</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<p class="font-label-md text-label-md text-primary font-semibold">Hardware Procurement</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">$14,362.50 (25%) â€¢ Disbursed</p>
+</div>
+<!-- Step 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">MILESTONE 3</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<p class="font-label-md text-label-md text-primary font-semibold">Mechanical Installation</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">$14,362.50 (25%) â€¢ Disbursed</p>
+</div>
+<!-- Step 4 -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-primary font-semibold">MILESTONE 4</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+</div>
+<p class="font-label-md text-label-md text-primary font-semibold">PTO & Final Closeout</p>
+<p class="font-body-sm text-body-sm text-secondary font-medium mt-1">$14,362.50 (25%) â€¢ Escrow Held</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Lifetime Warranty & Asset Protection -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-space-xl mb-space-xl">
+<div class="lg:col-span-2 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Sunpower Protection Vault & Warranties</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Triple-layer institutional asset guarantees with guaranteed response times.</p>
+</div>
+<span class="material-symbols-outlined text-[28px] text-secondary">verified_user</span>
+</div>
+<div class="space-y-space-md">
+<!-- Warranty 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">solar_power</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-semibold">PV Modules: Trina Solar 545W Mono PERC</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">25-Year Linear Performance Guarantee (>85% output at yr 25)</p>
+</div>
+</div>
+<div class="text-right sm:text-right">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">24.8 yrs remaining</span>
+<span class="block font-body-sm text-body-sm text-outline">Expires Nov 2049</span>
+</div>
+</div>
+<!-- Warranty 2 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">electrical_services</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-semibold">Inverters: SMA Sunny Tripower CORE1</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">10-Year Platinum Rapid Replacement SLA (48-hr swap out)</p>
+</div>
+</div>
+<div class="text-right sm:text-right">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">9.8 yrs remaining</span>
+<span class="block font-body-sm text-body-sm text-outline">Expires Nov 2034</span>
+</div>
+</div>
+<!-- Warranty 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">roofing</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-semibold">Workmanship: Sunpower Zero-Leak Guarantee</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">5-Year Structural Roof Penetration & Weatherproof Indemnity</p>
+</div>
+</div>
+<div class="text-right sm:text-right">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Active â€¢ Verified</span>
+<span class="block font-body-sm text-body-sm text-outline">Expires Nov 2029</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">security</span>
+          Underwritten by Lloyd's Clean Energy Syndicate
+        </span>
+<button class="inline-flex items-center gap-2 px-space-md py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">build</span> Request Maintenance / Log Service Ticket
+        </button>
+</div>
+</div>
+<!-- Rapid Dispatch & Dedicated Engineer Contact -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Field Engineering Director</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Dedicated asset manager assigned to the Northern Nevada portfolio.</p>
+<div class="flex items-center gap-space-md mb-space-lg p-space-md rounded-lg bg-surface-container-low">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-primary flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of a master electrical clean energy engineer with warm lighting, wearing executive industrial dark navy attire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBifNclQfPgTIm9y26zNPRbv-xB8jEIIwP61mwDIoAegSA5KEZ7n7pPTCFHIex0tWubT7DaYI6UwOuWqdBEQGn1RE71C0yG841MWMgIVydh7C6fF-xcWWxsr21hkwkDPMhHUlGp6IeHO0bLvuR7HbXV1LetluNcUrrKgM42wyreStaOBP0c-9X2MYe8u_81kNBFKuBow-7ElwHdzG14XlhzKCbt-F5z5NeMOCkS9js3"/>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary font-semibold">Marcus Vance, PE</h4>
+<p class="font-body-sm text-body-sm text-secondary">Director of Commercial O&M</p>
+<p class="font-body-sm text-body-sm text-outline">Direct Dispatch: (775) 402-9180</p>
+</div>
+</div>
+<div class="space-y-space-xs text-body-sm font-body-sm">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">SLA Response Window</span>
+<span class="text-primary font-semibold">â‰¤ 2 Hours Priority</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Annual Thermal Imaging</span>
+<span class="text-primary font-semibold">Scheduled Q2 2025</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Rapid Inverter Spares</span>
+<span class="text-primary font-semibold">Reno Depot Staged</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg">
+<a class="inline-flex items-center justify-center w-full gap-2 px-space-md py-2.5 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors" href="mailto:ops-nv@sunpowersolutions.com">
+<span class="material-symbols-outlined text-[18px]">email</span> Contact Operations Desk
+        </a>
+</div>
+</div>
+</section>
+<!-- Facility Documentation Vault & Regulatory Approvals -->
+<section class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm mb-space-lg" id="documents-vault">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Compliance & Asset Documentation Vault</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Institutional records, utility interconnections, and tax equity verification packages.</p>
+</div>
+<button class="inline-flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span> Download All (Archive .ZIP)
+      </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Doc 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between hover:bg-surface-container transition-colors">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="p-2 rounded bg-surface-container-lowest text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+</span>
+<span class="font-label-sm text-label-sm text-outline">PDF â€¢ 8.4 MB</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary font-semibold mt-space-xs">PE Stamped Structural Blueprints</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Carport foundation wind load calculations, IBC 2021 seismic compliance, and stamped single-line electrical.</p>
+</div>
+<div class="mt-space-md pt-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Verified by NV PE #28419</span>
+<button class="text-primary hover:text-secondary p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Doc 2 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between hover:bg-surface-container transition-colors">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="p-2 rounded bg-surface-container-lowest text-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">handshake</span>
+</span>
+<span class="font-label-sm text-label-sm text-outline">PDF â€¢ 3.2 MB</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary font-semibold mt-space-xs">NV Energy Interconnection Agreement</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Formal Permission to Operate (PTO) certificate, bi-directional meter schedule, and Net Energy Metering rider.</p>
+</div>
+<div class="mt-space-md pt-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-medium">PTO Granted 11/14/2024</span>
+<button class="text-primary hover:text-secondary p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Doc 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between hover:bg-surface-container transition-colors">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="p-2 rounded bg-surface-container-lowest text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</span>
+<span class="font-label-sm text-label-sm text-outline">PDF â€¢ 1.9 MB</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary font-semibold mt-space-xs">Section 48 / Form 3468 ITC Pack</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">30% Federal Investment Tax Credit certification package with prevailing wage audit documentation for CPAs.</p>
+</div>
+<div class="mt-space-md pt-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Ready for Tax Filing</span>
+<button class="text-primary hover:text-secondary p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript for Facility Switcher Dropdown -->
+<script>
+    (function () {
+      const btn = document.getElementById('facilityMenuBtn');
+      const dropdown = document.getElementById('facilityMenuDropdown');
+      if (btn && dropdown) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          dropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function (e) {
+          if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+            dropdown.classList.add('hidden');
+          }
+        });
+      }
+    })();
+  </script>
+</div></div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(73,48,39,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg text-on-surface-variant"><div class="flex items-center gap-space-md"><div class="w-6 h-6 rounded bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[14px]">solar_power</span></div><span class="font-label-md text-label-md text-on-surface">Sunpower Client Portal â€¢ Enterprise Asset Operations</span></div><div class="flex items-center gap-space-lg"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Dispatch Hotline</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">SLA Governance</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacy Policy</a><span class="font-body-sm text-body-sm text-outline">Â© 2024 Sunpower Solutions Inc.</span></div></div></footer></body></html>

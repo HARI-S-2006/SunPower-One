@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-variant": "#eae1dc", "surface": "#fff8f5", "secondary-fixed": "#ffdbcf", "secondary-fixed-dim": "#e5beb1", "tertiary": "#1f1000", "surface-container-highest": "#eae1dc", "on-secondary-fixed-variant": "#5c4037", "on-tertiary": "#ffffff", "inverse-primary": "#b7c6ef", "error-container": "#ffdad6", "surface-container-low": "#fbf2ed", "on-error-container": "#93000a", "secondary-container": "#ffd7ca", "on-secondary-container": "#7a5c51", "primary-fixed-dim": "#b7c6ef", "primary-container": "#172747", "surface-bright": "#fff8f5", "on-primary-container": "#7f8eb4", "on-surface": "#1f1b18", "inverse-surface": "#34302c", "outline": "#75777f", "on-tertiary-fixed-variant": "#614011", "on-primary-fixed": "#091b3a", "error": "#ba1a1a", "on-background": "#1f1b18", "on-tertiary-container": "#b18751", "surface-tint": "#4f5e81", "inverse-on-surface": "#f8efea", "background": "#fff8f5", "tertiary-fixed": "#ffddb7", "on-tertiary-fixed": "#2a1700", "on-primary": "#ffffff", "tertiary-fixed-dim": "#eebe83", "surface-container-lowest": "#ffffff", "primary-fixed": "#d9e2ff", "surface-dim": "#e1d8d3", "on-secondary-fixed": "#2b160e", "surface-container-high": "#efe6e1", "tertiary-container": "#3a2200", "surface-container": "#f5ece7", "on-primary-fixed-variant": "#374668", "on-surface-variant": "#45464e", "primary": "#011232", "secondary": "#75584d", "outline-variant": "#c5c6cf", "on-error": "#ffffff", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "3rem", "space-xs": "0.25rem", "margin-sm": "1rem", "gutter-lg": "2rem", "gutter": "1.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "space-md": "0.75rem", "margin": "2rem", "space-lg": "1.25rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Plus Jakarta Sans" ], "title-md": [ "Inter" ], "label-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "data-metric": [ "Plus Jakarta Sans" ], "data-tabular": [ "Inter" ], "display": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "0", "fontWeight": "400" } ], "label-md": [ "0.8125rem", { "lineHeight": "1.125rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "title-md": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-md": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "data-metric": [ "1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "data-tabular": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "500" } ], "display": [ "2.75rem", { "lineHeight": "3.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "body-sm": [ "0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg-mobile": [ "1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-secondary z-50 flex flex-col justify-between shadow-[0_4px_24px_rgba(48,32,25,0.18)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-20 px-space-lg flex items-center gap-space-md border-b border-white/10"><img alt="Sunpower Solutions Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U14rxJ4f7LN5oJA9sjYif1GGapvw8PUlhQlcUhKXjq6mwrkVCX9-6Bfc1_FNI9JJ8wDCdu6GBRm8hCixPSSH6vF9ePMi4FAx6c9RzGUpBujA2pgz1xXip6cksc0ns8_D06ONc-TsLdKWPlqvXDyJ8Ud5_pFkerpsKARoRu3t7-aTXq94ArQ5AiHV6Dw72ngnnJOJJazsn0EczQ10-S_9-b_z5IEfgOF81JqYUVxvuMcw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-secondary leading-none">SUNPOWER</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed opacity-90 mt-0.5">SOLUTIONS</span></div></div><div class="px-space-lg py-space-sm"><p class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed-dim/80 font-medium">Operations Platform</p></div><nav class="flex-1 overflow-y-auto px-space-sm space-y-0.5 py-space-xs" data-active-classes="bg-primary-container text-on-primary border-l-4 border-tertiary-fixed shadow-sm font-semibold"><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="customers" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Customers</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="site-surveys" href="#"><span class="material-symbols-outlined text-[20px]">solar_power</span><span>Site Surveys</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="quotations" href="#"><span class="material-symbols-outlined text-[20px]">request_quote</span><span>Quotations</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="orders" href="#"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span>Orders</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="inventory" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventory</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="serial-numbers" href="#"><span class="material-symbols-outlined text-[20px]">qr_code_2</span><span>Serial Numbers</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="dispatch-management" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span>Dispatch Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="installations" href="#"><span class="material-symbols-outlined text-[20px]">construction</span><span>Installations</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="technicians" href="#"><span class="material-symbols-outlined text-[20px]">engineering</span><span>Technicians</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="warranty-management" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span>Warranty Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="service-tickets" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span>Service Tickets</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="payments" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Payments</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="expenses" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Expenses</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="invoices" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Invoices</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="reports-and-analytics" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span>Reports &amp; Analytics</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="user-management" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span>User Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span>Settings</span></a></nav></div><div class="bg-tertiary-container/60 p-space-md border-t border-white/10"><div class="flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 text-on-secondary-fixed"><span class="material-symbols-outlined text-[20px]">account_circle</span></div><div class="min-w-0 flex-1"><p class="font-label-md text-label-md text-on-secondary truncate font-medium">Marcus Vance</p><p class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Admin - Solar Operations</p></div></div><button class="p-1.5 rounded-lg text-white/75 hover:text-on-secondary hover:bg-white/10 transition-colors" title="Sign Out" type="button"><span class="material-symbols-outlined text-[20px]">logout</span></button></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface-container-lowest border-b border-surface-variant z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(73,48,39,0.04)]"><div class="flex items-center gap-space-lg flex-1 max-w-2xl"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="text-on-surface font-semibold">Operations</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-secondary font-medium">Workspace</span></div><div class="relative flex-1 max-w-md hidden md:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-4 rounded-lg bg-surface border border-outline-variant text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container font-body-sm text-body-sm transition-all" placeholder="Search telemetry, serial numbers, customers, tickets..." type="search"/></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-low border border-surface-variant text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-secondary">event</span><span>Tuesday, Oct 24, 2024</span></div><button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation &amp; Help" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><button class="relative w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-8 w-px bg-surface-variant mx-1 hidden sm:block"></div><div class="flex items-center gap-space-md pl-1"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden sm:flex flex-col text-left"><div class="flex items-center gap-space-xs"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Marcus Vance</span><span class="px-1.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-secondary-container text-on-secondary-container">Admin</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Solar Operations</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen px-gutter-lg py-margin-sm"><div class="flex flex-col w-full">
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('aside nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === 'installations') {
+          link.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold', 'shadow-sm');
+          link.classList.remove('text-white/75');
+          const span = link.querySelector('span:first-child');
+          if (span) span.style.fontVariationSettings = "'FILL' 1";
+        }
+      });
+    });
+  </script>
+<!-- Module Context & Tactical Controls -->
+<section class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-lg pb-space-xl">
+<div class="space-y-space-xs max-w-3xl">
+<div class="flex items-center gap-space-sm text-secondary font-label-sm uppercase tracking-widest font-semibold">
+<span class="inline-flex w-2 h-2 rounded-full bg-primary-container"></span>
+        Operational Division: Commercial Rooftop Engineering
+      </div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-semibold">
+        Field Installations &amp; Technician Crew Operations
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Real-time rooftop construction scheduling, certified NABCEP electrician tracking, multi-stage photographic sign-off, and customer handover certificates.
+      </p>
+</div>
+<!-- Actions Panel -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-primary font-label-md text-label-md shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Field Safety Briefing</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-secondary hover:bg-primary text-on-secondary font-label-md text-label-md shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">engineering</span>
+<span>Assign Crew</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Schedule Installation</span>
+</button>
+</div>
+</section>
+<!-- Key Operational Performance Metrics (4-Column Bento) -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg pb-space-xl">
+<!-- Metric 1 -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Active Sites Today</span>
+<span class="w-8 h-8 rounded-lg bg-secondary-fixed/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">solar_power</span>
+</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">6</span>
+<span class="font-title-md text-title-md text-secondary">Crews Deployed</span>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[11px] font-semibold bg-primary-fixed text-on-primary-fixed">100% Rooftop Tracked</span>
+<span>18 Riggers active</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-container via-secondary to-primary-container"></div>
+</div>
+<!-- Metric 2 -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Completed This Month</span>
+<span class="w-8 h-8 rounded-lg bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">38</span>
+<span class="font-title-md text-title-md text-secondary">Installs</span>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[11px] font-semibold bg-secondary-container text-on-secondary-container">99.4% SLA</span>
+<span>+12% vs prior month</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-secondary"></div>
+</div>
+<!-- Metric 3 -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Zero Safety Incidents</span>
+<span class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">412</span>
+<span class="font-title-md text-title-md text-secondary">Days</span>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[11px] font-semibold bg-surface-container-high text-primary">OSHA 30 Protocol</span>
+<span>Zero harness infractions</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-tertiary-fixed-dim"></div>
+</div>
+<!-- Metric 4 -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Avg Customer CSAT</span>
+<span class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-data-metric text-data-metric text-primary">4.94</span>
+<span class="font-title-md text-title-md text-on-surface-variant">/ 5.0</span>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[11px] font-semibold bg-primary-fixed text-on-primary-fixed">NABCEP Verified</span>
+<span>Based on 341 reviews</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-primary-container"></div>
+</div>
+</section>
+<!-- Two-Column Operational Command Center -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left Column: Active Job Card & Telemetry Sign-Off (7 Columns) -->
+<div class="lg:col-span-7 flex flex-col gap-space-xl min-w-0">
+<!-- Primary Job Card Container -->
+<div class="rounded-xl bg-surface-container-lowest p-space-xl shadow-sm flex flex-col gap-space-lg">
+<!-- Job Card Header & Status Banner -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md pb-space-md border-b-0">
+<div class="min-w-0">
+<div class="flex items-center gap-space-sm">
+<span class="px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed font-bold tracking-wider">
+                LIVE DEPLOYMENT
+              </span>
+<span class="font-data-tabular text-data-tabular text-secondary font-semibold">#ORD-9402</span>
+</div>
+<h2 class="mt-space-xs font-headline-md text-headline-md text-primary font-semibold truncate">
+              Apex Cold Storage Rooftop
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              884 Industrial Parkway, Sector 4 â€¢ Commercial Flat Membrane &amp; Seam
+            </p>
+</div>
+<div class="flex sm:flex-col items-end gap-space-xs text-right">
+<span class="px-3 py-1 rounded-full text-label-sm font-semibold bg-secondary-fixed text-on-secondary-fixed">
+              Phase 3 of 4 Active
+            </span>
+<span class="text-body-sm font-label-md text-secondary">Target Interconnect: Today 17:30</span>
+</div>
+</div>
+<!-- System & Crew Summary Pill Deck -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md p-space-md rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</div>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">System Capacity</span>
+<span class="font-title-md text-title-md text-primary font-semibold">120.0 kW Hybrid</span>
+<span class="text-body-sm text-secondary block">220 High-Output Monocrystalline Modules</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+</div>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Assigned Crew</span>
+<span class="font-title-md text-title-md text-primary font-semibold">Team Alpha (5 Staff)</span>
+<span class="text-body-sm text-secondary truncate block">Mateo Kowalski (Lead), Julian Torres (Master Elec)</span>
+</div>
+</div>
+</div>
+<!-- Construction Phase Progress Meter -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-md text-label-md font-semibold text-primary">Inverter Wiring &amp; Grid Interconnect</span>
+<span class="text-body-sm text-on-surface-variant block">String combiners #1-#6 landed at DC disconnect switchboard</span>
+</div>
+<span class="font-data-tabular text-data-tabular font-bold text-primary">80% Complete</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-variant overflow-hidden p-0.5">
+<div class="h-full rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-500" style="width: 80%"></div>
+</div>
+<div class="grid grid-cols-4 gap-2 pt-1 font-label-sm text-label-sm text-on-surface-variant text-center">
+<span class="text-secondary font-semibold">1. Racking &amp; Flashing (Done)</span>
+<span class="text-secondary font-semibold">2. PV Placement (Done)</span>
+<span class="text-primary font-bold">3. Electrical Tie-in (Active)</span>
+<span>4. Authority Inspection</span>
+</div>
+</div>
+<!-- Interactive Multi-Stage Photographic Inspection Gallery -->
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">photo_library</span>
+<h3 class="font-title-md text-title-md font-semibold text-primary">Photographic Verification Logs</h3>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">High-Res Field Telemetry (4/4 Stages)</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Inspection Card 1: Before -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container shadow-sm hover:shadow-md transition-all">
+<div class="h-44 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High angle view of a pristine commercial metal standing seam rooftop before solar installation, showing clean metal panels under clear blue sky, sharp industrial architecture in cream and steel tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcT9dZqmALdL58KHDeGAugf5sldFx52iBzjDEDDuXZ4AonwrGpliJ-0fEo_cuZ2mvjdcJzym3g2HSx1VoDezHXjkN_B3lmbnT-Flz3gZhtLyUWAWnHsfXiRtt5JVNNJrs3Y9zzH52qntcq4THIXEEK2g9ILEnIWvaNzqLUIuHhAueeN4hAtYrN1a3h5KXbIEKrPniZweSHx3YpXBaIJ317zB82-eE0m3_4iq83r1pH"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary-container/90 text-on-primary font-label-sm text-label-sm uppercase font-semibold">
+                  Stage 1: Baseline
+                </div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-label-sm text-label-sm">
+                  08:15 AM
+                </div>
+</div>
+<div class="p-space-sm bg-surface-container-lowest">
+<p class="font-label-md text-label-md text-primary font-semibold">Clean Metal Standing Seam Roof</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Zero puncture membrane verification sign-off</p>
+</div>
+</div>
+<!-- Inspection Card 2: During Rail -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container shadow-sm hover:shadow-md transition-all">
+<div class="h-44 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Close-up engineering view of solar ballast footings and aluminum rails anchored onto rooftop with calibrated torque markings, warm coffee brown accents and industrial precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0JvEhtYE27sIGxnkXdYb0U28r0_ZPHSnQ62O81xZrrIdTAJjnFVpxocZQB0pNKWy2_kZoNaCycad6gYUCUjoAAFGex4jLVvb49KUgVOAprSEuKDGJc8Os_JWfgB2v_cielHmTGupP210K6Gt2VrfpoPyfWZlJ1gTs6hoTK-Q4ijvvmD_nwIkqkbPfJhnw_689r1DKIbwFnAE8oO2SC0w5uziL8lzwEnLRL9vbzgxo"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-secondary/90 text-on-secondary font-label-sm text-label-sm uppercase font-semibold">
+                  Stage 2: Structural
+                </div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-label-sm text-label-sm">
+                  11:40 AM
+                </div>
+</div>
+<div class="p-space-sm bg-surface-container-lowest">
+<p class="font-label-md text-label-md text-primary font-semibold">Ballast Footing &amp; Rail Torque Checked</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Calibrated digital wrench: 42 Nm verified</p>
+</div>
+</div>
+<!-- Inspection Card 3: During Conduit -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container shadow-sm hover:shadow-md transition-all">
+<div class="h-44 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Industrial solar electrical installation showing sealed roof ingress conduit, heavy duty DC isolator switch and color coded DC cabling with tamper-proof warning tags." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_WuW7v7kmEdS55BnNwSXxHf0LnSnMYD7B8gUuW70qc7cHl_KnsFCn-yyMLrr8CdF4crXhg5VQ0-DMivo2bBfA33qGJ2GH1tm06-1sOYKs45EAhlFbzO43KzCEntZ3rghRvFl78OaHdooaGySrFdzwhf68fz_Xt9hm5QpWMmSh5egZAobNEFv3suHgvh73Lyb1JWOAeIsyMoNAzyuzX1kuHxNnFwoL5RRkshGCMnRp"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-secondary/90 text-on-secondary font-label-sm text-label-sm uppercase font-semibold">
+                  Stage 3: Electrical Ingress
+                </div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-label-sm text-label-sm">
+                  14:10 PM
+                </div>
+</div>
+<div class="p-space-sm bg-surface-container-lowest">
+<p class="font-label-md text-label-md text-primary font-semibold">Ingress Conduit Sealing &amp; DC Isolator</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Silicone gasket IP67 rated compression sealed</p>
+</div>
+</div>
+<!-- Inspection Card 4: Post Layout -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container shadow-sm hover:shadow-md transition-all">
+<div class="h-44 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Expansive panoramic view of commercial solar panel array layout installed on commercial roof, dark monocrystalline panels glistening in afternoon sun with clean wire management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8ZPw4P-LVGudcWX0t0v7_QcoZjxsDdA_s-sNNNrhpYj3kpsBH12zikrlxh6t1Y_FNcBIrte4oH5cefeTGQepZwQsRqwEDfHCyIZpw3c8-VrsDFpzBTmW2s5iqE4_tQ1-AyauVNYQtSfvnBVMTK7zEiZZqmXvkfqY-X0Kj-ADC87SN_fhXUR7mhFPRUNHPZt3pmJN6l_LA-XUGC75B1YxwuHrC4s0LxI_wniDVGHzy"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary-container/90 text-on-primary font-label-sm text-label-sm uppercase font-semibold">
+                  Stage 4: Array Review
+                </div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-label-sm text-label-sm">
+                  16:05 PM
+                </div>
+</div>
+<div class="p-space-sm bg-surface-container-lowest">
+<p class="font-label-md text-label-md text-primary font-semibold">Array Layout &amp; Microinverter Tie-in</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">220 modules mapped to Enphase trunk cable</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Rigorous Quality & Safety Checklist -->
+<div class="space-y-space-sm rounded-lg bg-surface-container-low p-space-md">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">
+              Quality Assurance &amp; Commissioning Gates
+            </span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">3 of 4 Gates Passed</span>
+</div>
+<div class="space-y-2">
+<!-- Item 1 -->
+<label class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest cursor-pointer hover:bg-surface-variant/40 transition-colors">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container accent-primary-container" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-primary">Fall Arrest Harness Anchor Points Tested</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-secondary-fixed text-on-secondary-fixed">PASS â€¢ OSHA 1926</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Static pull-tested at 5,000 lbs. Certified by Mateo Kowalski.</span>
+</div>
+</label>
+<!-- Item 2 -->
+<label class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest cursor-pointer hover:bg-surface-variant/40 transition-colors">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container accent-primary-container" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-primary">DC Open Circuit Voltage (Voc) String Test</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-secondary-fixed text-on-secondary-fixed">482V NOMINAL (PASS)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Fluke 393 FC Solar Clamp Meter log synced. Deviation &lt; 0.8%.</span>
+</div>
+</label>
+<!-- Item 3 -->
+<label class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest cursor-pointer hover:bg-surface-variant/40 transition-colors">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container accent-primary-container" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-primary">Insulation Resistance (Megger Test)</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-secondary-fixed text-on-secondary-fixed">&gt;50 MÎ© (PASS)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1000V DC applied to array conductors to ground. Zero insulation leakage.</span>
+</div>
+</label>
+<!-- Item 4 (Pending) -->
+<label class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest cursor-pointer hover:bg-surface-variant/40 transition-colors">
+<input class="mt-1 w-4 h-4 rounded text-primary-container accent-primary-container" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-on-surface-variant">Utility Bi-Directional Net Meter Swapped</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-surface-container-high text-on-surface-variant">PENDING INSPECTOR</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">City Grid Engineer expected on site at 16:45 PM for PTO lockbox verification.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Handover Action CTA -->
+<div class="pt-space-sm">
+<button class="w-full py-3.5 px-space-lg rounded-xl bg-primary-container hover:bg-primary text-on-primary font-title-md text-title-md font-semibold shadow-md flex items-center justify-center gap-space-sm transition-all group" type="button">
+<span class="material-symbols-outlined text-[24px]">draw</span>
+<span>Capture Digital Signature &amp; Generate Commissioning Certificate</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="mt-2 text-center font-body-sm text-body-sm text-on-surface-variant">
+            Generates SHA-256 encrypted NABCEP installation record and triggers automatic customer solar warranty activation.
+          </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Technicians Directory & Dispatch Schedule (5 Columns) -->
+<div class="lg:col-span-5 flex flex-col gap-space-xl min-w-0">
+<!-- Technicians Directory Card -->
+<div class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b-0">
+<div>
+<h3 class="font-title-md text-title-md font-semibold text-primary">Master Electricians &amp; Riggers</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">NABCEP Certified Personnel Field Availability</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold">
+            4 Deployed
+          </span>
+</div>
+<!-- Technician 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-variant/30 transition-all space-y-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-full overflow-hidden bg-primary-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of Julian Torres, lead solar master electrician in protective hard hat and navy work polo against clear blue sky, focused professional expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB41hAVs1oAej4DAdykjKKZ790KmX-M7Z1n55P5NzmJRAdR8-I2LGL-QLXU5w_yonFkIUxsRDC6ilr_765VjQlQ8sQLsGMM3fBS-BCinTs47VTnyasYWvkXl9uzul2FaN8-gBfSYJhUcZEn7I3VLOs8RfMHuK-QpVh4OK7uITRQ2UD2OOiPpx3rOZgxhewonkLP5yCYrwi7QKwsSMlTgrrXTxVF7jRy-DtWT5-y81Ji"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<p class="font-label-md text-label-md font-semibold text-primary truncate">Julian Torres</p>
+<span class="material-symbols-outlined text-secondary text-[16px]" title="NABCEP Certified">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate">Lead Electrician â€¢ NABCEP #EE-9481</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed font-bold flex-shrink-0">
+              Active On Site
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">4.95 / 5.0</span>
+<span class="text-[10px] uppercase">Rating</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">142</span>
+<span class="text-[10px] uppercase">Installs</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">100%</span>
+<span class="text-[10px] uppercase">Safety SLA</span>
+</div>
+</div>
+</div>
+<!-- Technician 2 -->
+<div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-variant/30 transition-all space-y-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-full overflow-hidden bg-secondary flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of Mateo Kowalski, solar rigging specialist wearing safety sunglasses and harness, confident industrial expression in sunlit rooftop environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwSH7yw16I40vKVf9BpviJ-q4GYqIsa0MAySpwLWZyfLAkUFA8C3gOKg1FMBA5FIqYec9yqnh6fEN2d_5z3rnivDmdBG2645HACzBe3R6VaTI5wUavzpHPb0-RKAjrGa7P6ZgRaCqGceh3qb-9gT94kLORsDuZkGoN740ueOXxiW0o5rweNqbdcvcnAgGux38XonyXKqgT-YU7lhK_pbMFvGAQtoBAC56Js2zNvbPV"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<p class="font-label-md text-label-md font-semibold text-primary truncate">Mateo Kowalski</p>
+<span class="material-symbols-outlined text-secondary text-[16px]" title="OSHA 30 Certified">shield</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate">Rigging Specialist â€¢ OSHA 30 Certified</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed font-bold flex-shrink-0">
+              Active On Site
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">4.90 / 5.0</span>
+<span class="text-[10px] uppercase">Rating</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">98</span>
+<span class="text-[10px] uppercase">Installs</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">100%</span>
+<span class="text-[10px] uppercase">Safety SLA</span>
+</div>
+</div>
+</div>
+<!-- Technician 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-variant/30 transition-all space-y-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-full overflow-hidden bg-primary-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of Sarah Reynolds, solar commissioning engineer holding technical tablet wearing clean engineering vest and safety glasses in front of electrical switchgear." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkWaEWRBRj9he2CBH8hJhwrWyKzTJKwJ1HExL-pC-RGMX9AJggpvbbdxNYDZUy5xCdXHe1MzDJybIZ1iAnkQaeTu6SPl-lGO7ZOMikpZhTCfjP4BP7a0JnyhgnYbtL9RrrgNqA9usPB3TEsuJcMdQAgSfEHtXwIcKLfcwLTXXCvbyvjy_uraIF3nikV8Gg7IBfoS9d78xHzLuyykonrXV9H3qBFZ-PkaD08i63jAHy"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<p class="font-label-md text-label-md font-semibold text-primary truncate">Sarah Reynolds</p>
+<span class="material-symbols-outlined text-secondary text-[16px]" title="Licensed Professional Engineer">workspace_premium</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate">Commissioning Eng â€¢ Licensed PE</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container-high text-primary font-bold flex-shrink-0">
+              Standby / Ready
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">4.98 / 5.0</span>
+<span class="text-[10px] uppercase">Rating</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">184</span>
+<span class="text-[10px] uppercase">Installs</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">100%</span>
+<span class="text-[10px] uppercase">Safety SLA</span>
+</div>
+</div>
+</div>
+<!-- Technician 4 -->
+<div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-variant/30 transition-all space-y-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-full overflow-hidden bg-secondary flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of Tariq Al-Mansoor, certified commercial solar rigger wearing hard hat with high vis uniform in clean industrial logistics warehouse setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoO8hansTG8WxgFvVkTHj9ijjoWO_y4QWiR2M6I9G8glzmo6frkxEO_TRHZJ_dcuvtEEo4opGFaVNlLyxVwr5Si8xU4YAI5UnrZxNV5h-1mvWNekLQn-TBYrt8rKzN8K5eBwgIcuc1umIjFaPg5czgI4-RlQphzSTNgtTTmIt276LEXi35N9GFnlGcfHlocmDaJx9g-K9-IRVpirisqaJtAy_L5EVuRPWo5iVKscgr"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<p class="font-label-md text-label-md font-semibold text-primary truncate">Tariq Al-Mansoor</p>
+<span class="material-symbols-outlined text-secondary text-[16px]" title="Solar Rigger">construction</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate">Solar Rigger â€¢ High-Elevation Spec</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-container text-on-secondary-container font-bold flex-shrink-0">
+              In Transit
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">4.88 / 5.0</span>
+<span class="text-[10px] uppercase">Rating</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">76</span>
+<span class="text-[10px] uppercase">Installs</span>
+</div>
+<div class="bg-surface-container-lowest p-1.5 rounded text-center">
+<span class="block text-primary font-bold">100%</span>
+<span class="text-[10px] uppercase">Safety SLA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Weekly Field Deployment Calendar Timeline -->
+<div class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">calendar_month</span>
+<h3 class="font-title-md text-title-md font-semibold text-primary">Field Schedule &amp; Crew Slots</h3>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Oct 24 - Oct 28</span>
+</div>
+<!-- Timeline Visual Deck -->
+<div class="space-y-space-sm">
+<!-- Tue Today -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Today (Tue, Oct 24)</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-secondary-fixed text-on-secondary-fixed">6 Crews Out</span>
+</div>
+<div class="grid grid-cols-12 gap-1 h-6">
+<div class="col-span-8 bg-primary-container text-on-primary text-[10px] font-semibold rounded flex items-center px-2 truncate" title="Team Alpha - Apex Cold Storage">
+                Apex Cold Storage (120 kW) - Team Alpha
+              </div>
+<div class="col-span-4 bg-secondary text-on-secondary text-[10px] font-semibold rounded flex items-center px-1.5 truncate" title="Metro Logistics Hub">
+                Metro Hub Pre-Wire
+              </div>
+</div>
+</div>
+<!-- Wed -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-primary">Wednesday, Oct 25</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">5 Crews Scheduled</span>
+</div>
+<div class="grid grid-cols-12 gap-1 h-6">
+<div class="col-span-6 bg-secondary text-on-secondary text-[10px] font-semibold rounded flex items-center px-2 truncate">
+                BioMed Tech Rooftop (95 kW)
+              </div>
+<div class="col-span-6 bg-primary-container text-on-primary text-[10px] font-semibold rounded flex items-center px-2 truncate">
+                Piedmont Valley Winery Array
+              </div>
+</div>
+</div>
+<!-- Thu -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-primary">Thursday, Oct 26</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">6 Crews Scheduled</span>
+</div>
+<div class="grid grid-cols-12 gap-1 h-6">
+<div class="col-span-7 bg-primary-container text-on-primary text-[10px] font-semibold rounded flex items-center px-2 truncate">
+                Apex Cold Storage - Final Commissioning
+              </div>
+<div class="col-span-5 bg-surface-variant text-primary text-[10px] font-semibold rounded flex items-center px-2 truncate">
+                Kaiser Microgrid Rack Mount
+              </div>
+</div>
+</div>
+<!-- Fri -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-primary">Friday, Oct 27</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">4 Crews Scheduled</span>
+</div>
+<div class="grid grid-cols-12 gap-1 h-6">
+<div class="col-span-5 bg-secondary text-on-secondary text-[10px] font-semibold rounded flex items-center px-2 truncate">
+                Harbor Logistics Crane Rigging
+              </div>
+<div class="col-span-7 bg-surface-container-high text-primary text-[10px] font-semibold rounded flex items-center px-2 truncate">
+                Weekly Safety &amp; Tool Recalibration
+              </div>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-lg bg-surface-container-high hover:bg-surface-variant text-primary font-label-md text-label-md font-semibold transition-colors flex items-center justify-center gap-space-xs" type="button">
+<span>Expand Master Dispatch Gantt</span>
+<span class="material-symbols-outlined text-[18px]">calendar_view_week</span>
+</button>
+</div>
+</div>
+</section>
+</div></main></div></body></html>

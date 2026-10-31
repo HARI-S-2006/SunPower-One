@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Stitch: Warm Cream Canvas #F7F3EC */
+    --background: 40 33% 95%;
+    /* Stitch: Warm Basalt #292522 */
+    --foreground: 25 10% 15%;
+    
+    /* Stitch: Surface Card #FFFFFF */
+    --card: 0 0% 100%;
+    --card-foreground: 25 10% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 25 10% 15%;
+    
+    /* Stitch: Deep Navy #172747 */
+    --primary: 220 51% 18%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Stitch: Deep Espresso #493027 */
+    --secondary: 17 28% 22%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Stitch: Layered Utility #E9DDCA */
+    --muted: 36 36% 85%;
+    /* Stitch: Sandstone Slate #827B73 */
+    --muted-foreground: 33 6% 48%;
+    
+    /* Stitch: Warm Sandstone Accent */
+    --accent: 36 36% 92%;
+    --accent-foreground: 220 51% 18%;
+    
+    /* Stitch: Crimson Rust #9E3A3A */
+    --destructive: 0 46% 42%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Stitch: Hairline Divider #E8E0D6 */
+    --border: 34 27% 88%;
+    --input: 34 27% 88%;
+    
+    /* Stitch: Deep Navy Focus Ring #172747 */
+    --ring: 220 51% 18%;
+    
+    /* Stitch: Architectural 12px Radius */
+    --radius: 0.75rem;
+    
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 20 18% 10%;
+    --foreground: 35 25% 94%;
+    --card: 20 18% 14%;
+    --card-foreground: 35 25% 94%;
+    --popover: 20 18% 14%;
+    --popover-foreground: 35 25% 94%;
+    --primary: 220 51% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 17 28% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 20 18% 20%;
+    --muted-foreground: 33 10% 65%;
+    --accent: 20 18% 22%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 46% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 20 18% 22%;
+    --input: 20 18% 22%;
+    --ring: 220 51% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Material Symbols Outlined Icon Standard */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* Tabular Figures for SCADA / Telemetry / Financials */
+.tabular-nums {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Custom Stitch Warm Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F3EC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D9CFBD;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B68B55;
+}
+
+/* Smooth transitions */
+button, a, input, select {
+  transition: all 150ms ease-in-out;
+}

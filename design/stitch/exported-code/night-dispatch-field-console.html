@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"error-container":"#ffdad6","on-tertiary":"#ffffff","on-secondary":"#ffffff","surface-container-high":"#efe6e1","surface-tint":"#4f5e81","surface":"#fff8f5","primary-fixed-dim":"#b7c6ef","tertiary-fixed":"#ffddb7","secondary-container":"#ffd7ca","primary-fixed":"#d9e2ff","on-tertiary-fixed":"#2a1700","primary-container":"#172747","on-secondary-container":"#7a5c51","surface-container-lowest":"#ffffff","on-background":"#1f1b18","secondary-fixed":"#ffdbcf","on-secondary-fixed-variant":"#5c4037","on-surface":"#1f1b18","surface-container-highest":"#eae1dc","inverse-surface":"#34302c","surface-variant":"#eae1dc","on-primary-fixed-variant":"#374668","surface-container":"#f5ece7","tertiary-container":"#3a2200","tertiary-fixed-dim":"#eebe83","on-primary-fixed":"#091b3a","inverse-primary":"#b7c6ef","surface-dim":"#e1d8d3","surface-container-low":"#fbf2ed","on-error-container":"#93000a","on-tertiary-fixed-variant":"#614011","error":"#ba1a1a","on-secondary-fixed":"#2b160e","tertiary":"#1f1000","background":"#fff8f5","inverse-on-surface":"#f8efea","on-primary-container":"#7f8eb4","on-primary":"#ffffff","primary":"#011232","on-error":"#ffffff","secondary":"#75584d","on-surface-variant":"#45464e","outline":"#75777f","outline-variant":"#c5c6cf","secondary-fixed-dim":"#e5beb1","surface-bright":"#fff8f5","on-tertiary-container":"#b18751"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-sm":"1rem","space-md":"0.75rem","margin-sm":"1rem","space-xl":"2rem","space-sm":"0.5rem","gutter-lg":"2rem","margin":"2rem","space-lg":"1.25rem","margin-lg":"3rem","gutter":"1.5rem","space-xs":"0.25rem"},"fontFamily":{"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Inter"],"data-tabular":["Inter"],"body-md":["Inter"],"data-metric":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"title-md":["Inter"],"body-sm":["Inter"],"display":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","letterSpacing":"0","fontWeight":"400"}],"headline-md":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg-mobile":["1.625rem",{"lineHeight":"2.125rem","letterSpacing":"-0.015em","fontWeight":"600"}],"label-md":["0.8125rem",{"lineHeight":"1.125rem","letterSpacing":"0.02em","fontWeight":"600"}],"data-tabular":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0","fontWeight":"500"}],"body-md":["0.875rem",{"lineHeight":"1.375rem","letterSpacing":"0","fontWeight":"400"}],"data-metric":["1.875rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"title-md":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1.125rem","letterSpacing":"0.01em","fontWeight":"400"}],"display":["2.75rem",{"lineHeight":"3.25rem","letterSpacing":"-0.025em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-primary text-on-primary z-50 flex flex-col justify-between shadow-[2px_0_12px_rgba(0,0,0,0.12)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-primary-container"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-tertiary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-tertiary-container text-[18px]">radar</span></div><div><span class="font-headline-sm text-headline-sm tracking-tight text-on-primary block leading-tight">DISPATCH</span><span class="font-label-sm text-label-sm tracking-widest text-on-primary-container block uppercase">NOC COMMAND</span></div></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface/10 text-on-primary"><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span><span class="font-label-sm text-label-sm">LIVE</span></div></div><nav class="flex flex-col gap-1 p-space-md" data-active-classes="bg-primary-container text-on-primary font-label-md rounded-lg shadow-sm"><a aria-current="page" class="flex items-center gap-space-md px-3 py-2.5 transition-all bg-primary-container text-on-primary font-label-md rounded-lg shadow-sm" data-path="grid-telemetry-console" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span>Telemetry Grid</a><a class="flex items-center gap-space-md px-3 py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-all font-label-md text-label-md" data-path="bess-dispatch-radar" href="#"><span class="material-symbols-outlined text-[20px]">battery_charging_full</span>BESS Dispatch</a><a class="flex items-center gap-space-md px-3 py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-all font-label-md text-label-md" data-path="curtailment-controls" href="#"><span class="material-symbols-outlined text-[20px]">tune</span>Curtailment Logic</a><a class="flex items-center gap-space-md px-3 py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-all font-label-md text-label-md" data-path="feeder-fault-center" href="#"><span class="material-symbols-outlined text-[20px]">bolt</span>Feeder Alarms</a><a class="flex items-center gap-space-md px-3 py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-all font-label-md text-label-md" data-path="field-crew-dispatch" href="#"><span class="material-symbols-outlined text-[20px]">engineering</span>Field Crews</a></nav></div><div class="p-space-md flex flex-col gap-space-sm bg-primary-container/40"><div class="flex items-center justify-between text-on-primary-container px-2"><span class="font-label-sm text-label-sm uppercase tracking-wider">ISO Connection</span><span class="font-label-sm text-label-sm text-on-primary">CAISO â€¢ 99.98%</span></div><div class="flex items-center gap-space-sm px-2 py-1.5 rounded-lg bg-surface/5"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">warning</span><span class="font-body-sm text-body-sm text-on-primary-container">Thermal Curtailment Active</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(73,48,39,0.04)] z-40 flex items-center justify-between px-gutter-lg"><div class="flex items-center gap-space-lg"><span class="font-title-md text-title-md text-on-surface">Central Operations NOC</span><div class="flex items-center gap-space-xs px-2.5 py-1 rounded bg-surface-container text-secondary font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">schedule</span><span>Night Shift Phase 02 â€¢ Active</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm bg-surface-container-high px-3 py-1.5 rounded-lg text-on-surface"><span class="material-symbols-outlined text-[18px] text-secondary">speed</span><span class="font-data-tabular text-data-tabular">342.8 MW Gross</span></div><button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">tune</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="w-full px-gutter-lg py-space-xl"><div class="flex flex-col w-full">
+<!-- Night Dispatch Console Banner & Mode Bar -->
+<div class="w-full bg-primary-container text-on-primary rounded-xl p-space-lg mb-space-xl shadow-xl relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-secondary/20 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/3 -bottom-20 w-96 h-96 rounded-full bg-tertiary-container/30 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-container text-tertiary-fixed-dim font-label-sm text-label-sm tracking-wide">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+            IR OPTICS ONLINE
+          </span>
+<span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase font-semibold">
+            SEC-LEVEL 4 NOC â€¢ NOC-NIGHT-CAL-09
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-primary tracking-tight">
+          NIGHT DISPATCH CONSOLE <span class="text-tertiary-fixed-dim font-normal">â€¢ INFRARED & GRID TELEMETRY</span>
+</h1>
+<p class="font-body-md text-body-md text-on-primary-container flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 text-on-primary"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">electrical_services</span> Grid: 60.02 Hz</span>
+<span>â€¢</span>
+<span class="inline-flex items-center gap-1 text-on-primary"><span class="material-symbols-outlined text-[16px] text-secondary-fixed">battery_charging_full</span> Reserve: 88.4% Fleetwide</span>
+<span>â€¢</span>
+<span class="inline-flex items-center gap-1 text-on-primary"><span class="material-symbols-outlined text-[16px] text-primary-fixed">commute</span> Field Technicians: 3 Active Units</span>
+</p>
+</div>
+<!-- Controls & Toggle -->
+<div class="flex items-center gap-space-md self-start xl:self-center">
+<div class="flex items-center bg-primary px-3 py-1.5 rounded-xl shadow-inner gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed-dim">bedtime</span>
+<span class="font-label-md text-label-md text-on-primary">Dark NOC Lens</span>
+<button class="relative inline-flex h-6 w-11 items-center rounded-full bg-tertiary-container transition-colors focus:outline-none" id="themeToggleBtn" onclick="toggleThemeVisual()">
+<span class="sr-only">Toggle daylight theme</span>
+<span class="inline-block h-4 w-4 transform rounded-full bg-tertiary-fixed-dim transition translate-x-6" id="themeTogglePill"></span>
+</button>
+</div>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md hover:opacity-90 shadow-md transition-all">
+<span class="material-symbols-outlined text-[18px]">satellite_alt</span>
+          Sync SCADA Pulse
+        </button>
+</div>
+</div>
+</div>
+<!-- Telemetry Metric Row (Bento Micro-Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg mb-space-xl">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Critical Night Dispatches</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span> High Alert
+        </span>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-error">2 In-Flight</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          Inverter Ingress Fault â€¢ Feeder 14B Ground Trip
+        </div>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-space-md overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Off-Peak Arbitrage Index</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+          CAISO Super-Off
+        </span>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">$0.082</span>
+<span class="font-label-md text-label-md text-secondary">/ kWh</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          BESS bulk recharge window active until 05:30 PST
+        </div>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-space-md overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Fleet Night Storage Draw</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+          Baseline Load
+        </span>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">18.4</span>
+<span class="font-label-md text-label-md text-on-surface-variant">MW DC</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          Parasitic HVAC + 4 Megapacks charging in Tahoe zone
+        </div>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-space-md overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 44%"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">SCADA Telemetry Nodes</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm">
+          Optimal
+        </span>
+</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">99.8%</span>
+<span class="font-label-sm text-label-sm text-secondary">Nominal</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          844 / 846 verified remote RTUs transmitting
+        </div>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-space-md overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 99.8%"></div>
+</div>
+</div>
+</div>
+<!-- Operational Core: GPS Radar Map & Field Crew Hub (Split 7 / 5) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Map Section: 7 Cols -->
+<div class="xl:col-span-7 bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col">
+<div class="flex items-center justify-between mb-space-md flex-wrap gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">radar</span>
+<h2 class="font-title-md text-title-md text-on-surface">Night GPS Radar â€¢ Northern California & Reno Corridor</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span> Live Ping (1s)
+          </span>
+<button class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition">
+            Recenter Geofence
+          </button>
+</div>
+</div>
+<!-- Real Map Canvas Element -->
+<div class="relative w-full h-80 rounded-xl overflow-hidden shadow-inner mb-space-md" data-location="Sacramento, California" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBA79MRIBpGscDJslOMAf5VPM6wRmQTgxGWalFNeMjF6PG6bvAUoM6-7frp8NtwQmgrDRy4R5XYFT718379jQz8qAorigkFnRUbe3t5SOW4bTjYkJSj_pIEhKeq5_ENwDm6W5ipkqwXAYkURIA0U7S_oopkmzOcpNaa7VPVlPo87BTgzdVDoICogAaLargmMbCFzM27tBKqY1gM4QGrbOE-ri75jkkUPR7wK8oOUjMq'); background-size: cover; background-position: center;">
+<!-- Simulated High-Tech Night Grid Layer Overlay -->
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-[1px] pointer-events-none"></div>
+<!-- Radar Ring Graphic (Inline SVG) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-40" fill="none" viewbox="0 0 700 320">
+<circle class="text-tertiary-fixed-dim" cx="350" cy="160" r="80" stroke="currentColor" stroke-dasharray="4 4" stroke-width="0.8"></circle>
+<circle class="text-primary-fixed-dim" cx="350" cy="160" r="140" stroke="currentColor" stroke-width="0.8"></circle>
+<circle class="text-secondary-fixed" cx="350" cy="160" r="210" stroke="currentColor" stroke-dasharray="6 6" stroke-width="0.8"></circle>
+<line class="text-on-primary-container" stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5" x1="350" x2="350" y1="0" y2="320"></line>
+<line class="text-on-primary-container" stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5" x1="0" x2="700" y1="160" y2="160"></line>
+</svg>
+<!-- Pin 1: Crew #04 En Route -->
+<div class="absolute top-24 left-1/4 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="flex items-center gap-2 bg-primary-container text-on-primary px-2.5 py-1 rounded-full shadow-lg">
+<span class="w-2.5 h-2.5 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-label-sm tracking-tight">Unit #04 (Mateo K.) â€¢ En Route (ETA 18m)</span>
+</div>
+<div class="w-2 h-2 bg-error rotate-45 mx-auto -mt-1 shadow-md"></div>
+</div>
+<!-- Pin 2: Crew #08 On Site Thermal -->
+<div class="absolute top-44 left-3/5 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="flex items-center gap-2 bg-primary-container text-on-primary px-2.5 py-1 rounded-full shadow-lg">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-label-sm text-label-sm tracking-tight">Unit #08 â€¢ Apex Cold Storage [Active FLIR]</span>
+</div>
+<div class="w-2 h-2 bg-tertiary-fixed-dim rotate-45 mx-auto -mt-1 shadow-md"></div>
+</div>
+<!-- Pin 3: Crew #12 Reno Hub Standby -->
+<div class="absolute bottom-12 right-12 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="flex items-center gap-2 bg-primary text-on-primary px-2.5 py-1 rounded-full shadow-lg">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span>
+<span class="font-label-sm text-label-sm tracking-tight">Unit #12 â€¢ Reno Hub Standby</span>
+</div>
+<div class="w-2 h-2 bg-primary-container rotate-45 mx-auto -mt-1 shadow-md"></div>
+</div>
+<!-- Watermark Metadata Overlay -->
+<div class="absolute bottom-2 left-3 bg-primary-container/80 text-on-primary-container px-2 py-0.5 rounded text-[10px] font-label-sm uppercase tracking-wider backdrop-blur-md">
+          Telemetry Coordinate Grid: 38.5816Â° N, 121.4944Â° W â€¢ UTC-8 Night Scan
+        </div>
+</div>
+<!-- Quick Roster Telemetry Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-auto">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Unit #04 â€¢ Mateo Kowalski</span>
+<span class="material-symbols-outlined text-error text-[18px]">emergency_home</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant my-1">HV Electrician â€¢ Dispatch Van 22</span>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-error mt-1">
+<span>En route Oakridge</span>
+<span class="font-semibold">ETA 02:44 AM</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Unit #08 â€¢ Sarah Reynolds</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">camera_indoor</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant my-1">Thermal Level II â€¢ FLIR E96</span>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-secondary mt-1">
+<span>Apex Cold Storage</span>
+<span class="font-semibold">In Progress</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Unit #12 â€¢ Liam Vance</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">garage</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant my-1">Substation Tech â€¢ Truck 09</span>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant mt-1">
+<span>Reno Central Depot</span>
+<span class="font-semibold">Standby</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Thermal & Infrared Field Inspection Feed: 5 Cols -->
+<div class="xl:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[22px]">thermostat</span>
+<h2 class="font-title-md text-title-md text-on-surface">Night Thermal Field Stream</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-pulse"></span> Unit #08 Live FLIR
+        </span>
+</div>
+<!-- Thermographic Image Card -->
+<div class="relative w-full rounded-xl overflow-hidden shadow-sm group mb-space-md bg-primary-container">
+<img class="w-full h-52 object-cover opacity-90 group-hover:opacity-100 transition-opacity" data-alt="Photorealistic high-contrast night vision infrared thermography capture of a large commercial solar combiner box and junction panel. Glowing thermal heat gradients from cool indigo-blue 28 degrees Celsius to luminous amber gold 45 degrees Celsius. Technical telemetry crosshairs, HUD digital temperature overlays, and dark industrial aesthetic tailored for clean energy night operations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZBC0UQnI3-upZoiNOzB_I24wrtXu8trPndg_ED7AoQAkgJkIJ6pFVl2DUaUMyJYh9vzFg6xJ5MrIuYPCvE2bcNkfq7cQQ2fl26p61G8byjlugUPAdGFxbauvdBNIkA2-Nv1scVkWk2ReWJzriNbKYB8tt7gzfWz9cizqPIR5a1ZVf30n9qLq0CT1u-l4u9emkTKlHPxFCXFSPgmMMPyqL82u4LBzCJfOh3wRZ_i9V"/>
+<!-- Live HUD Optical Overlays -->
+<div class="absolute inset-0 p-3 pointer-events-none flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="bg-primary/80 backdrop-blur-sm px-2 py-1 rounded text-[11px] text-tertiary-fixed-dim font-data-tabular">
+              SP01: 34.2Â°C â€¢ AMBIENT: 12.0Â°C
+            </div>
+<div class="bg-primary/80 backdrop-blur-sm px-2 py-1 rounded text-[11px] text-primary-fixed font-data-tabular">
+              FLIR T1020 HD â€¢ 30 FPS
+            </div>
+</div>
+<!-- Crosshairs Reticle Center -->
+<div class="self-center flex flex-col items-center">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-3xl opacity-75">filter_center_focus</span>
+<span class="text-[10px] text-tertiary-fixed-dim font-label-sm bg-primary/70 px-1 rounded -mt-1">STRING #04: NOMINAL</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-[10px] text-on-primary-container bg-primary/80 px-2 py-0.5 rounded font-label-sm">
+              EMISSIVITY: 0.95 â€¢ DIST: 4.8m
+            </span>
+<span class="text-[10px] text-on-primary bg-secondary/80 px-2 py-0.5 rounded font-label-sm font-semibold">
+              DELTA-T: 2.1Â°C (CLEAR)
+            </span>
+</div>
+</div>
+</div>
+<!-- Secondary Drone LiDAR Scan Card -->
+<div class="p-space-md rounded-lg bg-surface-container flex items-center gap-space-md">
+<div class="w-16 h-16 rounded-lg bg-primary-container overflow-hidden shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Digital wireframe LiDAR point cloud visualization of a utility-scale solar farm at night. High-contrast neon cyan and amber elevation contour lines outlining photovoltaic tracker rows and energy storage containers under a midnight sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJsLfsNoxxF4efs0klUNiH4mrv851DNMR3kQudFKniGTblExhGDQ1miMpEg3_yoSOeG06ZCrR-VAwXGsLN5vcd4wkxdUWVY6o_YgHg4UfOCSve1t1DvAx5TwCJyk03RaloHMFgQW3eU5J9ARHZynwBw2oK3J33jYAd4Vmfhk8Imcf58h2QH9Rs8vs6-IMC1xtigMv4-3Zr5AdjjqrV8NXsBj0sNQTeApNjepP_caGh"/>
+<div class="absolute inset-0 bg-primary/20"></div>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Drone LiDAR Wireframe Elevation</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">flight_takeoff</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Oakridge array rack settling scan: 0.04mm tolerance. No tilt deflection recorded.
+          </p>
+<span class="font-label-sm text-label-sm text-secondary font-semibold mt-1">Autonomous Flight Log #882 â€¢ Complete</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Core: Emergency Night Queue & TOU Arbitrage Schedule -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Emergency Night Service Queue: 8 Cols -->
+<div class="xl:col-span-8 bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-lg flex-wrap gap-2">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[22px]">warning</span>
+<h2 class="font-title-md text-title-md text-on-surface">Emergency Night Incident Stream â€¢ Active Queues</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Automated trip alerts mapped to ISO SLA dispatch thresholds
+            </p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high text-label-sm font-label-sm transition">
+              Export Audit Log
+            </button>
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary text-label-sm font-label-sm hover:opacity-95 transition shadow-sm">
+              + Manual Incident
+            </button>
+</div>
+</div>
+<!-- Incident 1: Urgent -->
+<div class="p-space-lg rounded-xl bg-surface-container-low mb-space-md flex flex-col gap-space-md shadow-sm transition hover:shadow-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-error animate-ping"></span>
+<span class="font-label-md text-label-md text-error uppercase tracking-wider font-bold">
+                ALERT #NIGHT-204 â€¢ PRIORITY 1 CRITICAL
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+                SLA: 01h 42m Rem.
+              </span>
+</div>
+<span class="font-data-tabular text-data-tabular text-on-surface-variant">02:18:04 PST (Logged 24m ago)</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="max-w-xl">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Oakridge Estates Phase-B â€¢ DC Ingress & String Isolation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Moisture intrusion sensor triggered at Central Inverter INV-03B. Contactor open commanded via safety interlock. 420 kW string curtailed.
+              </p>
+</div>
+<div class="flex items-center gap-2 shrink-0 flex-wrap">
+<button class="px-3 py-2 bg-error text-on-error rounded-lg font-label-sm text-label-sm font-semibold hover:opacity-90 shadow-sm transition flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">send</span> Dispatch Rig
+              </button>
+<button class="px-3 py-2 bg-surface-container-highest text-on-surface rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">lock_reset</span> Override Contactor
+              </button>
+<button class="px-3 py-2 bg-surface-container-highest text-on-surface rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">chat</span> SMS Manager
+              </button>
+</div>
+</div>
+</div>
+<!-- Incident 2: Auto-Remediated / Warning -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col gap-space-md shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">
+                ALERT #NIGHT-205 â€¢ PRIORITY 2 ADVISORY
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+                Auto-Remediated
+              </span>
+</div>
+<span class="font-data-tabular text-data-tabular text-on-surface-variant">01:54:19 PST</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="max-w-xl">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Bakersfield BESS â€¢ Chiller Loop Delta Pressure</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Cooling cycle anomaly triggered at Battery Bay 02. Redundant glycol pump activated via firmware v4.18. Temperature stabilized at 21.4Â°C.
+              </p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="px-3 py-1.5 bg-surface-container-high text-on-surface rounded-lg font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                Closed by SCADA Logic
+              </span>
+<button class="px-3 py-1.5 bg-surface-container-highest text-on-surface-variant rounded-lg font-label-sm text-label-sm hover:text-on-surface transition">
+                View Telemetry Log
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Log Ticker -->
+<div class="flex items-center gap-space-md mt-space-lg pt-space-md border-t-0 bg-surface-container p-space-md rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[18px]">terminal</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant overflow-hidden truncate">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">[02:41:10 UTC-8]</span> CAISO dispatch signal received: Target storage reserve target updated to 88.4% nominal â€¢ Oakridge inverter telemetry heartbeats nominal.
+        </div>
+</div>
+</div>
+<!-- Utility Tariff & TOU Arbitrage Schedule Clock: 4 Cols -->
+<div class="xl:col-span-4 bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">hourglass_top</span>
+<h2 class="font-title-md text-title-md text-on-surface">TOU Arbitrage Dial</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm font-semibold">
+            PG&E B-19 Rate
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-lg">
+          Super-Off-Peak charge arbitrage clock & dynamic BESS absorption status.
+        </p>
+<!-- Circular Dial Diagram (Pure Vector SVG) -->
+<div class="relative w-56 h-56 mx-auto my-2 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 120 120">
+<!-- Background Dial Ring -->
+<circle class="text-surface-container-high" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-width="10"></circle>
+<!-- Super-Off-Peak Window: 00:00 to 06:00 (25% of ring) -->
+<circle class="text-secondary" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-dasharray="78.5 235.5" stroke-dashoffset="0" stroke-width="10"></circle>
+<!-- Standard Off-Peak Window: 06:00 to 16:00 (41.6% of ring) -->
+<circle class="text-tertiary-fixed-dim" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-dasharray="130.6 183.4" stroke-dashoffset="-78.5" stroke-width="10"></circle>
+<!-- On-Peak Window: 16:00 to 21:00 (20.8% of ring) -->
+<circle class="text-error" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-dasharray="65.3 248.7" stroke-dashoffset="-209.1" stroke-width="10"></circle>
+<!-- Indicator Pin (Current Time: 02:42 AM approx 11.2% around dial) -->
+<circle class="text-on-surface-variant" cx="60" cy="60" fill="none" r="44" stroke="currentColor" stroke-dasharray="2 3" stroke-width="0.75"></circle>
+</svg>
+<!-- Dial Center Numeric Core -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">Current Cycle</span>
+<span class="font-data-metric text-data-metric text-on-surface leading-none my-1">02:42</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">SUPER OFF-PEAK</span>
+<span class="font-label-sm text-label-sm text-secondary mt-0.5">$0.082 / kWh</span>
+</div>
+</div>
+<!-- Dial Legend & Schedule Milestones -->
+<div class="flex flex-col gap-2.5 mt-space-lg">
+<div class="flex items-center justify-between text-body-sm font-body-sm p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-medium">Super-Off-Peak (Bulk Charge)</span>
+</div>
+<span class="text-on-surface-variant font-data-tabular">00:00 â€“ 06:00</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="text-on-surface font-medium">Solar Shoulder Window</span>
+</div>
+<span class="text-on-surface-variant font-data-tabular">06:00 â€“ 16:00</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="text-on-surface font-medium">Peak Discharge Window</span>
+</div>
+<span class="text-on-surface-variant font-data-tabular">16:00 â€“ 21:00</span>
+</div>
+</div>
+</div>
+<!-- Quick Dispatch Automation CTA -->
+<div class="mt-space-lg pt-space-md">
+<button class="w-full py-2.5 px-4 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+          Commit Maximum Ingestion (12.4 MW)
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function toggleThemeVisual() {
+    const pill = document.getElementById('themeTogglePill');
+    if (pill) {
+      if (pill.classList.contains('translate-x-6')) {
+        pill.classList.remove('translate-x-6');
+        pill.classList.add('translate-x-1');
+      } else {
+        pill.classList.remove('translate-x-1');
+        pill.classList.add('translate-x-6');
+      }
+    }
+  }
+</script></div></main></div></body></html>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-variant": "#eae1dc", "surface": "#fff8f5", "secondary-fixed": "#ffdbcf", "secondary-fixed-dim": "#e5beb1", "tertiary": "#1f1000", "surface-container-highest": "#eae1dc", "on-secondary-fixed-variant": "#5c4037", "on-tertiary": "#ffffff", "inverse-primary": "#b7c6ef", "error-container": "#ffdad6", "surface-container-low": "#fbf2ed", "on-error-container": "#93000a", "secondary-container": "#ffd7ca", "on-secondary-container": "#7a5c51", "primary-fixed-dim": "#b7c6ef", "primary-container": "#172747", "surface-bright": "#fff8f5", "on-primary-container": "#7f8eb4", "on-surface": "#1f1b18", "inverse-surface": "#34302c", "outline": "#75777f", "on-tertiary-fixed-variant": "#614011", "on-primary-fixed": "#091b3a", "error": "#ba1a1a", "on-background": "#1f1b18", "on-tertiary-container": "#b18751", "surface-tint": "#4f5e81", "inverse-on-surface": "#f8efea", "background": "#fff8f5", "tertiary-fixed": "#ffddb7", "on-tertiary-fixed": "#2a1700", "on-primary": "#ffffff", "tertiary-fixed-dim": "#eebe83", "surface-container-lowest": "#ffffff", "primary-fixed": "#d9e2ff", "surface-dim": "#e1d8d3", "on-secondary-fixed": "#2b160e", "surface-container-high": "#efe6e1", "tertiary-container": "#3a2200", "surface-container": "#f5ece7", "on-primary-fixed-variant": "#374668", "on-surface-variant": "#45464e", "primary": "#011232", "secondary": "#75584d", "outline-variant": "#c5c6cf", "on-error": "#ffffff", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "3rem", "space-xs": "0.25rem", "margin-sm": "1rem", "gutter-lg": "2rem", "gutter": "1.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "space-md": "0.75rem", "margin": "2rem", "space-lg": "1.25rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Plus Jakarta Sans" ], "title-md": [ "Inter" ], "label-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "data-metric": [ "Plus Jakarta Sans" ], "data-tabular": [ "Inter" ], "display": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "0", "fontWeight": "400" } ], "label-md": [ "0.8125rem", { "lineHeight": "1.125rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "title-md": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-md": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "data-metric": [ "1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "data-tabular": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "500" } ], "display": [ "2.75rem", { "lineHeight": "3.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "body-sm": [ "0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg-mobile": [ "1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-secondary z-50 flex flex-col justify-between shadow-[0_4px_24px_rgba(48,32,25,0.18)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-20 px-space-lg flex items-center gap-space-md border-b border-white/10"><img alt="Sunpower Solutions Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U14rxJ4f7LN5oJA9sjYif1GGapvw8PUlhQlcUhKXjq6mwrkVCX9-6Bfc1_FNI9JJ8wDCdu6GBRm8hCixPSSH6vF9ePMi4FAx6c9RzGUpBujA2pgz1xXip6cksc0ns8_D06ONc-TsLdKWPlqvXDyJ8Ud5_pFkerpsKARoRu3t7-aTXq94ArQ5AiHV6Dw72ngnnJOJJazsn0EczQ10-S_9-b_z5IEfgOF81JqYUVxvuMcw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-secondary leading-none">SUNPOWER</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed opacity-90 mt-0.5">SOLUTIONS</span></div></div><div class="px-space-lg py-space-sm"><p class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed-dim/80 font-medium">Operations Platform</p></div><nav class="flex-1 overflow-y-auto px-space-sm space-y-0.5 py-space-xs" data-active-classes="bg-primary-container text-on-primary border-l-4 border-tertiary-fixed shadow-sm font-semibold"><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="customers" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Customers</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="site-surveys" href="#"><span class="material-symbols-outlined text-[20px]">solar_power</span><span>Site Surveys</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="quotations" href="#"><span class="material-symbols-outlined text-[20px]">request_quote</span><span>Quotations</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="orders" href="#"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span>Orders</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="inventory" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventory</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="serial-numbers" href="#"><span class="material-symbols-outlined text-[20px]">qr_code_2</span><span>Serial Numbers</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="dispatch-management" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span>Dispatch Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="installations" href="#"><span class="material-symbols-outlined text-[20px]">construction</span><span>Installations</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="technicians" href="#"><span class="material-symbols-outlined text-[20px]">engineering</span><span>Technicians</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="warranty-management" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span>Warranty Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="service-tickets" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span>Service Tickets</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="payments" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Payments</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="expenses" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Expenses</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="invoices" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Invoices</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="reports-and-analytics" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span>Reports &amp; Analytics</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="user-management" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span>User Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span>Settings</span></a></nav></div><div class="bg-tertiary-container/60 p-space-md border-t border-white/10"><div class="flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 text-on-secondary-fixed"><span class="material-symbols-outlined text-[20px]">account_circle</span></div><div class="min-w-0 flex-1"><p class="font-label-md text-label-md text-on-secondary truncate font-medium">Marcus Vance</p><p class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Admin - Solar Operations</p></div></div><button class="p-1.5 rounded-lg text-white/75 hover:text-on-secondary hover:bg-white/10 transition-colors" title="Sign Out" type="button"><span class="material-symbols-outlined text-[20px]">logout</span></button></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface-container-lowest border-b border-surface-variant z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(73,48,39,0.04)]"><div class="flex items-center gap-space-lg flex-1 max-w-2xl"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="text-on-surface font-semibold">Operations</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-secondary font-medium">Workspace</span></div><div class="relative flex-1 max-w-md hidden md:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-4 rounded-lg bg-surface border border-outline-variant text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container font-body-sm text-body-sm transition-all" placeholder="Search telemetry, serial numbers, customers, tickets..." type="search"/></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-low border border-surface-variant text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-secondary">event</span><span>Tuesday, Oct 24, 2024</span></div><button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation &amp; Help" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><button class="relative w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-8 w-px bg-surface-variant mx-1 hidden sm:block"></div><div class="flex items-center gap-space-md pl-1"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden sm:flex flex-col text-left"><div class="flex items-center gap-space-xs"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Marcus Vance</span><span class="px-1.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-secondary-container text-on-secondary-container">Admin</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Solar Operations</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen px-gutter-lg py-margin-sm"><div class="flex flex-col w-full space-y-gutter-lg pb-margin-lg">
+<!-- Executive Header & Switcher Banner -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg bg-surface-container-lowest p-space-xl rounded-xl shadow-sm">
+<div class="space-y-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest font-semibold">Strategic Governance &amp; Infrastructure Ops</span>
+</div>
+<h1 class="font-display text-display text-primary tracking-tight">Intelligence &amp; Access Controls</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        High-fidelity financial reporting, MW telemetry synthesis, and multi-tier cryptographic authorization for clean energy asset deployments.
+      </p>
+</div>
+<!-- View Mode Switcher -->
+<div class="flex items-center bg-surface-variant/40 p-1.5 rounded-lg shadow-inner self-start md:self-auto">
+<button class="flex items-center gap-space-sm px-space-lg py-2.5 rounded-md font-label-md text-label-md transition-all duration-200 bg-surface-container-lowest text-primary shadow-sm font-semibold" id="tab-analytics" onclick="switchView('analytics')">
+<span class="material-symbols-outlined text-[18px]">monitoring</span>
+<span>Executive Analytics</span>
+</button>
+<button class="flex items-center gap-space-sm px-space-lg py-2.5 rounded-md font-label-md text-label-md transition-all duration-200 text-on-surface-variant hover:text-primary" id="tab-rbac" onclick="switchView('rbac')">
+<span class="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+<span>Identity &amp; RBAC</span>
+</button>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- VIEW 1: EXECUTIVE REPORTS & OPERATIONS ANALYTICS -->
+<!-- ========================================== -->
+<div class="flex flex-col space-y-gutter-lg" id="view-analytics">
+<!-- KPI Metric Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Gross EPC Revenue</span>
+<span class="w-8 h-8 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+</span>
+</div>
+<div>
+<div class="font-data-metric text-data-metric text-primary">$4,892,400</div>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined text-[14px] mr-0.5">trending_up</span>+18.4% YoY
+            </span>
+<span class="font-body-sm text-body-sm text-outline">vs $4.13M baseline</span>
+</div>
+</div>
+<div class="w-full bg-surface-variant/30 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Avg Margin / Watt</span>
+<span class="w-8 h-8 rounded-full bg-tertiary-fixed/30 flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">electric_bolt</span>
+</span>
+</div>
+<div>
+<div class="font-data-metric text-data-metric text-primary">$0.62 <span class="text-sm font-normal text-outline">/ Watt</span></div>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full bg-tertiary-fixed/40 text-on-tertiary-container">
+              +12.7% Spread
+            </span>
+<span class="font-body-sm text-body-sm text-outline">Target: &gt;$0.55/W</span>
+</div>
+</div>
+<div class="w-full bg-surface-variant/30 h-1 rounded-full overflow-hidden">
+<div class="bg-on-tertiary-container h-full rounded-full" style="width: 84%"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Total Installed Fleet</span>
+<span class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">solar_power</span>
+</span>
+</div>
+<div>
+<div class="font-data-metric text-data-metric text-primary">74.2 <span class="text-sm font-normal text-outline">MW DC</span></div>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-body-sm text-body-sm font-medium text-primary">846 Commercial Arrays</span>
+<span class="text-outline text-xs">â€¢ Active Grid</span>
+</div>
+</div>
+<div class="w-full bg-surface-variant/30 h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">ITC &amp; SGIP Approval</span>
+<span class="w-8 h-8 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+</span>
+</div>
+<div>
+<div class="font-data-metric text-data-metric text-primary">99.4%</div>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary/10 text-secondary">
+              Federal Sec. 48
+            </span>
+<span class="font-body-sm text-body-sm text-outline">0 Filings Rejected</span>
+</div>
+</div>
+<div class="w-full bg-surface-variant/30 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 99.4%"></div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Analytics Mosaic: Asset Class Mix & Project Completion Velocity -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Asset Class Breakdown (4 Columns) -->
+<div class="lg:col-span-4 bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary">Asset Capital Mix</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">pie_chart</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Total revenue distribution across active power purchasing tiers.</p>
+</div>
+<!-- Custom Inline High-Contrast Donut Chart -->
+<div class="relative py-space-lg flex items-center justify-center">
+<svg class="w-48 h-48 transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background circle -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#F5ECE7" stroke-width="12"></circle>
+<!-- Commercial: 55% (circ 251.3 => 138.2) -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#172747" stroke-dasharray="251.32" stroke-dashoffset="113.1" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Industrial: 28% (70.37) -->
+<circle class="transform origin-center rotate-[198deg]" cx="50" cy="50" fill="transparent" r="40" stroke="#75584D" stroke-dasharray="251.32" stroke-dashoffset="180.9" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Solar+Storage: 17% (42.7) -->
+<circle class="transform origin-center rotate-[298deg]" cx="50" cy="50" fill="transparent" r="40" stroke="#B18751" stroke-dasharray="251.32" stroke-dashoffset="208.6" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-headline-md text-headline-md text-primary">$4.89M</span>
+<span class="font-label-sm text-label-sm text-outline uppercase font-semibold">Active YTD</span>
+</div>
+</div>
+<!-- Legend & Segments -->
+<div class="space-y-space-sm pt-space-xs">
+<div class="flex items-center justify-between p-space-sm bg-surface rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-body-sm text-body-sm font-medium text-primary">Commercial Rooftop</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-data-tabular text-data-tabular font-bold text-primary">55%</span>
+<span class="font-label-sm text-label-sm text-outline">$2.69M</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm font-medium text-primary">Industrial Ground Mount</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-data-tabular text-data-tabular font-bold text-primary">28%</span>
+<span class="font-label-sm text-label-sm text-outline">$1.37M</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-body-sm text-body-sm font-medium text-primary">Solar + BESS Storage</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-data-tabular text-data-tabular font-bold text-primary">17%</span>
+<span class="font-label-sm text-label-sm text-outline">$0.83M</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Completion Velocity & Field Crew Load (8 Columns) -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Project Completion Velocity &amp; Crew Dispatch Load</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Megawatt interconnections and active field deployment cycles per quarter.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-variant text-on-surface-variant">
+              Average Load: 92%
+            </span>
+</div>
+</div>
+<!-- Inline Multi-Bar SVG Metric Graph -->
+<div class="my-space-md">
+<div class="h-44 w-full flex items-end justify-between gap-space-sm px-2 pt-4">
+<!-- Jan -->
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full flex items-end justify-center gap-1 h-32">
+<div class="w-2.5 bg-primary-container rounded-t-sm" style="height: 60%"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm" style="height: 48%"></div>
+<div class="w-2.5 bg-tertiary-fixed-dim rounded-t-sm" style="height: 72%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Q1-M1</span>
+</div>
+<!-- Feb -->
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full flex items-end justify-center gap-1 h-32">
+<div class="w-2.5 bg-primary-container rounded-t-sm" style="height: 75%"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm" style="height: 62%"></div>
+<div class="w-2.5 bg-tertiary-fixed-dim rounded-t-sm" style="height: 80%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Q1-M2</span>
+</div>
+<!-- Mar -->
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full flex items-end justify-center gap-1 h-32">
+<div class="w-2.5 bg-primary-container rounded-t-sm" style="height: 88%"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm" style="height: 80%"></div>
+<div class="w-2.5 bg-tertiary-fixed-dim rounded-t-sm" style="height: 90%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Q1-M3</span>
+</div>
+<!-- Apr -->
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full flex items-end justify-center gap-1 h-32">
+<div class="w-2.5 bg-primary-container rounded-t-sm" style="height: 70%"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm" style="height: 65%"></div>
+<div class="w-2.5 bg-tertiary-fixed-dim rounded-t-sm" style="height: 78%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Q2-M1</span>
+</div>
+<!-- May -->
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full flex items-end justify-center gap-1 h-32">
+<div class="w-2.5 bg-primary-container rounded-t-sm" style="height: 94%"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm" style="height: 88%"></div>
+<div class="w-2.5 bg-tertiary-fixed-dim rounded-t-sm" style="height: 96%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Q2-M2</span>
+</div>
+<!-- Jun -->
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full flex items-end justify-center gap-1 h-32">
+<div class="w-2.5 bg-primary-container rounded-t-sm" style="height: 100%"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm" style="height: 92%"></div>
+<div class="w-2.5 bg-tertiary-fixed-dim rounded-t-sm" style="height: 98%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Q2-M3</span>
+</div>
+</div>
+</div>
+<!-- Field Crew Real-time Pulse -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md pt-space-md bg-surface p-space-md rounded-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-3 h-10 bg-primary-container rounded-full"></div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Crew Alpha (Utility)</div>
+<div class="font-headline-sm text-headline-sm text-primary">94.8% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Cap</span></div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="w-3 h-10 bg-secondary rounded-full"></div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Crew Bravo (Commercial)</div>
+<div class="font-headline-sm text-headline-sm text-primary">91.2% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Cap</span></div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="w-3 h-10 bg-tertiary-fixed-dim rounded-full"></div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Crew Delta (Storage Sync)</div>
+<div class="font-headline-sm text-headline-sm text-primary">90.1% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Cap</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Inventory BoS Pricing Trends & Visual Highlights -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- 12-Month BoS Pricing Curve & Material Consumption -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-space-xl rounded-xl shadow-sm space-y-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Balance of System (BoS) Index &amp; PV Cell Cost Curve</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Trailing 12-month structural racking, microinverter &amp; bifacial panel spot pricing.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-outline">BoS $/W Curve</span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container ml-2"></span>
+<span class="font-label-sm text-label-sm text-outline">Cell Tier-1 Spot</span>
+</div>
+</div>
+<!-- Inline Vector Curve Canvas -->
+<div class="relative w-full h-48 bg-surface rounded-lg p-space-md overflow-hidden">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 600 160">
+<defs>
+<lineargradient id="gradBoS" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#75584D" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#75584D" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Guide Grid Lines -->
+<line stroke="#EAE1DC" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="600" y1="40" y2="40"></line>
+<line stroke="#EAE1DC" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="600" y1="80" y2="80"></line>
+<line stroke="#EAE1DC" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="600" y1="120" y2="120"></line>
+<!-- BoS Area Fill -->
+<path d="M0,130 C100,120 200,90 300,85 C400,80 500,60 600,45 L600,160 L0,160 Z" fill="url(#gradBoS)"></path>
+<!-- BoS Path Line -->
+<path d="M0,130 C100,120 200,90 300,85 C400,80 500,60 600,45" fill="none" stroke="#75584D" stroke-width="3"></path>
+<!-- Cell Spot Line (Trending down sharply) -->
+<path d="M0,50 C120,60 220,95 340,110 C440,120 520,135 600,140" fill="none" stroke="#172747" stroke-dasharray="6 3" stroke-width="3"></path>
+</svg>
+<div class="absolute bottom-2 left-4 right-4 flex justify-between font-label-sm text-label-sm text-outline">
+<span>Nov '23 ($0.38/W)</span>
+<span>Mar '24 ($0.31/W)</span>
+<span>Jul '24 ($0.26/W)</span>
+<span>Oct '24 ($0.21/W)</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-2">
+<div class="p-2.5 bg-surface rounded-md">
+<span class="font-label-sm text-label-sm text-outline">Tier-1 Bifacial N-Type</span>
+<p class="font-data-tabular text-data-tabular font-bold text-primary mt-0.5">$0.118 / Wp</p>
+</div>
+<div class="p-2.5 bg-surface rounded-md">
+<span class="font-label-sm text-label-sm text-outline">Central 250kW Inverters</span>
+<p class="font-data-tabular text-data-tabular font-bold text-primary mt-0.5">$0.042 / Wp</p>
+</div>
+<div class="p-2.5 bg-surface rounded-md">
+<span class="font-label-sm text-label-sm text-outline">Dual-Axis Trackers</span>
+<p class="font-data-tabular text-data-tabular font-bold text-primary mt-0.5">$0.079 / Wp</p>
+</div>
+<div class="p-2.5 bg-surface rounded-md">
+<span class="font-label-sm text-label-sm text-outline">Copper &amp; High-Amp DC Cabling</span>
+<p class="font-data-tabular text-data-tabular font-bold text-primary mt-0.5">$0.021 / Wp</p>
+</div>
+</div>
+</div>
+<!-- Document & Compliance Export Center -->
+<div class="lg:col-span-4 bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[20px]">download_for_offline</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Executive Export Center</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mt-1">Audit Ledger &amp; SEC Reports</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Official cryptographically signed assets ready for investor packets and IRS reconciliation.</p>
+</div>
+<div class="space-y-space-sm my-space-md">
+<!-- Item 1 -->
+<div class="p-space-sm bg-surface rounded-lg flex items-center justify-between hover:bg-surface-variant/40 transition-colors cursor-pointer group">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">picture_as_pdf</span>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-primary">Q3 Comprehensive EPC Audit.pdf</p>
+<p class="font-label-sm text-label-sm text-outline">18.4 MB â€¢ Signed by Arthur P.</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs group-hover:bg-primary-container group-hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm bg-surface rounded-lg flex items-center justify-between hover:bg-surface-variant/40 transition-colors cursor-pointer group">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">eco</span>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-primary">SEC ESG Carbon Offset Certificate</p>
+<p class="font-label-sm text-label-sm text-outline">Scope 1 &amp; 2 Verified â€¢ SHA-256</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs group-hover:bg-primary-container group-hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</button>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm bg-surface rounded-lg flex items-center justify-between hover:bg-surface-variant/40 transition-colors cursor-pointer group">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">table_view</span>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-primary">Subcontractor Certified Payroll.xlsx</p>
+<p class="font-label-sm text-label-sm text-outline">Davis-Bacon Act / Prevailing Wage</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs group-hover:bg-primary-container group-hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-all flex items-center justify-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-[18px]">cloud_sync</span>
+<span>Generate Instant 10-Q Package</span>
+</button>
+</div>
+</div>
+<!-- Field Deployment Telemetry Photo Strip -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-sm">
+<div class="relative h-44 rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="High-resolution aerial photograph of a sprawling 20-megawatt commercial solar array on an enterprise warehouse rooftop, rich coffee brown perimeter pathways, sleek navy solar panels angled toward brilliant golden sunlight, crisp architectural detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLAGAqWEq9H8PZiyNviQHr1GpUCBXwwu3sEAkbq7hkskt2qyjc0grEuwTrddqOUDZzqumnAfnNgtI6DxjnXK-5u5oEIG3iHrQwvGNn8E4xvgiSPIFT4URRsDQ7D9BrWXlBAyiscnOlydGuV9JiEzP85b36vGXVStFlFvtDghoHu6HO7e8IA_x4PIvk6S-VUwELX_9RbaaTwOWMh7t1o93Vfvr-SCxddJBaeHv1hKe1"/>
+<div class="absolute top-2 right-2 bg-primary-container/90 text-on-primary px-2 py-0.5 rounded-full text-xs font-semibold">
+            Array #409: 14.2 MW DC
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Mojave Industrial Logistics Hub</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">99.8% Commissioned</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-sm">
+<div class="relative h-44 rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up architectural shot of high-voltage industrial solar inverters and battery energy storage system containers, warm espresso-toned metallic housing with clean navy blue digital indicator lights, modern clean power infrastructure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm5SOOdHE2ZECrdEg8BBHlXEkub5wQonVpOgaLzC0WfahI2DnAiEEY1IcJsJQ4UnxpOqiyUm2ea097IEwBr5YO5NzvlzHhSG5TjN8lMzrhn5sM0R5Ni5lPe82KXw04NW7pQgH9YZ4p6FocmGssBTRo3dF5qZo1-ElumtFf2PmHaUs_DeFfBcYxOdklYWyXBw6Kognxm4k-dmE-rUu4MP18h_6XZl3l6YyVwmbQ9vgU"/>
+<div class="absolute top-2 right-2 bg-secondary/90 text-on-secondary px-2 py-0.5 rounded-full text-xs font-semibold">
+            BESS Unit 04: Online
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Bakersfield Storage Intertie</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">10 MWh Grid Tied</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-sm">
+<div class="relative h-44 rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Field lead technician wearing safety helmet and protective gear reviewing digital engineering schematics on an industrial rugged tablet at a massive solar farm with warm golden sunrise lighting reflecting across panels." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtJIqrgsEoZHU538DlBJg16N9XpES_D9-ajRY3BCJOv1zQOjgNjHvsgBNHYAJHmy6mOoRBJA2qTfTdRCxr2O5C5ZwXAso-iwN915Ldw8RgFPa9tNUgT8OUhV7s0Bw9t3H95Ye5-MLapEHFJTuft8y1opwu8GgNAv5susgRrAw7adHt9i0r6_reKxlwU_7p5aZOVDqGuB7KkQTViiK_AU3Hq-1yxkzKfnebSPyzfmne"/>
+<div class="absolute top-2 right-2 bg-on-tertiary-container/90 text-on-tertiary px-2 py-0.5 rounded-full text-xs font-semibold">
+            Field Audit Bravo
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Imperial Valley Verification</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Zero Deviations</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- VIEW 2: ROLE-BASED ACCESS CONTROL (RBAC) -->
+<!-- ========================================== -->
+<div class="flex flex-col space-y-gutter-lg hidden" id="view-rbac">
+<!-- Management Controls Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[22px]">shield_person</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Enterprise User Directory &amp; Entitlements</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cryptographic role separation enforcing segregation of duties across operational and financial layers.</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="px-space-md py-2 rounded-lg bg-surface hover:bg-surface-variant/50 text-primary font-label-md text-label-md transition-colors flex items-center gap-space-xs" onclick="triggerAction('Audit Activity Logs')">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Audit Logs</span>
+</button>
+<button class="px-space-md py-2 rounded-lg bg-surface hover:bg-surface-variant/50 text-secondary font-label-md text-label-md transition-colors flex items-center gap-space-xs" onclick="triggerAction('Reset 2FA Credentials')">
+<span class="material-symbols-outlined text-[18px]">phonelink_lock</span>
+<span>Reset 2FA</span>
+</button>
+<button class="px-space-lg py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-all flex items-center gap-space-xs shadow-sm" onclick="triggerAction('Add New Team Member')">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Add Member</span>
+</button>
+</div>
+</div>
+<!-- Security & Compliance Status Banner -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[28px]">lock_reset</span>
+<div>
+<div class="font-label-sm text-label-sm text-outline uppercase font-semibold">SOC2 Type II Enforced</div>
+<div class="font-body-sm text-body-sm font-bold text-primary">Continuous Vault Rotation</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[28px]">fingerprint</span>
+<div>
+<div class="font-label-sm text-label-sm text-outline uppercase font-semibold">Hardware Key Policy</div>
+<div class="font-body-sm text-body-sm font-bold text-primary">YubiKey / WebAuthn Active</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[28px]">timer</span>
+<div>
+<div class="font-label-sm text-label-sm text-outline uppercase font-semibold">Session Idle Limit</div>
+<div class="font-body-sm text-body-sm font-bold text-primary">15 Min Automatic Purge</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[28px]">gavel</span>
+<div>
+<div class="font-label-sm text-label-sm text-outline uppercase font-semibold">IRS 179D Dual Sign-Off</div>
+<div class="font-body-sm text-body-sm font-bold text-primary">Multi-party Escrow Locked</div>
+</div>
+</div>
+</div>
+<!-- Comprehensive Role Directory & Permissions Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="p-space-lg bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Assigned Personnel &amp; Privilege Gate Matrix</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Live permission scopes mapped to authenticated operational users.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<input class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-xs" placeholder="Filter identity or role..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-variant/30 text-outline font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3 px-space-lg">Team Member &amp; ID</th>
+<th class="py-3 px-space-md">Enterprise Role</th>
+<th class="py-3 px-space-md">Permissions &amp; Scope Badges</th>
+<th class="py-3 px-space-md text-center">Status</th>
+<th class="py-3 px-space-md">Last Auth</th>
+<th class="py-3 px-space-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/20 font-body-sm text-body-sm">
+<!-- Row 1: Marcus Vance -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">MV</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Marcus Vance</div>
+<div class="font-label-sm text-label-sm text-outline">mvance@sunpower-ops.net â€¢ ID-001</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container text-on-primary">
+                  Administrator
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Escrow Release</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">All Telemetry</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Quote Sign-off</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">BoM Override</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary/10 text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Active
+                </span>
+</td>
+<td class="py-space-md px-space-md font-data-tabular text-outline">4 mins ago</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="text-primary hover:text-secondary font-medium font-label-sm text-label-sm" onclick="triggerAction('Configure Marcus Vance')">Edit Privileges</button>
+</td>
+</tr>
+<!-- Row 2: Elena Rostova -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs">ER</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Elena Rostova</div>
+<div class="font-label-sm text-label-sm text-outline">erostova@sunpower-ops.net â€¢ ID-014</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary text-on-secondary">
+                  Operations Manager
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Approve Survey</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Approve Quotes</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Telemetry Access</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary/10 text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Active
+                </span>
+</td>
+<td class="py-space-md px-space-md font-data-tabular text-outline">18 mins ago</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="text-primary hover:text-secondary font-medium font-label-sm text-label-sm" onclick="triggerAction('Configure Elena Rostova')">Edit Privileges</button>
+</td>
+</tr>
+<!-- Row 3: Julian Torres -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-xs">JT</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Julian Torres</div>
+<div class="font-label-sm text-label-sm text-outline">jtorres@sunpower-ops.net â€¢ ID-089</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary text-on-tertiary">
+                  Field Lead Technician
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Serial Gate Scans</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Digital Commissioning</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Safety Sign-off</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-fixed/60 text-on-tertiary-fixed-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-fixed-variant"></span> Field Assigned
+                </span>
+</td>
+<td class="py-space-md px-space-md font-data-tabular text-outline">1 hour ago</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="text-primary hover:text-secondary font-medium font-label-sm text-label-sm" onclick="triggerAction('Configure Julian Torres')">Edit Privileges</button>
+</td>
+</tr>
+<!-- Row 4: David Reyes -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">DR</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">David Reyes</div>
+<div class="font-label-sm text-label-sm text-outline">dreyes@sunpower-ops.net â€¢ ID-042</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container-high text-primary">
+                  Senior Estimator &amp; Sales
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Sizing Matrix</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Draft Proposals</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">PPA Modeling</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary/10 text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Active
+                </span>
+</td>
+<td class="py-space-md px-space-md font-data-tabular text-outline">3 hours ago</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="text-primary hover:text-secondary font-medium font-label-sm text-label-sm" onclick="triggerAction('Configure David Reyes')">Edit Privileges</button>
+</td>
+</tr>
+<!-- Row 5: Samantha Wu -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs">SW</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Samantha Wu</div>
+<div class="font-label-sm text-label-sm text-outline">swu@sunpower-ops.net â€¢ ID-103</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container-high text-primary">
+                  Warehouse Controller
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Stock Reorder</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">RMA Dispatch</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Inbound Acceptance</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary/10 text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Active
+                </span>
+</td>
+<td class="py-space-md px-space-md font-data-tabular text-outline">Today, 08:30 AM</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="text-primary hover:text-secondary font-medium font-label-sm text-label-sm" onclick="triggerAction('Configure Samantha Wu')">Edit Privileges</button>
+</td>
+</tr>
+<!-- Row 6: Arthur Pendelton -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-xs">AP</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Arthur Pendelton</div>
+<div class="font-label-sm text-label-sm text-outline">apendelton@sunpower-ops.net â€¢ ID-005</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container text-on-tertiary">
+                  Head of Accounting
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">General Ledger</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">Tax Escrow</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-variant/50 text-primary">SEC Compliance</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-variant text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Standby
+                </span>
+</td>
+<td class="py-space-md px-space-md font-data-tabular text-outline">Yesterday</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="text-primary hover:text-secondary font-medium font-label-sm text-label-sm" onclick="triggerAction('Configure Arthur Pendelton')">Edit Privileges</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Privilege Enforcement Matrix / Interactive Guardrail Cards -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Guardrail 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<h4 class="font-headline-sm text-headline-sm text-primary">Escrow Release Policy</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Dual cryptographic authorization is required for any tranche disbursement above $50,000. Administrator and Accounting Head must co-sign.
+        </p>
+<div class="p-2.5 bg-surface rounded-lg flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-primary">Dual-Signature Rule</span>
+<span class="text-xs font-bold text-secondary uppercase">Strict Active</span>
+</div>
+</div>
+<!-- Guardrail 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+<h4 class="font-headline-sm text-headline-sm text-primary">Hardware Gate Scans</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Inverter and PV module serials require geo-located barcode verification prior to permitting PTO (Permission to Operate) grid tie.
+        </p>
+<div class="p-2.5 bg-surface rounded-lg flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-primary">GPS Geofence Match</span>
+<span class="text-xs font-bold text-secondary uppercase">25m Radius Lock</span>
+</div>
+</div>
+<!-- Guardrail 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[20px]">vpn_key</span>
+<h4 class="font-headline-sm text-headline-sm text-primary">ISO-27001 Access Review</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Automated 90-day role re-certification cycle. Unused API tokens and dormant telemetry keys are revoked automatically.
+        </p>
+<div class="p-2.5 bg-surface rounded-lg flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-primary">Next Cycle Due</span>
+<span class="font-data-tabular text-data-tabular font-bold text-primary">12 Days</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification Toast Modal Container (Dynamic via JS) -->
+<div class="fixed bottom-6 right-6 hidden bg-primary text-on-primary px-space-lg py-space-md rounded-lg shadow-xl flex items-center gap-space-md z-50 transition-all transform translate-y-2" id="toast-notification">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">check_circle</span>
+<span class="font-body-sm text-body-sm font-medium" id="toast-text">Action executed successfully.</span>
+</div>
+</div>
+<script>
+  function switchView(viewName) {
+    const analyticsView = document.getElementById('view-analytics');
+    const rbacView = document.getElementById('view-rbac');
+    const tabAnalytics = document.getElementById('tab-analytics');
+    const tabRbac = document.getElementById('tab-rbac');
+
+    if (viewName === 'analytics') {
+      analyticsView.classList.remove('hidden');
+      rbacView.classList.add('hidden');
+
+      tabAnalytics.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+      tabAnalytics.classList.remove('text-on-surface-variant');
+
+      tabRbac.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+      tabRbac.classList.add('text-on-surface-variant');
+    } else {
+      analyticsView.classList.add('hidden');
+      rbacView.classList.remove('hidden');
+
+      tabRbac.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+      tabRbac.classList.remove('text-on-surface-variant');
+
+      tabAnalytics.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+      tabAnalytics.classList.add('text-on-surface-variant');
+    }
+  }
+
+  function triggerAction(actionName) {
+    const toast = document.getElementById('toast-notification');
+    const toastText = document.getElementById('toast-text');
+    toastText.textContent = actionName + ' initialized successfully.';
+    toast.classList.remove('hidden');
+    toast.classList.remove('translate-y-2');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3200);
+  }
+</script></main></div></body></html>

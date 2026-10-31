@@ -1,0 +1,664 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-variant": "#eae1dc", "surface": "#fff8f5", "secondary-fixed": "#ffdbcf", "secondary-fixed-dim": "#e5beb1", "tertiary": "#1f1000", "surface-container-highest": "#eae1dc", "on-secondary-fixed-variant": "#5c4037", "on-tertiary": "#ffffff", "inverse-primary": "#b7c6ef", "error-container": "#ffdad6", "surface-container-low": "#fbf2ed", "on-error-container": "#93000a", "secondary-container": "#ffd7ca", "on-secondary-container": "#7a5c51", "primary-fixed-dim": "#b7c6ef", "primary-container": "#172747", "surface-bright": "#fff8f5", "on-primary-container": "#7f8eb4", "on-surface": "#1f1b18", "inverse-surface": "#34302c", "outline": "#75777f", "on-tertiary-fixed-variant": "#614011", "on-primary-fixed": "#091b3a", "error": "#ba1a1a", "on-background": "#1f1b18", "on-tertiary-container": "#b18751", "surface-tint": "#4f5e81", "inverse-on-surface": "#f8efea", "background": "#fff8f5", "tertiary-fixed": "#ffddb7", "on-tertiary-fixed": "#2a1700", "on-primary": "#ffffff", "tertiary-fixed-dim": "#eebe83", "surface-container-lowest": "#ffffff", "primary-fixed": "#d9e2ff", "surface-dim": "#e1d8d3", "on-secondary-fixed": "#2b160e", "surface-container-high": "#efe6e1", "tertiary-container": "#3a2200", "surface-container": "#f5ece7", "on-primary-fixed-variant": "#374668", "on-surface-variant": "#45464e", "primary": "#011232", "secondary": "#75584d", "outline-variant": "#c5c6cf", "on-error": "#ffffff", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "3rem", "space-xs": "0.25rem", "margin-sm": "1rem", "gutter-lg": "2rem", "gutter": "1.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "space-md": "0.75rem", "margin": "2rem", "space-lg": "1.25rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Plus Jakarta Sans" ], "title-md": [ "Inter" ], "label-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "data-metric": [ "Plus Jakarta Sans" ], "data-tabular": [ "Inter" ], "display": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "0", "fontWeight": "400" } ], "label-md": [ "0.8125rem", { "lineHeight": "1.125rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "title-md": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-md": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "data-metric": [ "1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "data-tabular": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "500" } ], "display": [ "2.75rem", { "lineHeight": "3.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "body-sm": [ "0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg-mobile": [ "1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-secondary z-50 flex flex-col justify-between shadow-[0_4px_24px_rgba(48,32,25,0.18)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-20 px-space-lg flex items-center gap-space-md border-b border-white/10"><img alt="Sunpower Solutions Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U14rxJ4f7LN5oJA9sjYif1GGapvw8PUlhQlcUhKXjq6mwrkVCX9-6Bfc1_FNI9JJ8wDCdu6GBRm8hCixPSSH6vF9ePMi4FAx6c9RzGUpBujA2pgz1xXip6cksc0ns8_D06ONc-TsLdKWPlqvXDyJ8Ud5_pFkerpsKARoRu3t7-aTXq94ArQ5AiHV6Dw72ngnnJOJJazsn0EczQ10-S_9-b_z5IEfgOF81JqYUVxvuMcw"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-secondary leading-none">SUNPOWER</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed opacity-90 mt-0.5">SOLUTIONS</span></div></div><div class="px-space-lg py-space-sm"><p class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed-dim/80 font-medium">Operations Platform</p></div><nav class="flex-1 overflow-y-auto px-space-sm space-y-0.5 py-space-xs" data-active-classes="bg-primary-container text-on-primary border-l-4 border-tertiary-fixed shadow-sm font-semibold"><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="">Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="customers" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="">Customers</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="site-surveys" href="#"><span class="material-symbols-outlined text-[20px]">solar_power</span><span class="">Site Surveys</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="quotations" href="#"><span class="material-symbols-outlined text-[20px]">request_quote</span><span class="">Quotations</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="orders" href="#"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span class="">Orders</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg bg-primary-container text-on-primary border-l-4 border-tertiary-fixed shadow-sm font-semibold transition-all font-body-md text-body-md" data-path="inventory" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="">Inventory</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="serial-numbers" href="#"><span class="material-symbols-outlined text-[20px]">qr_code_2</span><span class="">Serial Numbers</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="dispatch-management" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="">Dispatch Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="installations" href="#"><span class="material-symbols-outlined text-[20px]">construction</span><span class="">Installations</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="technicians" href="#"><span class="material-symbols-outlined text-[20px]">engineering</span><span class="">Technicians</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="warranty-management" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="">Warranty Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="service-tickets" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span class="">Service Tickets</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="payments" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="">Payments</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="expenses" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="">Expenses</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="invoices" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="">Invoices</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="reports-and-analytics" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="">Reports &amp; Analytics</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="user-management" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="">User Management</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-white/75 hover:bg-secondary-container/20 hover:text-on-secondary transition-all font-body-md text-body-md" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="">Settings</span></a></nav></div><div class="bg-tertiary-container/60 p-space-md border-t border-white/10"><div class="flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 text-on-secondary-fixed"><span class="material-symbols-outlined text-[20px]">account_circle</span></div><div class="min-w-0 flex-1"><p class="font-label-md text-label-md text-on-secondary truncate font-medium">Marcus Vance</p><p class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Admin - Solar Operations</p></div></div><button class="p-1.5 rounded-lg text-white/75 hover:text-on-secondary hover:bg-white/10 transition-colors" title="Sign Out" type="button"><span class="material-symbols-outlined text-[20px]">logout</span></button></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface-container-lowest border-b border-surface-variant z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(73,48,39,0.04)]"><div class="flex items-center gap-space-lg flex-1 max-w-2xl"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="text-on-surface font-semibold">Operations</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-secondary font-medium">Workspace</span></div><div class="relative flex-1 max-w-md hidden md:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-4 rounded-lg bg-surface border border-outline-variant text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container font-body-sm text-body-sm transition-all" placeholder="Search telemetry, serial numbers, customers, tickets..." type="search"></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-low border border-surface-variant text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-secondary">event</span><span class="">Tuesday, Oct 24, 2024</span></div><button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation &amp; Help" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><button class="relative w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="h-8 w-px bg-surface-variant mx-1 hidden sm:block"></div><div class="flex items-center gap-space-md pl-1"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden sm:flex flex-col text-left"><div class="flex items-center gap-space-xs"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Marcus Vance</span><span class="px-1.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-secondary-container text-on-secondary-container">Admin</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Solar Operations</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen px-gutter-lg py-margin-sm"><div class="flex flex-col w-full space-y-gutter-lg">
+<!-- Active Sidebar Link Synchronization Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const navLinks = document.querySelectorAll('aside nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === 'inventory') {
+          link.className = "flex items-center gap-space-md px-space-md py-2.5 rounded-lg bg-primary-container text-on-primary border-l-4 border-tertiary-fixed shadow-sm font-semibold transition-all font-body-md text-body-md";
+        }
+      });
+    });
+  </script>
+<!-- Page Title & Operational Actions Header -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col space-y-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">Logistics &amp; Supply Depot</span>
+<span class="text-outline text-label-sm">|</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Primary Hub: Bay 4 North</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Central Hardware Inventory &amp; Serial Number Registry</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">Warehouse stock levels, dynamic allocation for scheduled installations, live serial barcode scanning, and supplier reorder alerts.</p>
+</div>
+<!-- Action Deck -->
+<div class="flex flex-wrap items-center gap-space-sm pt-2 lg:pt-0">
+<button class="h-10 px-4 rounded-xl bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md shadow-sm flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span class="">Export Stock Ledger</span>
+</button>
+<button class="h-10 px-4 rounded-xl bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md shadow-sm flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">input</span>
+<span class="">Stock Inward / PO Receipt</span>
+</button>
+<button class="h-10 px-5 rounded-xl bg-primary text-on-primary hover:bg-primary-container transition-all font-label-md text-label-md shadow-md flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed">add_circle</span>
+<span class="">Register Serial Numbers</span>
+</button>
+</div>
+</div>
+<!-- Top Stat Strip: 4 High-Impact Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Stat 1: Total Valuation -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Total Warehouse Valuation</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="font-data-metric text-data-metric text-primary leading-none">$1,642,800</div>
+<div class="flex items-center gap-space-xs mt-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-semibold text-secondary">6,420</span> physical items in catalog
+        </div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Stat 2: Reserved Stock -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Reserved for Orders</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">pending_actions</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="font-data-metric text-data-metric text-secondary leading-none">2,180 <span class="font-headline-sm text-headline-sm text-outline font-normal">items</span></div>
+<div class="flex items-center gap-space-xs mt-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="">34% committed to current dispatches</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 34%"></div>
+</div>
+</div>
+<!-- Stat 3: Low Stock Alerts -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Low Stock Alerts</span>
+<div class="w-8 h-8 rounded-lg bg-error-container/60 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="font-data-metric text-data-metric text-error leading-none">4 <span class="font-headline-sm text-headline-sm text-outline font-normal">categories</span></div>
+<div class="flex items-center gap-space-xs mt-2 text-error font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+<span class="">Action required: Helukabel critical</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<!-- Stat 4: Serialized Units Logged -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Serialized Units Logged</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="font-data-metric text-data-metric text-primary leading-none">4,890</div>
+<div class="flex items-center gap-space-xs mt-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+<span class="">Verified cryptographically &amp; tagged</span>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 94%"></div>
+</div>
+</div>
+</div>
+<!-- Segmented Sub-Navigation Deck -->
+<div class="flex items-center justify-between flex-wrap gap-space-md p-1.5 rounded-xl bg-surface-variant/70 backdrop-blur-sm">
+<div class="flex items-center gap-1 overflow-x-auto py-0.5">
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest text-primary shadow-sm font-label-md text-label-md flex items-center gap-space-xs whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-[18px]">warehouse</span>
+<span class="">Warehouse Inventory Overview</span>
+</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface/50 font-label-md text-label-md flex items-center gap-space-xs transition-colors whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+<span class="">Serialized Hardware Registry</span>
+</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface/50 font-label-md text-label-md flex items-center gap-space-xs transition-colors whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-[18px]">document_scanner</span>
+<span class="">Barcode / QR Scanner Terminal</span>
+</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface/50 font-label-md text-label-md flex items-center gap-space-xs transition-colors whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+<span class="">Stock Movements &amp; POs</span>
+</button>
+</div>
+<!-- Quick Warehouse Filter Pill -->
+<div class="flex items-center gap-space-xs px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="">Facility: <strong>Reno Central Hub #1</strong></span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+</div>
+</div>
+<!-- Section 1: Inventory Categories & Stock Ledger Table -->
+<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden flex flex-col">
+<!-- Category Strip & Search Controls -->
+<div class="p-space-lg flex flex-col md:flex-row md:items-center md:justify-between gap-space-md bg-surface-container-lowest">
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-sm" type="button">All Hardware</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm transition-colors" type="button">Solar Panels (PV)</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm transition-colors" type="button">Inverters</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm transition-colors" type="button">Energy Storage (Batteries)</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm transition-colors" type="button">Mounting Rail Structures</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm transition-colors" type="button">Cables &amp; Switchgear</button>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0">
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">filter_list</span>
+<input class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container transition-all" placeholder="Filter stock SKU or spec..." type="text">
+</div>
+<button class="h-9 px-3 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span class="">Columns</span>
+</button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-body-md text-body-md border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider h-11">
+<th class="px-space-lg py-2 font-semibold">SKU / Code</th>
+<th class="px-space-md py-2 font-semibold">Product Description</th>
+<th class="px-space-md py-2 font-semibold">Category</th>
+<th class="px-space-md py-2 font-semibold text-right">Available Stock</th>
+<th class="px-space-md py-2 font-semibold text-right">Reserved</th>
+<th class="px-space-md py-2 font-semibold text-right">Reorder Level</th>
+<th class="px-space-md py-2 font-semibold text-right">Unit Cost</th>
+<th class="px-space-md py-2 font-semibold text-center">Status</th>
+<th class="px-space-lg py-2 font-semibold text-right">Fast Action</th>
+</tr>
+</thead>
+<tbody class="divide-none">
+<!-- Row 1: Trina Solar Panels -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="px-space-lg py-3.5">
+<div class="flex items-center gap-space-xs font-mono font-bold text-primary">
+<span class="material-symbols-outlined text-[16px] text-outline">solar_power</span>
+<span class="">PV-TRINA-545</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Trina Solar 545W Vertex Mono</span>
+<span class="text-outline font-body-sm text-body-sm">Bifacial Dual-Glass 144 Split Cell</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Panels</span>
+</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-semibold text-primary">840 units</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-secondary font-medium">420 reserved</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-outline">Min: 300</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-medium text-on-surface">$155.00</td>
+<td class="px-space-md py-3.5 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2D5A43]/10 text-[#2D5A43]">
+                â— In Stock
+              </span>
+</td>
+<td class="px-space-lg py-3.5 text-right">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Reorder
+              </button>
+</td>
+</tr>
+<!-- Row 2: SMA Inverter -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="px-space-lg py-3.5">
+<div class="flex items-center gap-space-xs font-mono font-bold text-primary">
+<span class="material-symbols-outlined text-[16px] text-outline">electric_bolt</span>
+<span class="">INV-SMA-50KW</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">SMA Sunny Tripower CORE1 50kW</span>
+<span class="text-outline font-body-sm text-body-sm">Commercial Multi-MPPT Grid-Tied Inverter</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Inverters</span>
+</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-semibold text-primary">14 units</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-secondary font-medium">8 reserved</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-outline">Min: 10</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-medium text-on-surface">$4,100.00</td>
+<td class="px-space-md py-3.5 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#B68B55]/15 text-[#885A1D]">
+                â— Low Stock
+              </span>
+</td>
+<td class="px-space-lg py-3.5 text-right">
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary hover:opacity-90 font-label-sm text-label-sm transition-opacity" type="button">
+                PO Draft
+              </button>
+</td>
+</tr>
+<!-- Row 3: Tesla Powerwall 3 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="px-space-lg py-3.5">
+<div class="flex items-center gap-space-xs font-mono font-bold text-primary">
+<span class="material-symbols-outlined text-[16px] text-outline">battery_charging_full</span>
+<span class="">BAT-TSLA-PW3</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Tesla Powerwall 3 13.5kWh</span>
+<span class="text-outline font-body-sm text-body-sm">Integrated Inverter LFP Battery Unit</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Batteries</span>
+</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-semibold text-primary">26 units</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-secondary font-medium">18 reserved</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-outline">Min: 15</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-medium text-on-surface">$6,200.00</td>
+<td class="px-space-md py-3.5 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2D5A43]/10 text-[#2D5A43]">
+                â— Adequate
+              </span>
+</td>
+<td class="px-space-lg py-3.5 text-right">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Allocate
+              </button>
+</td>
+</tr>
+<!-- Row 4: Schletter Mountings -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="px-space-lg py-3.5">
+<div class="flex items-center gap-space-xs font-mono font-bold text-primary">
+<span class="material-symbols-outlined text-[16px] text-outline">handyman</span>
+<span class="">STR-MNT-SCHL</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Schletter Standing Seam Clamps</span>
+<span class="text-outline font-body-sm text-body-sm">Heavy Duty Anodized Aluminum Clamp Kit</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Mounting</span>
+</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-semibold text-primary">2,400 pcs</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-secondary font-medium">1,100 reserved</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-outline">Min: 1,000</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-medium text-on-surface">$4.20</td>
+<td class="px-space-md py-3.5 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#2D5A43]/10 text-[#2D5A43]">
+                â— In Stock
+              </span>
+</td>
+<td class="px-space-lg py-3.5 text-right">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Adjust
+              </button>
+</td>
+</tr>
+<!-- Row 5: Helukabel DC Cable -->
+<tr class="hover:bg-surface-container-low/70 transition-colors">
+<td class="px-space-lg py-3.5">
+<div class="flex items-center gap-space-xs font-mono font-bold text-error">
+<span class="material-symbols-outlined text-[16px] text-error">cable</span>
+<span class="">CAB-6MM-SOL</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Helukabel 6mmÂ² Solar DC Cable (500m spool)</span>
+<span class="text-outline font-body-sm text-body-sm">Dual Insulated UV / Ozone Resistant PV1-F</span>
+</div>
+</td>
+<td class="px-space-md py-3.5">
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Wiring</span>
+</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-semibold text-error">8 spools</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-secondary font-medium">12 reserved</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular text-outline">Min: 15</td>
+<td class="px-space-md py-3.5 text-right font-data-tabular text-data-tabular font-medium text-on-surface">$420.00</td>
+<td class="px-space-md py-3.5 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-error/10 text-error">
+                â–² Critical Shortage
+              </span>
+</td>
+<td class="px-space-lg py-3.5 text-right">
+<button class="px-3 py-1.5 rounded-lg bg-error text-on-error hover:opacity-90 font-label-sm text-label-sm transition-opacity" type="button">
+                Urgent Order
+              </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Summary Bar -->
+<div class="px-space-lg py-3 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between text-outline font-body-sm text-body-sm gap-2">
+<div class="flex items-center gap-space-sm">
+<span class="">Showing 5 of 184 active SKUs</span>
+<span class="">â€¢</span>
+<span class="">Lead Time Buffer: 14 business days</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm disabled:opacity-50" type="button">Prev</button>
+<span class="text-on-surface font-semibold">1</span>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm" type="button">Next</button>
+</div>
+</div>
+</div>
+<!-- Section 2: Live Serial Number Tracking & Scanner Terminal -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Scanner Terminal & Verified Hardware Inspector -->
+<div class="lg:col-span-8 space-y-gutter">
+<div class="rounded-xl bg-surface-container-lowest shadow-sm p-space-lg space-y-space-lg">
+<!-- Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary text-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">qr_code_scanner</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Live Optical Scanner &amp; Hash Verification Terminal</h2>
+<p class="font-body-sm text-body-sm text-outline">Real-time scan interface connecting directly to OEM cryptographic serial manifests</p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2D5A43]/10 text-[#2D5A43] font-label-sm text-label-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-[#2D5A43]"></span>
+<span class="">Laser Camera Active</span>
+</div>
+</div>
+<!-- Barcode / Scanning Input Zone -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center gap-space-md">
+<!-- Optical SVG Barcode Representation -->
+<div class="flex flex-col items-center justify-center p-3 rounded-lg bg-surface-container-lowest shadow-inner flex-shrink-0 w-full md:w-auto">
+<svg class="w-48 h-12 text-primary" fill="currentColor" viewBox="0 0 200 48">
+<rect height="48" width="4" x="0" y="0"></rect>
+<rect height="48" width="2" x="6" y="0"></rect>
+<rect height="48" width="6" x="12" y="0"></rect>
+<rect height="48" width="3" x="22" y="0"></rect>
+<rect height="48" width="8" x="28" y="0"></rect>
+<rect height="48" width="2" x="40" y="0"></rect>
+<rect height="48" width="5" x="46" y="0"></rect>
+<rect height="48" width="3" x="54" y="0"></rect>
+<rect height="48" width="7" x="62" y="0"></rect>
+<rect height="48" width="2" x="73" y="0"></rect>
+<rect height="48" width="4" x="78" y="0"></rect>
+<rect height="48" width="8" x="86" y="0"></rect>
+<rect height="48" width="3" x="98" y="0"></rect>
+<rect height="48" width="6" x="105" y="0"></rect>
+<rect height="48" width="2" x="114" y="0"></rect>
+<rect height="48" width="7" x="120" y="0"></rect>
+<rect height="48" width="4" x="130" y="0"></rect>
+<rect height="48" width="2" x="138" y="0"></rect>
+<rect height="48" width="5" x="144" y="0"></rect>
+<rect height="48" width="3" x="154" y="0"></rect>
+<rect height="48" width="7" x="162" y="0"></rect>
+<rect height="48" width="3" x="173" y="0"></rect>
+<rect height="48" width="5" x="180" y="0"></rect>
+<rect height="48" width="6" x="190" y="0"></rect>
+</svg>
+<span class="font-mono text-label-sm text-outline mt-1 tracking-widest">SN-TRN-2024-994102</span>
+</div>
+<!-- Input Action -->
+<div class="flex-1 w-full space-y-2">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Optical Serial Capture Input</label>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-[20px]">barcode_scanner</span>
+<input class="w-full h-11 pl-10 pr-4 rounded-xl bg-surface-container-lowest text-primary font-mono text-body-md font-semibold focus:outline-none shadow-sm" id="serialInput" placeholder="Scan or Enter Serial Number (e.g. SN-TRN-2024-994102)" type="text" value="SN-TRN-2024-994102">
+</div>
+<button class="h-11 px-5 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md flex items-center gap-1 shadow-sm transition-all flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[18px]">search_check</span>
+<span class="">Verify</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Verified Unit Inspection Card -->
+<div class="rounded-xl bg-surface-container-low/60 p-space-lg space-y-space-md">
+<div class="flex items-center justify-between border-b pb-space-sm border-surface-variant/40">
+<div class="flex items-center gap-space-sm">
+<span class="px-2.5 py-1 rounded bg-[#2D5A43] text-on-primary font-label-sm text-label-sm font-semibold tracking-wide">MATCH CONFIRMED</span>
+<span class="font-mono font-bold text-headline-sm text-primary">SN-TRN-2024-994102</span>
+</div>
+<div class="flex items-center gap-space-xs text-[#2D5A43] font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Duplicate Prevention Check: PASSED</span>
+</div>
+</div>
+<!-- Metadata Spec Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-gutter-sm pt-1">
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm uppercase">Category</span>
+<span class="font-semibold text-primary font-body-md text-body-md mt-0.5">Solar PV Modules</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm uppercase">Manufacturer</span>
+<span class="font-semibold text-primary font-body-md text-body-md mt-0.5">Trina Solar Co.</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm uppercase">Hardware Model</span>
+<span class="font-semibold text-primary font-body-md text-body-md mt-0.5">Vertex TSM-DE19 545W</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm uppercase">Scanned Timestamp</span>
+<span class="font-semibold text-primary font-body-md text-body-md mt-0.5">Oct 24, 2024 14:28:11</span>
+</div>
+</div>
+<!-- Allocation & Rooftop Alignment -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter-sm p-space-md rounded-xl bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm">Associated Order</span>
+<span class="font-bold text-primary font-body-md text-body-md">#ORD-9402</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">roofing</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm">Assigned Rooftop</span>
+<span class="font-bold text-primary font-body-md text-body-md">Commercial Array B4</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline font-label-sm text-label-sm">OEM Warranty Duration</span>
+<span class="font-bold text-primary font-body-md text-body-md">25 Years (Power)</span>
+</div>
+</div>
+</div>
+<!-- Bottom Security Hash Bar -->
+<div class="flex items-center justify-between text-outline font-mono text-label-sm pt-1">
+<span class="truncate max-w-xs sm:max-w-md">SHA-256: 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069</span>
+<span class="text-[#2D5A43] font-semibold">Ledger Validated</span>
+</div>
+</div>
+</div>
+<!-- Field Hardware Visual Blueprint -->
+<div class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col md:flex-row items-center gap-space-lg">
+<div class="w-full md:w-1/3 h-44 rounded-xl overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Industrial solar equipment storage facility showing rows of pallets with monocrystalline photovoltaic panels, battery energy cabinets, and heavy duty inverters under clean architectural warehouse lighting in rich espresso and warm earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFkBvTrvy3EC_-M0vG2layVfrkxHvncfPtAmNt0986R0pWcaKXG1i8HG066NDIhcZvN681r7XmI7d5BCOjUl1TjSlbP3d0Oeu70ITRFmPmzKAyz1amFMMMckJ0WPlrGI0HxD_dHzGyXVzFVMUE1o6FlSpmdqeUSlWWjzcOBJDi-LqE4OCG05d65Q-K-xEerz1F9yBJB8PNnxJ8AZOMV5n_jWKQWAyjE_aWE8PoSLpg">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-space-md">
+<span class="text-on-primary font-label-sm text-label-sm font-semibold">Warehouse Bay 4 - Storage Array</span>
+</div>
+</div>
+<div class="flex-1 space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Pallet Batch Capacity</span>
+<span class="font-mono font-bold text-primary text-body-md">88.4% Full</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="bg-secondary h-full rounded-full" style="width: 88.4%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1">
+            Serial tracking updates automatically sync with field installation crews. When a technician deploys panel arrays on-site, barcode status updates from <strong class="text-on-surface">Allocated</strong> to <strong class="text-on-surface">Installed &amp; Energized</strong> in the central ledger.
+          </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Recent Serial Log & High-Value Batch Summary -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Quick Recent Serial Log Card -->
+<div class="rounded-xl bg-surface-container-lowest shadow-sm p-space-lg space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">history</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Recent Scanned Units</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-outline font-mono text-label-sm">Last 5</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Verified incoming scan trail with terminal timestamps.</p>
+<!-- Log List -->
+<div class="space-y-space-sm pt-1">
+<!-- Item 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[#2D5A43] text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-mono font-bold text-primary font-body-md text-body-md">SN-TRN-2024-994102</span>
+<span class="text-outline font-body-sm text-body-sm">Trina Solar 545W Module</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-mono text-label-sm text-on-surface-variant">14:28:11</span>
+<div class="text-[10px] text-secondary font-semibold">Bay 4A</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[#2D5A43] text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-mono font-bold text-primary font-body-md text-body-md">SN-TRN-2024-994101</span>
+<span class="text-outline font-body-sm text-body-sm">Trina Solar 545W Module</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-mono text-label-sm text-on-surface-variant">14:27:42</span>
+<div class="text-[10px] text-secondary font-semibold">Bay 4A</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[#2D5A43] text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-mono font-bold text-primary font-body-md text-body-md">SN-TSL-PW3-004812</span>
+<span class="text-outline font-body-sm text-body-sm">Powerwall 3 13.5kWh Unit</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-mono text-label-sm text-on-surface-variant">14:15:09</span>
+<div class="text-[10px] text-secondary font-semibold">Bay 2C</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[#2D5A43] text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-mono font-bold text-primary font-body-md text-body-md">SN-SMA-50K-881920</span>
+<span class="text-outline font-body-sm text-body-sm">SMA Tripower Inverter</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-mono text-label-sm text-on-surface-variant">13:58:34</span>
+<div class="text-[10px] text-secondary font-semibold">Bay 1B</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[#2D5A43] text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-mono font-bold text-primary font-body-md text-body-md">SN-HLK-DC6-41902</span>
+<span class="text-outline font-body-sm text-body-sm">Helukabel 500m Spool</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-mono text-label-sm text-on-surface-variant">13:42:01</span>
+<div class="text-[10px] text-secondary font-semibold">Bay 5D</div>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-surface-container text-on-surface hover:bg-surface-variant font-label-md text-label-md flex items-center justify-center gap-space-xs transition-colors" type="button">
+<span class="">View Complete Audit Ledger</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Warehouse Dispatch Allocation Ratio Widget -->
+<div class="rounded-xl bg-surface-container-lowest shadow-sm p-space-lg space-y-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md text-primary font-bold">Hardware Allocation State</h3>
+<span class="text-label-sm text-outline uppercase font-semibold">Real-Time</span>
+</div>
+<div class="flex items-center justify-center py-2">
+<!-- Circular Ring Representation of Commitments -->
+<div class="relative w-36 h-36 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+<!-- Background Circle -->
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<!-- Allocated Segment: 34% (stroke-dasharray: 34, 100) -->
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="34, 100" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- In Transit Segment: 20% (offset 34, stroke-dasharray: 20, 100) -->
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="20, 100" stroke-dashoffset="-34" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-data-metric text-data-metric text-primary leading-none font-bold">54%</span>
+<span class="text-[10px] uppercase tracking-wider text-outline font-medium mt-1">Committed</span>
+</div>
+</div>
+</div>
+<!-- Legend breakdown -->
+<div class="space-y-2 pt-2 border-t border-surface-variant/40">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-on-surface">Reserved (Installations)</span>
+</div>
+<span class="font-mono font-semibold text-primary">2,180 units (34%)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-on-surface">En Route / Transit</span>
+</div>
+<span class="font-mono font-semibold text-primary">1,284 units (20%)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-container"></span>
+<span class="text-on-surface">Unallocated Shelf Stock</span>
+</div>
+<span class="font-mono font-semibold text-primary">2,956 units (46%)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div>
+
+<div id="serialScanModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/80 backdrop-blur-sm overflow-y-auto"><div class="relative w-full max-w-3xl rounded-xl bg-surface-container-lowest shadow-[0_4px_24px_rgba(48,32,25,0.18)] border border-outline-variant/40 overflow-hidden flex flex-col my-space-md"><div class="bg-primary-container px-space-lg py-space-md flex items-center justify-between border-b border-white/10"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[24px]">qr_code_scanner</span></div><div><div class="flex items-center gap-2"><h3 class="font-headline-sm text-headline-sm text-on-primary leading-tight">Optical Barcode &amp; QR Serial Registration Terminal</h3><span class="px-2 py-0.5 rounded-full bg-[#2D5A43] text-on-primary font-mono text-[10px] uppercase font-bold tracking-wider">Live</span></div><p class="font-body-sm text-body-sm text-on-primary-container">Enterprise cryptographic sensor interface â€¢ Auto-align enabled</p></div></div><button class="p-1.5 rounded-lg text-white/75 hover:text-on-secondary hover:bg-white/10 transition-colors" onclick="document.getElementById('serialScanModal').classList.add('hidden')" title="Close modal" type="button"><span class="material-symbols-outlined text-[20px]">close</span></button></div><div class="p-space-lg space-y-space-md bg-surface-container-low/60"><div class="grid grid-cols-1 md:grid-cols-2 gap-space-md items-center"><div class="relative h-48 rounded-xl bg-primary overflow-hidden border border-outline/30 flex flex-col justify-between p-3"><div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div><div class="absolute inset-x-4 top-1/2 -translate-y-1/2 h-0.5 bg-error shadow-[0_0_10px_#ba1a1a]"></div><div class="relative flex items-center justify-between z-10"><span class="px-2 py-0.5 rounded bg-primary/90 text-on-primary font-mono text-[10px] tracking-wider border border-white/10 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-error"></span> 60 FPS CAM ACTIVE</span><span class="flex items-center gap-1 text-tertiary-fixed font-mono text-[10px]"><span class="material-symbols-outlined text-[14px]">volume_up</span> AUDIO CHIME ON</span></div><div class="relative self-center flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-lowest/90 backdrop-blur-sm shadow-md"><svg class="w-36 h-10 text-primary" fill="currentColor" viewBox="0 0 200 48"><rect height="48" width="4" x="0" y="0"></rect><rect height="48" width="2" x="6" y="0"></rect><rect height="48" width="6" x="12" y="0"></rect><rect height="48" width="3" x="22" y="0"></rect><rect height="48" width="8" x="28" y="0"></rect><rect height="48" width="2" x="40" y="0"></rect><rect height="48" width="5" x="46" y="0"></rect><rect height="48" width="7" x="62" y="0"></rect><rect height="48" width="4" x="78" y="0"></rect><rect height="48" width="8" x="86" y="0"></rect><rect height="48" width="6" x="105" y="0"></rect><rect height="48" width="7" x="120" y="0"></rect><rect height="48" width="4" x="130" y="0"></rect><rect height="48" width="5" x="144" y="0"></rect><rect height="48" width="7" x="162" y="0"></rect><rect height="48" width="6" x="190" y="0"></rect></svg><span class="font-mono text-[10px] text-primary font-bold tracking-widest mt-1">SN-TRN-2024-994103</span></div><div class="relative flex items-center justify-between text-white/75 font-mono text-[10px] z-10"><span class="">FOCUS: AUTO 98.4%</span><span class="">FPS: 59.8</span></div></div><div class="rounded-xl bg-surface-container-lowest p-space-md border border-outline-variant/30 space-y-2"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#2D5A43]/10 text-[#2D5A43] font-label-sm text-label-sm font-semibold"><span class="material-symbols-outlined text-[18px]">verified</span><span class="">Cryptographic Hash Verified - Zero Duplicate Conflict</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Optical sensor read matched OEM Trina Solar production registry. Hash signature validated against local inventory database.</p><div class="pt-1 font-mono text-[10px] text-outline truncate bg-surface-container-low p-2 rounded">SHA-256: 9e32a188f61bc3d8487b3e028b17a109ecf029...</div></div></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-1"><div class="space-y-1"><label class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Scanned Serial Number</label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-[18px]">barcode_reader</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest border border-outline-variant font-mono text-body-md font-bold text-primary focus:outline-none focus:border-primary-container shadow-sm" type="text" value="SN-TRN-2024-994103"></div></div><div class="space-y-1"><label class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Associated Hardware</label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px]">solar_power</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container shadow-sm" readonly="" type="text" value="Trina Solar 545W Vertex Mono PERC"></div></div><div class="space-y-1"><label class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Order Association</label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px]">assignment</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container shadow-sm" readonly="" type="text" value="Apex Cold Storage (#ORD-9402)"></div></div><div class="space-y-1"><label class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Warehouse Bay &amp; Location</label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px]">warehouse</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container shadow-sm" readonly="" type="text" value="Bay 4A - Pallet Stack 12"></div></div></div></div><div class="p-space-lg bg-surface-container-lowest border-t border-surface-variant/40 flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs text-outline font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-[#2D5A43]">lock</span><span class="">Signed via Hardware Security Module (HSM)</span></div><div class="flex items-center gap-space-sm w-full sm:w-auto"><button class="flex-1 sm:flex-initial h-10 px-4 rounded-xl bg-surface-container text-on-surface hover:bg-surface-variant transition-colors font-label-md text-label-md flex items-center justify-center" onclick="document.getElementById('serialScanModal').classList.add('hidden')" type="button">Dismiss / Return</button><button class="flex-1 sm:flex-initial h-10 px-4 rounded-xl bg-surface-container-lowest border border-secondary text-secondary hover:bg-secondary-container/20 transition-colors font-label-md text-label-md flex items-center justify-center gap-1" type="button"><span class="material-symbols-outlined text-[18px]">playlist_add</span><span class="">Batch Scan Next</span></button><button class="flex-1 sm:flex-initial h-10 px-5 rounded-xl bg-primary text-on-primary hover:bg-primary-container transition-all font-label-md text-label-md flex items-center justify-center gap-1 shadow-md" type="button"><span class="material-symbols-outlined text-[18px] text-tertiary-fixed">check_circle</span><span class="">Capture &amp; Verify Hash</span></button></div></div></div></div></body></html>
