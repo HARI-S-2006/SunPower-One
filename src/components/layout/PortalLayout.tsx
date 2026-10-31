@@ -96,7 +96,8 @@ export function PortalLayout() {
           {portalNavigation.map((item) => {
             const isActive =
               location.pathname === item.href ||
-              (item.href !== '/portal' && location.pathname.startsWith(item.href))
+              (item.href !== '/portal' && location.pathname.startsWith(item.href)) ||
+              (item.href === '/portal/warranty' && location.pathname.startsWith('/portal/warrant'))
             const Icon = item.icon
 
             return (

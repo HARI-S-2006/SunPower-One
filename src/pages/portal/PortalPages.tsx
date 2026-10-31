@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSolarStore, type Quotation, type ServiceTicket } from '@/lib/store/solarStore'
+import { useSolarStore, type Quotation, type ServiceTicket, type WarrantyRecord } from '@/lib/store/solarStore'
 import { MetricCard } from '@/components/ui/MetricCard'
 import {
   Sun,
@@ -10,7 +10,21 @@ import {
   CheckCircle2,
   Sparkles,
   Plus,
-  X
+  X,
+  Download,
+  Printer,
+  ExternalLink,
+  FileText,
+  Search,
+  Filter,
+  Copy,
+  Check,
+  Award,
+  Shield,
+  AlertCircle,
+  Calendar,
+  BadgeCheck,
+  QrCode
 } from 'lucide-react'
 
 // ==========================================
@@ -502,60 +516,420 @@ export function PortalEquipmentPage() {
 // ==========================================
 export function PortalWarrantiesPage() {
   const { warranties } = useSolarStore()
+  const navigate = useNavigate()
+  const [selectedWarranty, setSelectedWarranty] = useState<WarrantyRecord | null>(null)
+  const [activeCategory, setActiveCategory] = useState<'all' | 'panel' | 'inverter' | 'battery'>('all')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [copiedId, setCopiedId] = useState<string | null>(null)
+
+  const handleCopy = (text: string, id: string) => {
+    navigator.clipboard.writeText(text)
+    setCopiedId(id)
+    setTimeout(() => setCopiedId(null), 2000)
+  }
+
+  const handlePrint = () => {
+    window.print()
+  }
+
+  const filteredWarranties = warranties.filter(w => {
+    const matchesCategory = activeCategory === 'all' || w.category === activeCategory
+    const q = searchQuery.toLowerCase().trim()
+    const matchesSearch = !q ||
+      w.productName.toLowerCase().includes(q) ||
+      w.certificateNo.toLowerCase().includes(q) ||
+      w.serialNumber.toLowerCase().includes(q) ||
+      w.customerName.toLowerCase().includes(q)
+    return matchesCategory && matchesSearch
+  })
+
+  // Calculation for remaining years
+  const getRemainingYears = (expiryDate: string) => {
+    const exp = new Date(expiryDate).getTime()
+    const now = new Date().getTime()
+    const diffYears = Math.max(0, Math.round((exp - now) / (1000 * 60 * 60 * 24 * 365.25)))
+    return diffYears
+  }
 
   return (
-    <div className="space-y-6 pb-12">
-      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6]">
-        <h1 className="text-2xl font-bold text-[#172747] font-['Plus_Jakarta_Sans']">
-          Digital Warranty Certificates
-        </h1>
-        <p className="text-sm text-[#6E7787]">
-          Official warranty bonds guaranteeing 20-year module efficiency and 2-year inverter replacement.
-        </p>
+    <div className="space-y-6 pb-16">
+      {/* 1. Header & Summary Banner */}
+      <div className="relative overflow-hidden rounded-2xl bg-[#172747] p-6 text-white shadow-xl">
+        <div className="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-[#FFDDB7]/15 blur-3xl pointer-events-none" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-[#FFDDB7]">
+              <ShieldCheck className="h-4 w-4 text-emerald-400" />
+              100% Comprehensive Coverage • DISCOM & IEC Certified
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans']">
+              Digital Warranty Certificates
+            </h1>
+            <p className="text-sm text-[#F7F3EC]/80 max-w-2xl">
+              Official manufacturer bonds and performance guarantees issued for Site #AZ-8422. Every key asset is backed by linear power output and rapid zero-cost hardware replacement.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => navigate('/portal/service')}
+              className="inline-flex items-center gap-2 rounded-xl bg-[#E87A5D] px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-[#d66c50] transition-colors"
+            >
+              <LifeBuoy className="h-4 w-4" />
+              File Warranty Claim
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Key SLA Badges */}
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 border-t border-white/10 pt-4">
+          <div className="rounded-xl bg-white/5 p-3 text-center border border-white/5">
+            <span className="text-[10px] uppercase tracking-wider text-[#FFDDB7] font-semibold block">Total Covered Assets</span>
+            <span className="text-xl font-bold text-white font-mono mt-0.5 block">{warranties.length} Products</span>
+          </div>
+          <div className="rounded-xl bg-white/5 p-3 text-center border border-white/5">
+            <span className="text-[10px] uppercase tracking-wider text-[#FFDDB7] font-semibold block">Max Performance Bond</span>
+            <span className="text-xl font-bold text-white font-mono mt-0.5 block">25 Years Linear</span>
+          </div>
+          <div className="rounded-xl bg-white/5 p-3 text-center border border-white/5">
+            <span className="text-[10px] uppercase tracking-wider text-[#FFDDB7] font-semibold block">Warranty Status</span>
+            <span className="text-xl font-bold text-emerald-400 font-mono mt-0.5 block">100% Active</span>
+          </div>
+          <div className="rounded-xl bg-white/5 p-3 text-center border border-white/5">
+            <span className="text-[10px] uppercase tracking-wider text-[#FFDDB7] font-semibold block">Turnaround SLA</span>
+            <span className="text-xl font-bold text-white font-mono mt-0.5 block">&lt; 24h RMA</span>
+          </div>
+        </div>
       </div>
 
+      {/* 2. Search & Category Filters */}
+      <div className="rounded-2xl bg-white p-4 shadow-sm border border-[#E8E0D6] flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          {(['all', 'panel', 'inverter', 'battery'] as const).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all ${
+                activeCategory === cat
+                  ? 'bg-[#172747] text-white shadow-sm'
+                  : 'bg-[#F7F3EC] text-[#493027] hover:bg-[#E8E0D6]'
+              }`}
+            >
+              {cat === 'all' && 'All Equipment (' + warranties.length + ')'}
+              {cat === 'panel' && 'Solar Panels (25-Yr)'}
+              {cat === 'inverter' && 'Inverters (5-Yr)'}
+              {cat === 'battery' && 'Battery Storage (5-Yr)'}
+            </button>
+          ))}
+        </div>
+
+        <div className="relative w-full md:w-72">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8C7A6B]" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search serial, certificate, or model..."
+            className="w-full rounded-xl border border-[#E8E0D6] bg-[#F7F3EC]/50 pl-9 pr-3 py-1.5 text-xs text-[#172747] placeholder-[#8C7A6B] focus:border-[#172747] focus:outline-none focus:ring-1 focus:ring-[#172747]"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#8C7A6B] hover:text-[#172747]"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* 3. Certificate Cards Grid */}
       <div className="space-y-4">
-        {warranties.map((w) => (
-          <div key={w.id} className="rounded-2xl border-2 border-[#172747] bg-[#FFF8F5] p-6 shadow-sm space-y-4">
-            <div className="flex items-center justify-between border-b border-[#E8E0D6] pb-3">
-              <div>
-                <span className="font-mono text-xs font-bold text-[#172747]">{w.certificateNo}</span>
-                <h3 className="text-lg font-bold text-[#172747]">{w.productName}</h3>
+        {filteredWarranties.length === 0 ? (
+          <div className="rounded-2xl bg-white p-12 text-center border border-[#E8E0D6]">
+            <ShieldCheck className="mx-auto h-12 w-12 text-[#8C7A6B]/50" />
+            <h3 className="mt-3 text-base font-bold text-[#172747]">No warranty certificates matched</h3>
+            <p className="mt-1 text-xs text-[#6E7787]">Try adjusting your search query or switching categories.</p>
+          </div>
+        ) : (
+          filteredWarranties.map((w) => {
+            const remaining = getRemainingYears(w.expiryDate)
+            return (
+              <div
+                key={w.id}
+                className="rounded-2xl border border-[#E8E0D6] bg-white p-6 shadow-sm hover:shadow-md transition-shadow space-y-4"
+              >
+                {/* Header row */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#F0EAE1] pb-4">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#172747] text-[#FFDDB7]">
+                      {w.category === 'panel' && <Sun className="h-5 w-5" />}
+                      {w.category === 'inverter' && <Zap className="h-5 w-5" />}
+                      {w.category === 'battery' && <Award className="h-5 w-5" />}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-[#172747] bg-[#F7F3EC] px-2 py-0.5 rounded">
+                          {w.certificateNo}
+                        </span>
+                        <button
+                          onClick={() => handleCopy(w.certificateNo, w.id)}
+                          className="text-[#8C7A6B] hover:text-[#172747] transition-colors"
+                          title="Copy Certificate Number"
+                        >
+                          {copiedId === w.id ? (
+                            <Check className="h-3.5 w-3.5 text-emerald-600" />
+                          ) : (
+                            <Copy className="h-3.5 w-3.5" />
+                          )}
+                        </button>
+                      </div>
+                      <h3 className="text-lg font-bold text-[#172747] mt-1 font-['Plus_Jakarta_Sans']">
+                        {w.productName}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 self-start sm:self-center">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-700">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      ACTIVE WARRANTY
+                    </span>
+                    <span className="rounded-full bg-[#172747]/5 px-2.5 py-1 text-[11px] font-semibold text-[#172747]">
+                      {w.durationYears} Years Total
+                    </span>
+                  </div>
+                </div>
+
+                {/* Details Matrix */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs bg-[#FAF7F2] p-4 rounded-xl border border-[#F0EAE1]">
+                  <div>
+                    <span className="text-[#8C7A6B] font-medium block">Asset Serial Number</span>
+                    <strong className="font-mono text-[#172747] text-xs font-bold mt-0.5 block">{w.serialNumber}</strong>
+                  </div>
+                  <div>
+                    <span className="text-[#8C7A6B] font-medium block">Coverage Window</span>
+                    <strong className="text-[#172747] mt-0.5 block">{w.startDate} → {w.expiryDate}</strong>
+                  </div>
+                  <div>
+                    <span className="text-[#8C7A6B] font-medium block">Remaining Validity</span>
+                    <strong className="text-emerald-700 font-bold mt-0.5 block">{remaining} Years Remaining</strong>
+                  </div>
+                  <div>
+                    <span className="text-[#8C7A6B] font-medium block">Registered Beneficiary</span>
+                    <strong className="text-[#172747] mt-0.5 block">{w.customerName}</strong>
+                  </div>
+                </div>
+
+                {/* Scope of Coverage */}
+                <div className="rounded-xl bg-white p-3.5 text-xs border border-[#E8E0D6] space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-[#172747] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                      <BadgeCheck className="h-4 w-4 text-emerald-600" />
+                      Legally Binding Coverage Scope
+                    </span>
+                    <span className="text-[10px] text-[#8C7A6B] font-mono">ISO 9001:2015 & IEC 61215</span>
+                  </div>
+                  <p className="text-[#493027] leading-relaxed">{w.coverageScope}</p>
+                </div>
+
+                {/* Action Toolbar */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setSelectedWarranty(w)}
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-[#172747] px-4 py-2 text-xs font-bold text-white hover:bg-[#0c162b] transition-colors"
+                    >
+                      <Award className="h-3.5 w-3.5 text-[#FFDDB7]" />
+                      View Official Certificate Bond
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSelectedWarranty(w)
+                        setTimeout(() => handlePrint(), 300)
+                      }}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-[#E8E0D6] bg-white px-3.5 py-2 text-xs font-semibold text-[#172747] hover:bg-[#F7F3EC] transition-colors"
+                    >
+                      <Printer className="h-3.5 w-3.5 text-[#8C7A6B]" />
+                      Print / PDF
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => navigate('/portal/service')}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#E87A5D] hover:text-[#d66c50] transition-colors"
+                  >
+                    <LifeBuoy className="h-3.5 w-3.5" />
+                    Claim Warranty on Serial {w.serialNumber} →
+                  </button>
+                </div>
               </div>
-              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
-                ACTIVE WARRANTY
+            )
+          })
+        )}
+      </div>
+
+      {/* 4. SLA Protocol & Assurance Banner */}
+      <div className="rounded-2xl bg-[#FFF8F5] border border-[#E8E0D6] p-6 space-y-4">
+        <h3 className="text-base font-bold text-[#172747] font-['Plus_Jakarta_Sans'] flex items-center gap-2">
+          <Shield className="h-5 w-5 text-[#E87A5D]" />
+          SunPower One 3-Step Warranty Claim Guarantee
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div className="rounded-xl bg-white p-4 border border-[#E8E0D6] space-y-1">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#172747] text-white font-bold text-[11px]">1</span>
+            <h4 className="font-bold text-[#172747] pt-1">File via Customer Desk</h4>
+            <p className="text-[#6E7787]">Submit a service request with your asset serial number and inverter fault code.</p>
+          </div>
+          <div className="rounded-xl bg-white p-4 border border-[#E8E0D6] space-y-1">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#172747] text-white font-bold text-[11px]">2</span>
+            <h4 className="font-bold text-[#172747] pt-1">Telemetry Adjudication</h4>
+            <p className="text-[#6E7787]">Our engineers verify string telemetry and DISCOM net-meter logs remotely within 4 hours.</p>
+          </div>
+          <div className="rounded-xl bg-white p-4 border border-[#E8E0D6] space-y-1">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#172747] text-white font-bold text-[11px]">3</span>
+            <h4 className="font-bold text-[#172747] pt-1">Zero-Cost Replacement</h4>
+            <p className="text-[#6E7787]">Certified technician dispatched to your site with warranty replacement hardware under ₹0 RMA.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 5. Official Certificate Modal */}
+      {selectedWarranty && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="relative w-full max-w-2xl rounded-2xl bg-white shadow-2xl border-4 border-[#172747] overflow-hidden my-8">
+            {/* Modal Controls Bar */}
+            <div className="flex items-center justify-between bg-[#172747] px-6 py-3 text-white">
+              <span className="text-xs font-mono font-bold tracking-wider text-[#FFDDB7]">
+                OFFICIAL WARRANTY BOND #{selectedWarranty.certificateNo}
               </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handlePrint}
+                  className="rounded-lg bg-white/10 px-2.5 py-1 text-xs font-semibold text-white hover:bg-white/20 transition-colors flex items-center gap-1"
+                >
+                  <Printer className="h-3 w-3" />
+                  Print Bond
+                </button>
+                <button
+                  onClick={() => setSelectedWarranty(null)}
+                  className="rounded-lg p-1 text-white/80 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div>
-                <span className="text-[#6E7787] block">Asset Serial</span>
-                <strong className="font-mono text-[#172747]">{w.serialNumber}</strong>
+            {/* Official Certificate Paper Container */}
+            <div className="p-8 space-y-6 bg-[#FCFBF8]">
+              {/* Certificate Header Banner */}
+              <div className="text-center space-y-1 border-b-2 border-[#172747] pb-6">
+                <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-[#172747] text-[#FFDDB7] mb-2 shadow">
+                  <ShieldCheck className="h-7 w-7" />
+                </div>
+                <h2 className="text-2xl font-bold uppercase tracking-wider text-[#172747] font-['Plus_Jakarta_Sans']">
+                  Certificate of Solar Warranty
+                </h2>
+                <p className="text-xs text-[#8C7A6B] uppercase tracking-widest font-semibold">
+                  SunPower One Distributed Clean Energy Systems Limited
+                </p>
+                <p className="text-[11px] text-[#6E7787]">
+                  Statutory Performance Bond issued in accordance with MNRE Guidelines & IEC 61215/61730
+                </p>
               </div>
-              <div>
-                <span className="text-[#6E7787] block">Coverage Period</span>
-                <strong className="text-[#172747]">{w.durationYears} Years ({w.startDate} - {w.expiryDate})</strong>
+
+              {/* Certificate Body Grid */}
+              <div className="grid grid-cols-2 gap-4 text-xs border border-[#E8E0D6] bg-white p-5 rounded-xl">
+                <div>
+                  <span className="text-[#8C7A6B] block">Registered Beneficiary</span>
+                  <strong className="text-sm font-bold text-[#172747] block mt-0.5">{selectedWarranty.customerName}</strong>
+                  <span className="text-[11px] text-[#6E7787]">Site ID: Site #AZ-8422 • 3 kW On-Grid</span>
+                </div>
+                <div>
+                  <span className="text-[#8C7A6B] block">Certificate Reference</span>
+                  <strong className="font-mono text-sm font-bold text-[#172747] block mt-0.5">{selectedWarranty.certificateNo}</strong>
+                  <span className="text-[11px] text-[#6E7787]">Serial: {selectedWarranty.serialNumber}</span>
+                </div>
+                <div>
+                  <span className="text-[#8C7A6B] block">Covered Equipment</span>
+                  <strong className="text-xs font-bold text-[#172747] block mt-0.5">{selectedWarranty.productName}</strong>
+                </div>
+                <div>
+                  <span className="text-[#8C7A6B] block">Guarantee Period</span>
+                  <strong className="text-xs font-bold text-emerald-700 block mt-0.5">
+                    {selectedWarranty.durationYears} Years ({selectedWarranty.startDate} to {selectedWarranty.expiryDate})
+                  </strong>
+                </div>
               </div>
-              <div>
-                <span className="text-[#6E7787] block">Registered Owner</span>
-                <strong className="text-[#172747]">{w.customerName}</strong>
+
+              {/* Warranty Guarantee Covenant */}
+              <div className="rounded-xl bg-[#FAF7F2] p-4 text-xs border border-[#E8E0D6] space-y-2">
+                <span className="font-bold text-[#172747] uppercase tracking-wider text-[11px] block">
+                  Authoritative Performance & Repair Covenant
+                </span>
+                <p className="text-[#493027] leading-relaxed">
+                  {selectedWarranty.coverageScope}
+                </p>
+                <p className="text-[11px] text-[#8C7A6B] italic">
+                  In the event of module degradation beyond permissible tolerance or inverter internal electrical failure, SunPower One guarantees on-site replacement at ₹0 cost under our certified RMA warranty protocol.
+                </p>
+              </div>
+
+              {/* Digital Seal & Signatures */}
+              <div className="pt-4 border-t border-[#E8E0D6] flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-14 w-14 rounded-full border-2 border-dashed border-[#172747] flex items-center justify-center p-1 bg-white">
+                    <div className="h-full w-full rounded-full bg-[#172747] text-[#FFDDB7] flex items-center justify-center font-bold text-[9px] uppercase tracking-tighter text-center leading-tight">
+                      OFFICIAL<br />SEAL
+                    </div>
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-[#8C7A6B] block">SHA-256 DIGITAL BOND VERIFIED</span>
+                    <span className="text-xs font-bold text-emerald-700 flex items-center gap-1">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                      Active & Enforceable
+                    </span>
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <span className="font-['Caveat',cursive] text-lg font-bold text-[#172747] block italic">
+                    Marcus Vance
+                  </span>
+                  <div className="border-t border-[#172747] pt-1">
+                    <span className="text-[10px] text-[#8C7A6B] block uppercase tracking-wider font-bold">
+                      Chief Technology Officer
+                    </span>
+                    <span className="text-[10px] text-[#6E7787] block">SunPower One Quality Assurance</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="rounded-xl bg-white p-3 text-xs border border-[#E8E0D6]">
-              <span className="font-bold text-[#6E7787] uppercase tracking-wider block">Coverage Scope</span>
-              <p className="mt-1 text-[#172747]">{w.coverageScope}</p>
+            {/* Modal Bottom Actions */}
+            <div className="flex justify-end gap-2 bg-[#F0EAE1] px-6 py-3 border-t border-[#E8E0D6]">
+              <button
+                onClick={() => setSelectedWarranty(null)}
+                className="rounded-xl border border-[#E8E0D6] bg-white px-4 py-2 text-xs font-bold text-[#172747] hover:bg-[#F7F3EC] transition-colors"
+              >
+                Close
+              </button>
+              <button
+                onClick={handlePrint}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#172747] px-4 py-2 text-xs font-bold text-white hover:bg-[#0c162b] transition-colors"
+              >
+                <Printer className="h-3.5 w-3.5 text-[#FFDDB7]" />
+                Print Certificate PDF
+              </button>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
 
-// ==========================================
-// 7. CUSTOMER SERVICE DESK & TICKETS
-// ==========================================
+
 export function PortalServicePage() {
   const { serviceTickets, logServiceTicket } = useSolarStore()
   const [isOpenModal, setIsOpenModal] = useState(false)

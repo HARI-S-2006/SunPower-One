@@ -147,6 +147,7 @@ function App() {
         <Route path="/portal/orders" element={<PortalOrdersPage />} />
         <Route path="/portal/installations" element={<PortalInstallationsPage />} />
         <Route path="/portal/equipment" element={<PortalEquipmentPage />} />
+        <Route path="/portal/warranty" element={<PortalWarrantiesPage />} />
         <Route path="/portal/warranties" element={<PortalWarrantiesPage />} />
         <Route path="/portal/service" element={<PortalServicePage />} />
         <Route path="/portal/profile" element={<PortalProfilePage />} />
