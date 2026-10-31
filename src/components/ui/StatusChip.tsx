@@ -84,6 +84,7 @@ export function StatusChip({ status, label, className }: StatusChipProps) {
     case 'testing':
     case 'investigating':
     case 'reserved':
+    case 'revisit_required':
       variant = 'warning'
       break
 

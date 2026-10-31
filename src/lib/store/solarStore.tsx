@@ -44,7 +44,7 @@ export interface SiteSurvey {
   structuralStrength: 'Good - RCC Slab' | 'Tin Shed - Reinforcement Needed' | 'Tile Roof'
   photos: string[]
   technicianNotes: string
-  status: 'scheduled' | 'pending_approval' | 'approved' | 'rejected'
+  status: 'scheduled' | 'pending_approval' | 'approved' | 'rejected' | 'revisit_required' | 'in_progress'
   rejectionReason?: string
   approvedBy?: string
   approvedAt?: string
@@ -312,9 +312,9 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
       'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1545209575-7076a5992a54?auto=format&fit=crop&w=600&q=80',
     ],
-    technicianNotes: 'RCC rooftop with zero shadowing between 9 AM and 4:30 PM. AC mains panel 28m away.',
+    technicianNotes: 'RCC rooftop with zero shadowing between 9 AM and 4:30 PM. AC mains panel 28m away. High solar irradiance profile.',
     status: 'approved',
-    approvedBy: 'Marcus Vance (Director)',
+    approvedBy: 'Marcus Vance (Director / Chief Engineer)',
     approvedAt: '2026-10-25T16:00:00Z',
   },
   {
@@ -340,6 +340,28 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     status: 'pending_approval',
   },
   {
+    id: 'srv-03',
+    surveyNo: 'SRV-2026-0043',
+    leadId: 'lead-03',
+    customerName: 'Green Valley Villas #14',
+    siteAddress: 'Villa 14, Prestige Green Valley, Whitefield, Bengaluru',
+    technicianName: 'Vikram Singh',
+    technicianId: 'tech-03',
+    scheduledDate: '2026-11-05',
+    roofAreaSqFt: 1100,
+    shadowFreeAreaSqFt: 920,
+    roofDirection: 'South',
+    roofTiltAngle: 12,
+    cableDistanceMeters: 18,
+    gridSuitability: 'Optimal',
+    structuralStrength: 'Good - RCC Slab',
+    photos: [
+      'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+    ],
+    technicianNotes: 'Site visit scheduled for Wednesday. Client requested preliminary azimuth assessment.',
+    status: 'scheduled',
+  },
+  {
     id: 'srv-04',
     surveyNo: 'SRV-2026-0038',
     leadId: 'lead-04',
@@ -360,10 +382,76 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     ],
     technicianNotes: 'Clean south-facing roof terrace. Ready for 4 kW On-Grid installation.',
     status: 'approved',
-    approvedBy: 'Marcus Vance (Director)',
+    approvedBy: 'Marcus Vance (Director / Chief Engineer)',
     approvedAt: '2026-10-20T17:30:00Z',
   },
-]
+  {
+    id: 'srv-05',
+    surveyNo: 'SRV-2026-0044',
+    leadId: 'lead-05',
+    customerName: 'Meera Nambiar',
+    siteAddress: 'Villa 28, Palm Meadows Phase 1, Airport Road, Bengaluru',
+    technicianName: 'Mateo Kowalski',
+    technicianId: 'tech-01',
+    scheduledDate: '2026-11-01',
+    roofAreaSqFt: 720,
+    shadowFreeAreaSqFt: 580,
+    roofDirection: 'South-East',
+    roofTiltAngle: 16,
+    cableDistanceMeters: 25,
+    gridSuitability: 'Optimal',
+    structuralStrength: 'Good - RCC Slab',
+    photos: [
+      'https://images.unsplash.com/photo-1545209575-7076a5992a54?auto=format&fit=crop&w=600&q=80',
+    ],
+    technicianNotes: 'Survey engineer currently on site measuring parapet shading and taking azimuth angle readings.',
+    status: 'in_progress',
+  },
+  {
+    id: 'srv-06',
+    surveyNo: 'SRV-2026-0045',
+    leadId: 'lead-06',
+    customerName: 'Apex Logistics Hub',
+    siteAddress: 'Survey 44, Nelamangala Highway Interchange, Bengaluru',
+    technicianName: 'Rajesh Kumar',
+    technicianId: 'tech-02',
+    scheduledDate: '2026-10-28',
+    roofAreaSqFt: 2400,
+    shadowFreeAreaSqFt: 1450,
+    roofDirection: 'West',
+    roofTiltAngle: 8,
+    cableDistanceMeters: 62,
+    gridSuitability: 'Requires Grid Tie Upgrade',
+    structuralStrength: 'Tin Shed - Reinforcement Needed',
+    photos: [
+      'https://images.unsplash.com/photo-1508873696983-2df57046475b?auto=format&fit=crop&w=600&q=80',
+    ],
+    technicianNotes: 'Adjacent communication tower creates afternoon shadow. High-mast drone thermography required to determine exact winter horizon angle.',
+    status: 'revisit_required',
+    rejectionReason: 'Adjacent 35m mobile tower casts winter shadow. Field revisit required with drone 3D horizon photogrammetry before commercial sign-off.',
+  },
+  {
+    id: 'srv-07',
+    surveyNo: 'SRV-2026-0036',
+    leadId: 'lead-07',
+    customerName: 'Kaveri Textile Mills',
+    siteAddress: 'Industrial Suburb, Doddaballapur Road, Bengaluru',
+    technicianName: 'Amit Sharma',
+    technicianId: 'tech-04',
+    scheduledDate: '2026-10-18',
+    roofAreaSqFt: 3500,
+    shadowFreeAreaSqFt: 2200,
+    roofDirection: 'North',
+    roofTiltAngle: 5,
+    cableDistanceMeters: 85,
+    gridSuitability: 'Inadequate',
+    structuralStrength: 'Tin Shed - Reinforcement Needed',
+    photos: [],
+    technicianNotes: 'Asbestos fiber cement roofing sheets degraded. High structural risk under 150 km/h wind shear.',
+    status: 'rejected',
+    rejectionReason: 'Brittle asbestos roof structure fails statutory IS 875 load testing. BESCOM feeder transformer operating at 98% capacity with zero net-metering headroom.',
+  },
+];
 
 const INITIAL_QUOTATIONS: Quotation[] = [
   {
@@ -757,6 +845,8 @@ interface SolarStoreContextType {
   scheduleSurvey: (leadId: string, technicianName: string, date: string) => SiteSurvey
   approveSurvey: (surveyId: string, approverName: string) => void
   rejectSurvey: (surveyId: string, reason: string) => void
+  revisitSurvey: (surveyId: string, reason: string) => void
+  startInspection: (surveyId: string) => void
   generateQuotation: (leadId: string, capacityKw: number, systemType: 'on-grid' | 'off-grid') => { quotation?: Quotation; error?: string }
   acceptQuotation: (quotationId: string) => SalesOrder
   recordOrderPayment: (orderId: string, amount: number) => void
@@ -942,6 +1032,18 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   const rejectSurvey: SolarStoreContextType['rejectSurvey'] = (surveyId, reason) => {
     setSurveys((prev) =>
       prev.map((s) => (s.id === surveyId ? { ...s, status: 'rejected', rejectionReason: reason } : s))
+    )
+  }
+
+  const revisitSurvey: SolarStoreContextType['revisitSurvey'] = (surveyId, reason) => {
+    setSurveys((prev) =>
+      prev.map((s) => (s.id === surveyId ? { ...s, status: 'revisit_required', rejectionReason: reason } : s))
+    )
+  }
+
+  const startInspection: SolarStoreContextType['startInspection'] = (surveyId) => {
+    setSurveys((prev) =>
+      prev.map((s) => (s.id === surveyId ? { ...s, status: 'in_progress' } : s))
     )
   }
 
@@ -1290,6 +1392,8 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
         scheduleSurvey,
         approveSurvey,
         rejectSurvey,
+        revisitSurvey,
+        startInspection,
         generateQuotation,
         acceptQuotation,
         recordOrderPayment,
