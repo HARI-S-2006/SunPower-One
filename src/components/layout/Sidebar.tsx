@@ -222,10 +222,23 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {!isCollapsed && (
                   <ul className="space-y-0.5">
                     {group.items.map((item) => {
-                      const isActive =
-                        location.pathname === item.href ||
-                        (item.href !== '/app/dashboard' &&
-                          location.pathname.startsWith(item.href))
+                      let isActive = false
+
+                      if (group.label === 'Inventory & Dispatch') {
+                        // Prevent multiple simultaneous active highlights in Inventory & Dispatch menu
+                        if (item.href === '/app/inventory') {
+                          isActive =
+                            location.pathname === '/app/inventory' ||
+                            location.pathname === '/app/inventory/stock-ledger'
+                        } else {
+                          isActive = location.pathname === item.href
+                        }
+                      } else {
+                        isActive =
+                          location.pathname === item.href ||
+                          (item.href !== '/app/dashboard' &&
+                            location.pathname.startsWith(item.href))
+                      }
                       const Icon = item.icon
 
                       return (
