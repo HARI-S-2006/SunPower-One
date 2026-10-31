@@ -14,6 +14,7 @@ import { SolarCalculatorPage } from '@/pages/public/SolarCalculatorPage'
 import { RequestSurveyPage } from '@/pages/public/RequestSurveyPage'
 import { ContactPage } from '@/pages/public/ContactPage'
 import { LoginPage } from '@/pages/public/LoginPage'
+import { NotFoundPage } from '@/pages/public/NotFoundPage'
 
 // App pages
 import {
@@ -82,6 +83,7 @@ function App() {
         <Route path="/solutions/on-grid" element={<OnGridPage />} />
         <Route path="/solutions/off-grid" element={<OffGridPage />} />
         <Route path="/solar-calculator" element={<SolarCalculatorPage />} />
+        <Route path="/calculator" element={<Navigate to="/solar-calculator" replace />} />
         <Route path="/request-survey" element={<RequestSurveyPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -89,9 +91,11 @@ function App() {
 
       {/* Admin app routes - protected */}
       <Route element={<AppLayout />}>
+        <Route path="/app" element={<Navigate to="/app/dashboard" replace />} />
         <Route path="/app/dashboard" element={<DashboardPage />} />
         <Route path="/app/crm" element={<CrmPage />} />
         <Route path="/app/crm/leads" element={<CrmPage />} />
+        <Route path="/app/leads" element={<Navigate to="/app/crm/leads" replace />} />
         <Route path="/app/customers" element={<CustomersPage />} />
         <Route path="/app/surveys" element={<SurveysPage />} />
         <Route path="/app/configurator" element={<ConfiguratorPage />} />
@@ -124,6 +128,7 @@ function App() {
 
       {/* Technician routes - mobile optimized */}
       <Route element={<TechnicianLayout />}>
+        <Route path="/technician" element={<Navigate to="/technician/jobs" replace />} />
         <Route path="/technician/dashboard" element={<TechnicianDashboardPage />} />
         <Route path="/technician/jobs" element={<TechnicianJobsPage />} />
         <Route path="/technician/jobs/:id" element={<TechnicianJobDetailPage />} />
@@ -134,6 +139,7 @@ function App() {
 
       {/* Customer portal routes */}
       <Route element={<PortalLayout />}>
+        <Route path="/portal" element={<Navigate to="/portal/dashboard" replace />} />
         <Route path="/portal/dashboard" element={<PortalDashboardPage />} />
         <Route path="/portal/quotations" element={<PortalQuotationsPage />} />
         <Route path="/portal/orders" element={<PortalOrdersPage />} />
@@ -144,8 +150,10 @@ function App() {
         <Route path="/portal/profile" element={<PortalProfilePage />} />
       </Route>
 
-      {/* Catch all - redirect to home */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      {/* 404 Catch-all route */}
+      <Route element={<PublicLayout />}>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
     </Routes>
   )
 }
