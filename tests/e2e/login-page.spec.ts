@@ -215,7 +215,11 @@ test.describe('SunPower One - Updated Login Page Verification', () => {
     await expect(page.locator('#reg-name')).toBeVisible()
     await expect(page.locator('#reg-email')).toBeVisible()
   })
-})
-
-
-
+  test('Requirement 10: Inventory & Dispatch sidebar menu does not contain Serial Number Registry', async ({ page }) => {
+    await page.goto('/app/inventory');
+    const inventoryGroup = page.locator('aside nav div:has(button:has-text("INVENTORY & DISPATCH"))');
+    await expect(inventoryGroup.getByRole('link', { name: /Serial Number Registry/i })).not.toBeVisible();
+    await expect(inventoryGroup.getByRole('link', { name: /Stock & Warehouse/i })).toBeVisible();
+    await expect(inventoryGroup.getByRole('link', { name: /Dispatch Staging/i })).toBeVisible();
+  });
+});

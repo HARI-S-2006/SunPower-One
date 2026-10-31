@@ -76,7 +76,7 @@ const navGroups: NavGroup[] = [
     label: 'Inventory & Dispatch',
     items: [
       { name: 'Stock & Warehouse', href: '/app/inventory', icon: Package },
-      { name: 'Serial Number Registry', href: '/app/inventory/serials', icon: QrCode, highlight: true },
+
       { name: 'Dispatch Staging', href: '/app/inventory/dispatch', icon: Truck },
       { name: 'Product Catalogue', href: '/app/products', icon: Package },
       { name: 'Suppliers & Procurement', href: '/app/suppliers', icon: Truck },
