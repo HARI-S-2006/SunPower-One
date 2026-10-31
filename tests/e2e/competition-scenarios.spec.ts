@@ -33,6 +33,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
 
     test('Sales executive can view and assign lead', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'sales@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'sales')
@@ -44,6 +45,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
 
     test('Survey technician records measurements', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'survey@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'survey')
@@ -57,9 +59,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
 
     test('Survey approval enables quotation', async ({ page }) => {
       await page.goto('/login')
-      await page.fill('input[type="email"]', 'director@demo.com')
-      await page.fill('input[type="password"]', 'password123')
-      await page.selectOption('select[name="role"]', 'director')
+      await page.click('button:has-text("Admin")')
       await page.click('button[type="submit"]')
       
       await page.goto('/app/surveys')
@@ -74,6 +74,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
   test.describe('Scenario 2: Getting the Kit Right (BOM)', () => {
     test('Configurator generates correct BOM for 3kW On-Grid', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'sales@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'sales')
@@ -91,8 +92,9 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
   })
 
   test.describe('Scenario 3: Dispatch & Serial Numbers', () => {
-test('Warehouse scans serials for dispatch', async ({ page }) => {
+    test('Warehouse scans serials for dispatch', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'warehouse@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'warehouse')
@@ -106,6 +108,7 @@ test('Warehouse scans serials for dispatch', async ({ page }) => {
 
     test('Warranty activates on delivery completion', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'warehouse@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'warehouse')
@@ -122,7 +125,6 @@ test('Warehouse scans serials for dispatch', async ({ page }) => {
       await page.goto('/login')
       await page.fill('input[type="email"]', 'tech@demo.com')
       await page.fill('input[type="password"]', 'password123')
-      await page.selectOption('select[name="role"]', 'technician')
       await page.click('button[type="submit"]')
       
       await page.goto('/technician/checklist/inst-01')
@@ -136,11 +138,10 @@ test('Warehouse scans serials for dispatch', async ({ page }) => {
   })
 
   test.describe('Scenario 5: Service & Warranty', () => {
-test('Customer files service ticket with warranty validation', async ({ page }) => {
+    test('Customer files service ticket with warranty validation', async ({ page }) => {
       await page.goto('/login')
-      await page.fill('input[type="email"]', 'customer@demo.com')
+      await page.click('button:has-text("Customer")')
       await page.fill('input[type="password"]', 'password123')
-      await page.selectOption('select[name="role"]', 'customer')
       await page.click('button[type="submit"]')
       
       await page.goto('/portal/service')
@@ -152,6 +153,7 @@ test('Customer files service ticket with warranty validation', async ({ page }) 
 
     test('Support validates warranty and processes repair', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'support@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'support')
@@ -166,9 +168,7 @@ test('Customer files service ticket with warranty validation', async ({ page }) 
   test.describe('Scenario 6: Director Dashboard', () => {
     test('Director sees real-time KPIs', async ({ page }) => {
       await page.goto('/login')
-      await page.fill('input[type="email"]', 'director@demo.com')
-      await page.fill('input[type="password"]', 'password123')
-      await page.selectOption('select[name="role"]', 'director')
+      await page.click('button:has-text("Admin")')
       await page.click('button[type="submit"]')
       
       await page.goto('/app/dashboard')
@@ -179,9 +179,7 @@ test('Customer files service ticket with warranty validation', async ({ page }) 
 
     test('Director views project profitability', async ({ page }) => {
       await page.goto('/login')
-      await page.fill('input[type="email"]', 'director@demo.com')
-      await page.fill('input[type="password"]', 'password123')
-      await page.selectOption('select[name="role"]', 'director')
+      await page.click('button:has-text("Admin")')
       await page.click('button[type="submit"]')
 
       await page.goto('/app/profitability')
@@ -191,7 +189,7 @@ test('Customer files service ticket with warranty validation', async ({ page }) 
   })
 
   test.describe('Cross-Module Data Integrity', () => {
-test('Customer deduplication - same phone creates single customer', async ({ page }) => {
+    test('Customer deduplication - same phone creates single customer', async ({ page }) => {
       await page.goto('/app/customers')
       await expect(page.getByText(/Customer Directory/i).first()).toBeVisible()
       await expect(page.getByText(/Siddharth Varma/i).first()).toBeVisible()
@@ -215,8 +213,9 @@ test('Customer deduplication - same phone creates single customer', async ({ pag
       await expect(page.getByText(/WAR-INV-2025-019/i)).toBeVisible()
     })
 
-test('Ticket closure requires customer confirmation', async ({ page }) => {
+    test('Ticket closure requires customer confirmation', async ({ page }) => {
       await page.goto('/login')
+      await page.click('button:has-text("Employee")')
       await page.fill('input[type="email"]', 'support@demo.com')
       await page.fill('input[type="password"]', 'password123')
       await page.selectOption('select[name="role"]', 'support')
@@ -246,9 +245,17 @@ test('Ticket closure requires customer confirmation', async ({ page }) => {
     for (const r of roles) {
       test(`${r.role} can access assigned modules`, async ({ page }) => {
         await page.goto('/login')
-        await page.fill('input[type="email"]', r.email)
-        await page.fill('input[type="password"]', 'password123')
-        await page.selectOption('select[name="role"]', r.role)
+        if (r.role === 'director') {
+          await page.click('button:has-text("Admin")')
+        } else if (r.role === 'technician') {
+          await page.fill('input[type="email"]', r.email)
+          await page.fill('input[type="password"]', 'password123')
+        } else {
+          await page.click('button:has-text("Employee")')
+          await page.fill('input[type="email"]', r.email)
+          await page.fill('input[type="password"]', 'password123')
+          await page.selectOption('select[name="role"]', r.role)
+        }
         await page.click('button[type="submit"]')
         
         for (const path of r.paths) {

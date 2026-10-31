@@ -4,30 +4,34 @@ import { Eye, EyeOff, ArrowRight, Shield, RefreshCw, Search } from 'lucide-react
 import { cn } from '@/lib/utils'
 
 interface DemoCredential {
+  id: 'admin' | 'employee' | 'customer'
   email: string
   roleName: string
-  roleCategory: 'director' | 'lead' | 'estimator' | 'technician' | 'customer'
+  roleCategory: 'director' | 'employee' | 'customer'
   redirectUrl: string
 }
 
 const demoCredentials: DemoCredential[] = [
   {
-    email: 'marcus.vance@sunpower-solutions.com',
-    roleName: 'Admin (M. Vance)',
+    id: 'admin',
+    email: 'admin@sunpower-solutions.com',
+    roleName: 'Admin',
     roleCategory: 'director',
     redirectUrl: '/app/dashboard',
   },
   {
-    email: 'm.kowalski@field.sunpower-solutions.com',
-    roleName: 'Lead (M. Kowalski)',
-    roleCategory: 'lead',
-    redirectUrl: '/technician',
+    id: 'employee',
+    email: 'sales@demo.com',
+    roleName: 'Employee',
+    roleCategory: 'employee',
+    redirectUrl: '/app/crm/leads',
   },
   {
-    email: 'elena.rostova@solar.sunpower-solutions.com',
-    roleName: 'Solar Estimator',
-    roleCategory: 'estimator',
-    redirectUrl: '/app/quotations',
+    id: 'customer',
+    email: 'customer@demo.com',
+    roleName: 'Customer',
+    roleCategory: 'customer',
+    redirectUrl: '/portal/dashboard',
   },
 ]
 
@@ -44,8 +48,9 @@ const roleRedirectMap: Record<string, { email: string; name: string; url: string
 
 export function LoginPage() {
   const navigate = useNavigate()
+  const [selectedProfile, setSelectedProfile] = useState<'admin' | 'employee' | 'customer'>('admin')
   const [selectedCred, setSelectedCred] = useState<DemoCredential>(demoCredentials[0])
-  const [selectedRole, setSelectedRole] = useState('director')
+  const [selectedRole, setSelectedRole] = useState('sales')
   const [email, setEmail] = useState(demoCredentials[0].email)
   const [password, setPassword] = useState('••••••••••••••••')
   const [showPassword, setShowPassword] = useState(false)
@@ -55,9 +60,20 @@ export function LoginPage() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleSelectDemo = (cred: DemoCredential) => {
+    setSelectedProfile(cred.id)
     setSelectedCred(cred)
-    setEmail(cred.email)
     setPassword('••••••••••••••••')
+    if (cred.id === 'admin') {
+      setEmail(cred.email)
+      setSelectedRole('director')
+    } else if (cred.id === 'customer') {
+      setEmail(cred.email)
+      setSelectedRole('customer')
+    } else if (cred.id === 'employee') {
+      const activeRole = selectedRole === 'customer' || selectedRole === 'technician' ? 'sales' : selectedRole
+      setSelectedRole(activeRole)
+      setEmail(roleRedirectMap[activeRole]?.email || cred.email)
+    }
   }
 
   const handleRoleChange = (role: string) => {
@@ -74,7 +90,15 @@ export function LoginPage() {
     setAuthState('verifying')
     setStatusMessage('Authentication successful! Launching workspace...')
 
-    const destination = roleRedirectMap[selectedRole]?.url || selectedCred.redirectUrl || '/app/dashboard'
+    let destination = '/app/dashboard'
+    if (selectedProfile === 'customer' || email.toLowerCase().includes('customer')) {
+      destination = '/portal/dashboard'
+    } else if (selectedProfile === 'admin') {
+      destination = '/app/dashboard'
+    } else {
+      destination = roleRedirectMap[selectedRole]?.url || '/app/dashboard'
+    }
+
     setTimeout(() => {
       setAuthState('success')
       navigate(destination)
@@ -290,10 +314,10 @@ export function LoginPage() {
                   </div>
                   <div className="grid grid-cols-3 gap-1.5">
                     {demoCredentials.map((cred) => {
-                      const isSelected = selectedCred.email === cred.email
+                      const isSelected = selectedProfile === cred.id
                       return (
                         <button
-                          key={cred.email}
+                          key={cred.id}
                           type="button"
                           onClick={() => handleSelectDemo(cred)}
                           className={cn(
@@ -312,37 +336,37 @@ export function LoginPage() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Role / Workspace Selection */}
-                  <div className="space-y-1">
-                    <div className="flex justify-between items-center text-xs">
-                      <label className="font-semibold text-[#292522]" htmlFor="role-select">
-                        Operational Role & Terminal
-                      </label>
-                      <span className="text-[#827B73]">RBAC Mode</span>
+                  {/* Role / Workspace Selection - Displayed only for Employee profile */}
+                  {selectedProfile === 'employee' && (
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center text-xs">
+                        <label className="font-semibold text-[#292522]" htmlFor="role-select">
+                          Operational Role & Terminal
+                        </label>
+                        <span className="text-[#827B73]">RBAC Mode</span>
+                      </div>
+                      <select
+                        id="role-select"
+                        name="role"
+                        value={selectedRole}
+                        onChange={(e) => handleRoleChange(e.target.value)}
+                        className="w-full h-10 px-3 bg-[#FBF2ED] text-[#292522] rounded-[10px] text-sm border border-[#E8E0D6] focus:bg-white focus:border-[#172747] focus:outline-none focus:ring-3 focus:ring-[#172747]/12 transition-all cursor-pointer font-medium"
+                      >
+                        <option value="director">Executive Director (Director Console)</option>
+                        <option value="sales">Sales Executive (CRM & Quotations)</option>
+                        <option value="survey">Site Survey Engineer (Rooftop Feasibility)</option>
+                        <option value="warehouse">Warehouse Manager (Inventory & Dispatch)</option>
+                        <option value="finance">Finance Controller (Invoicing & P&L)</option>
+                        <option value="support">Service Desk Support (Warranty & RMA)</option>
+                      </select>
                     </div>
-                    <select
-                      id="role-select"
-                      name="role"
-                      value={selectedRole}
-                      onChange={(e) => handleRoleChange(e.target.value)}
-                      className="w-full h-10 px-3 bg-[#FBF2ED] text-[#292522] rounded-[10px] text-sm border border-[#E8E0D6] focus:bg-white focus:border-[#172747] focus:outline-none focus:ring-3 focus:ring-[#172747]/12 transition-all cursor-pointer font-medium"
-                    >
-                      <option value="director">Executive Director (Director Console)</option>
-                      <option value="sales">Sales Executive (CRM & Quotations)</option>
-                      <option value="survey">Site Survey Engineer (Rooftop Feasibility)</option>
-                      <option value="warehouse">Warehouse Manager (Inventory & Dispatch)</option>
-                      <option value="technician">Field Technician (Mobile Checklist)</option>
-                      <option value="finance">Finance Controller (Invoicing & P&L)</option>
-                      <option value="support">Service Desk Support (Warranty & RMA)</option>
-                      <option value="customer">Solar Customer (Self-Service Portal)</option>
-                    </select>
-                  </div>
+                  )}
 
-                  {/* Corporate Email */}
+                  {/* Email Address */}
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-xs">
                       <label className="font-semibold text-[#292522]" htmlFor="email">
-                        Corporate Email Address
+                        Email Address
                       </label>
                       <span className="text-[#827B73]">SSO Enabled</span>
                     </div>
@@ -361,11 +385,11 @@ export function LoginPage() {
                     </div>
                   </div>
 
-                  {/* Password / Passphrase */}
+                  {/* Password */}
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-xs">
                       <label className="font-semibold text-[#292522]" htmlFor="password">
-                        Security Credential / Token
+                        Password
                       </label>
                       <button type="button" className="text-[#493027] hover:underline font-semibold">
                         Forgot key?
@@ -418,7 +442,7 @@ export function LoginPage() {
                   >
                     {authState === 'idle' ? (
                       <>
-                        <span>Authenticate & Launch Workspace</span>
+                        <span>LOGIN</span>
                         <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     ) : (
@@ -452,13 +476,28 @@ export function LoginPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <button
                     type="button"
-                    onClick={() => handleSSO('Okta')}
+                    onClick={() => handleSSO('Google')}
                     className="h-10 px-3 rounded-[10px] bg-[#FBF2ED] hover:bg-[#F5ECE7] text-xs font-semibold text-[#292522] flex items-center justify-center gap-2 border border-[#E8E0D6] transition-all"
                   >
-                    <span className="w-4 h-4 rounded-full bg-[#172747] flex items-center justify-center text-white font-bold text-[9px]">
-                      O
-                    </span>
-                    <span>Okta Enterprise SSO</span>
+                    <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                      <path
+                        fill="#4285F4"
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      />
+                      <path
+                        fill="#34A853"
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      />
+                      <path
+                        fill="#FBBC05"
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                      />
+                      <path
+                        fill="#EA4335"
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                      />
+                    </svg>
+                    <span>Google</span>
                   </button>
 
                   <button
