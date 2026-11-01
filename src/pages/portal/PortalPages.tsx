@@ -472,41 +472,142 @@ export function PortalInstallationsPage() {
 // 5. CUSTOMER EQUIPMENT & SERIALS PAGE
 // ==========================================
 export function PortalEquipmentPage() {
-  const { serials } = useSolarStore()
+  const { serials, passports } = useSolarStore()
+  const [selectedPassport, setSelectedPassport] = useState<any | null>(null)
 
   return (
-    <div className="space-y-6 pb-12">
-      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6]">
-        <h1 className="text-2xl font-bold text-[#172747] font-['Plus_Jakarta_Sans']">
-          Installed Equipment & Serial Registry
-        </h1>
-        <p className="text-sm text-[#6E7787]">
-          Immutable serial identity numbers recorded at dispatch and registered with OEM manufacturers.
-        </p>
+    <div className="space-y-6 pb-12 animate-fade-in">
+      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#172747]/5 px-2.5 py-0.5 text-xs font-semibold text-[#172747] uppercase tracking-wider">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              Verified Hardware Authenticity
+            </span>
+            <span className="text-xs text-[#827B73]">Cryptographic Digital Passports</span>
+          </div>
+          <h1 className="text-2xl font-bold text-[#172747] font-headline mt-1">
+            Installed Solar Equipment & Digital Passports
+          </h1>
+          <p className="text-xs sm:text-sm text-[#827B73] mt-0.5">
+            Immutable physical serial numbers, tamper-proof QR tokens, and manufacturer-backed warranty bonds for your solar installation.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {serials.map((s) => (
-          <div key={s.id} className="rounded-2xl bg-white p-5 shadow-sm border border-[#E8E0D6] space-y-3">
-            <div className="flex items-center justify-between border-b border-[#E8E0D6] pb-2">
-              <span className="font-mono text-xs font-bold text-[#172747]">{s.serialNumber}</span>
-              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 uppercase">
-                {s.status.replace('_', ' ')}
+        {passports.map((p) => (
+          <div
+            key={p.id}
+            className="rounded-2xl bg-white p-5 shadow-warm-sm border border-[#E8E0D6] space-y-3.5 hover:border-[#172747]/40 transition-all"
+          >
+            <div className="flex items-center justify-between border-b border-[#E8E0D6] pb-2.5">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-bold text-[#172747]">{p.serialNumber}</span>
+                <span className="font-mono text-[10px] text-[#B68B55] bg-[#F7F3EC] px-1.5 py-0.2 rounded font-semibold">
+                  {p.id}
+                </span>
+              </div>
+              <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 uppercase">
+                {p.warrantyStatus}
               </span>
             </div>
 
             <div>
-              <h3 className="font-bold text-[#172747] text-sm">{s.productName}</h3>
-              <p className="text-xs text-[#6E7787] capitalize mt-0.5">Category: {s.category}</p>
+              <h3 className="font-headline font-bold text-[#292522] text-sm">{p.productName}</h3>
+              <p className="text-xs text-[#827B73] mt-0.5">
+                Model: <strong>{p.model}</strong> • Manufacturer: <strong>{p.manufacturer}</strong>
+              </p>
             </div>
 
-            <div className="flex justify-between items-center rounded-xl bg-[#F7F3EC] p-2.5 text-xs">
-              <span className="text-[#6E7787]">OEM Warranty:</span>
-              <strong className="text-[#493027] font-bold">{s.warrantyYears} Years Protection</strong>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="p-2 rounded-lg bg-[#F7F3EC]">
+                <span className="text-[10px] uppercase text-[#827B73] block font-semibold">Rating</span>
+                <strong className="text-[#172747]">{p.ratedCapacity}</strong>
+              </div>
+              <div className="p-2 rounded-lg bg-[#F7F3EC]">
+                <span className="text-[10px] uppercase text-[#827B73] block font-semibold">Warranty Tenure</span>
+                <strong className="text-[#2D5A43]">{p.warrantyDurationYears} Years Protection</strong>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-[#E8E0D6] flex items-center justify-between">
+              <span className="font-mono text-[11px] text-[#827B73] truncate max-w-[200px]">
+                QR: {p.qrToken.slice(0, 22)}...
+              </span>
+              <button
+                onClick={() => setSelectedPassport(p)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#172747] text-white text-xs font-semibold hover:bg-[#1E345E] transition-colors"
+              >
+                <QrCode className="h-3.5 w-3.5 text-[#FFDDB7]" />
+                Inspect Passport & QR
+              </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Customer Digital Passport Modal */}
+      {selectedPassport && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#302019]/70 p-4 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-[#E8E0D6] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#E8E0D6] pb-3">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5 text-emerald-600" />
+                <h3 className="font-headline text-base font-bold text-[#292522]">
+                  Solar Digital Passport
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedPassport(null)}
+                className="p-1 rounded text-[#827B73] hover:text-[#292522]"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#F7F3EC] border border-[#E8E0D6] flex flex-col items-center text-center space-y-3">
+              <div className="p-3 bg-white rounded-xl border border-[#E8E0D6] shadow-xs">
+                <QrCode className="h-28 w-28 text-[#172747]" />
+              </div>
+              <div>
+                <span className="font-mono text-xs font-bold text-[#172747] block">
+                  {selectedPassport.id}
+                </span>
+                <span className="font-mono text-[10px] text-[#827B73]">
+                  Token: {selectedPassport.qrToken}
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
+                <span className="text-[#827B73]">Hardware Asset:</span>
+                <strong className="text-[#292522]">{selectedPassport.productName}</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
+                <span className="text-[#827B73]">Serial Barcode:</span>
+                <strong className="font-mono text-[#172747]">{selectedPassport.serialNumber}</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
+                <span className="text-[#827B73]">Rated Capacity:</span>
+                <strong className="text-[#B68B55]">{selectedPassport.ratedCapacity}</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
+                <span className="text-[#827B73]">Warranty Status:</span>
+                <strong className="text-[#2D5A43] uppercase">{selectedPassport.warrantyStatus} ({selectedPassport.warrantyDurationYears} Yrs)</strong>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setSelectedPassport(null)}
+              className="w-full bg-[#172747] hover:bg-[#1E345E] text-white text-xs font-semibold py-2.5"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -24,6 +24,7 @@ import {
   Smartphone,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useSolarStore } from '@/lib/store/solarStore'
 import { SerialScannerModal } from '@/components/ui/SerialScannerModal'
 
 interface SidebarProps {
@@ -120,8 +121,98 @@ const navGroups: NavGroup[] = [
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const location = useLocation()
+  const { currentUser } = useSolarStore()
   const [scannerOpen, setScannerOpen] = useState(false)
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({})
+
+  const roleNavPermissions: Record<string, string[]> = {
+    director: [],
+    sales: [
+      '/app/dashboard',
+      '/app/crm/leads',
+      '/app/customers',
+      '/app/surveys',
+      '/app/configurator',
+      '/app/quotations',
+      '/app/bom',
+      '/app/orders',
+    ],
+    survey: [
+      '/app/dashboard',
+      '/app/surveys',
+    ],
+    warehouse: [
+      '/app/dashboard',
+      '/app/inventory',
+      '/app/inventory/passport',
+      '/app/inventory/dispatch',
+      '/app/products',
+      '/app/suppliers',
+    ],
+    coordinator: [
+      '/app/dashboard',
+      '/app/installations',
+      '/app/technicians',
+      '/app/technician-schedule',
+      '/app/warranties',
+      '/app/inventory/passport',
+    ],
+    finance: [
+      '/app/dashboard',
+      '/app/quotations',
+      '/app/bom',
+      '/app/orders',
+      '/app/payments',
+      '/app/invoices',
+      '/app/expenses',
+      '/app/technician-payments',
+      '/app/subsidies',
+      '/app/profitability',
+      '/app/analytics',
+    ],
+    support: [
+      '/app/dashboard',
+      '/app/service',
+      '/app/warranties',
+      '/app/customers',
+      '/app/inventory/passport',
+    ],
+  }
+
+  const userRole = currentUser?.role || 'director'
+  const isAllAccess = !currentUser || currentUser.profile === 'admin' || userRole === 'director'
+  const allowedHrefs = roleNavPermissions[userRole] || []
+
+  const visibleGroups = isAllAccess
+    ? navGroups
+    : navGroups
+        .map((group) => ({
+          ...group,
+          items: group.items.filter((item) => allowedHrefs.includes(item.href)),
+        }))
+        .filter((group) => group.items.length > 0)
+
+  const roleTitleMap: Record<string, string> = {
+    director: 'Executive Director',
+    sales: 'Sales Executive',
+    survey: 'Site Survey Engineer',
+    warehouse: 'Warehouse Manager',
+    coordinator: 'Installation Coordinator',
+    finance: 'Finance Controller',
+    support: 'Service Desk Support',
+    technician: 'Field Technician',
+    customer: 'Solar Customer',
+  }
+
+  const currentName = currentUser?.name || 'Marcus Vance'
+  const currentTitle = roleTitleMap[userRole] || 'Executive Director'
+  const initials = currentName
+    .split(' ')
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
 
   const toggleGroup = (groupLabel: string) => {
     setCollapsedGroups((prev) => ({ ...prev, [groupLabel]: !prev[groupLabel] }))
@@ -203,7 +294,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* Navigation List */}
         <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-4" role="navigation">
-          {navGroups.map((group) => {
+          {visibleGroups.map((group) => {
             const isCollapsed = collapsedGroups[group.label]
             return (
               <div key={group.label} className="space-y-1">

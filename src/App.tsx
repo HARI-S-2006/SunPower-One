@@ -33,6 +33,7 @@ import {
   StockLedgerPage,
   SerialsPage,
   DispatchPage,
+  DigitalPassportPage,
   SuppliersPage,
   PurchaseOrdersPage,
   InstallationsPage,
@@ -109,6 +110,7 @@ function App() {
         <Route path="/app/inventory" element={<InventoryPage />} />
         <Route path="/app/inventory/stock-ledger" element={<StockLedgerPage />} />
         <Route path="/app/inventory/serials" element={<SerialsPage />} />
+        <Route path="/app/inventory/passport" element={<DigitalPassportPage />} />
         <Route path="/app/inventory/dispatch" element={<DispatchPage />} />
         <Route path="/app/suppliers" element={<SuppliersPage />} />
         <Route path="/app/purchase-orders" element={<PurchaseOrdersPage />} />

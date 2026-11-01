@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, ArrowRight, Shield, RefreshCw, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useSolarStore } from '@/lib/store/solarStore'
 
 interface DemoCredential {
   id: 'admin' | 'employee' | 'customer'
@@ -36,18 +37,20 @@ const demoCredentials: DemoCredential[] = [
 ]
 
 const roleRedirectMap: Record<string, { email: string; name: string; url: string }> = {
-  director: { email: 'director@demo.com', name: 'Executive Director', url: '/app/dashboard' },
-  sales: { email: 'sales@demo.com', name: 'Sales Executive', url: '/app/crm/leads' },
-  survey: { email: 'survey@demo.com', name: 'Survey Engineer', url: '/app/surveys' },
-  warehouse: { email: 'warehouse@demo.com', name: 'Warehouse Manager', url: '/app/inventory' },
+  director: { email: 'admin@sunpower-solutions.com', name: 'Marcus Vance', url: '/app/dashboard' },
+  sales: { email: 'sales@demo.com', name: 'Elena Rostova', url: '/app/crm/leads' },
+  survey: { email: 'survey@demo.com', name: 'Mateo Kowalski', url: '/app/surveys' },
+  warehouse: { email: 'warehouse@demo.com', name: 'Vikram Singh', url: '/app/inventory' },
+  coordinator: { email: 'coordinator@demo.com', name: "David O'Connor", url: '/app/installations' },
+  finance: { email: 'finance@demo.com', name: 'Priya Patel', url: '/app/invoices' },
+  support: { email: 'support@demo.com', name: 'Aisha Khan', url: '/app/service' },
   technician: { email: 'tech@demo.com', name: 'Field Technician', url: '/technician/dashboard' },
-  finance: { email: 'finance@demo.com', name: 'Finance Controller', url: '/app/invoices' },
-  support: { email: 'support@demo.com', name: 'Service Desk Support', url: '/app/service' },
-  customer: { email: 'customer@demo.com', name: 'Solar Customer', url: '/portal/dashboard' },
+  customer: { email: 'customer@demo.com', name: 'Anand Kumar Sharma', url: '/portal/dashboard' },
 }
 
 export function LoginPage() {
   const navigate = useNavigate()
+  const { setAuthUser } = useSolarStore()
   const [selectedProfile, setSelectedProfile] = useState<'admin' | 'employee' | 'customer'>('admin')
   const [selectedCred, setSelectedCred] = useState<DemoCredential>(demoCredentials[0])
   const [selectedRole, setSelectedRole] = useState('sales')
@@ -85,19 +88,31 @@ export function LoginPage() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setAuthState('verifying')
     setStatusMessage('Authentication successful! Launching workspace...')
 
     let destination = '/app/dashboard'
+    let activeRole: any = 'director'
     if (selectedProfile === 'customer' || email.toLowerCase().includes('customer')) {
       destination = '/portal/dashboard'
+      activeRole = 'customer'
     } else if (selectedProfile === 'admin') {
       destination = '/app/dashboard'
+      activeRole = 'director'
     } else {
+      activeRole = selectedRole
       destination = roleRedirectMap[selectedRole]?.url || '/app/dashboard'
     }
+
+    const info = roleRedirectMap[activeRole] || { name: 'SunPower User', email }
+    setAuthUser({
+      profile: selectedProfile,
+      role: activeRole,
+      name: info.name,
+      email: info.email || email,
+    })
 
     setTimeout(() => {
       setAuthState('success')
@@ -367,10 +382,10 @@ export function LoginPage() {
                         onChange={(e) => handleRoleChange(e.target.value)}
                         className="w-full h-10 px-3 bg-[#FBF2ED] text-[#292522] rounded-[10px] text-sm border border-[#E8E0D6] focus:bg-white focus:border-[#172747] focus:outline-none focus:ring-3 focus:ring-[#172747]/12 transition-all cursor-pointer font-medium"
                       >
-                        <option value="director">Executive Director (Director Console)</option>
                         <option value="sales">Sales Executive (CRM & Quotations)</option>
                         <option value="survey">Site Survey Engineer (Rooftop Feasibility)</option>
                         <option value="warehouse">Warehouse Manager (Inventory & Dispatch)</option>
+                        <option value="coordinator">Installation & Warranty Coordinator (Crew Operations)</option>
                         <option value="finance">Finance Controller (Invoicing & P&L)</option>
                         <option value="support">Service Desk Support (Warranty & RMA)</option>
                       </select>

@@ -66,12 +66,32 @@ const mockNotifications: NotificationItem[] = [
 
 export function Header({ onMenuClick }: AppHeaderProps) {
   const navigate = useNavigate()
-  const { backendMode } = useSolarStore()
+  const { backendMode, currentUser } = useSolarStore()
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [notifications, setNotifications] = useState(mockNotifications)
-  const [activeRole, setActiveRole] = useState<'admin' | 'lead' | 'estimator'>('admin')
+    const roleTitleMap: Record<string, string> = {
+    director: 'Executive Director',
+    sales: 'Sales Executive',
+    survey: 'Site Survey Engineer',
+    warehouse: 'Warehouse Manager',
+    coordinator: 'Installation & Warranty Coordinator',
+    finance: 'Finance Controller',
+    support: 'Service Desk Support',
+    technician: 'Field Technician',
+    customer: 'Solar Customer',
+  }
+  const currentRole = currentUser?.role || 'director'
+  const currentName = currentUser?.name || 'Marcus Vance'
+  const currentTitle = roleTitleMap[currentRole] || 'Executive Director'
+  const initials = currentName
+    .split(' ')
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
 
   const unreadCount = notifications.filter((n) => n.unread).length
 
@@ -149,41 +169,13 @@ export function Header({ onMenuClick }: AppHeaderProps) {
           <span className="text-[#827B73] font-mono tabular-nums">74.2 MW DC</span>
         </div>
 
-        {/* Role Simulator Pill */}
-        <div className="hidden sm:flex items-center bg-[#F7F3EC] p-1 rounded-lg border border-[#E8E0D6] text-xs font-semibold">
-          <button
-            onClick={() => setActiveRole('admin')}
-            className={cn(
-              'px-2.5 py-1 rounded-md transition-all',
-              activeRole === 'admin'
-                ? 'bg-[#172747] text-white shadow-xs'
-                : 'text-[#827B73] hover:text-[#292522]'
-            )}
-          >
-            Admin
-          </button>
-          <button
-            onClick={() => setActiveRole('lead')}
-            className={cn(
-              'px-2.5 py-1 rounded-md transition-all',
-              activeRole === 'lead'
-                ? 'bg-[#493027] text-white shadow-xs'
-                : 'text-[#827B73] hover:text-[#292522]'
-            )}
-          >
-            Field Lead
-          </button>
-          <button
-            onClick={() => setActiveRole('estimator')}
-            className={cn(
-              'px-2.5 py-1 rounded-md transition-all',
-              activeRole === 'estimator'
-                ? 'bg-[#172747] text-white shadow-xs'
-                : 'text-[#827B73] hover:text-[#292522]'
-            )}
-          >
-            Estimator
-          </button>
+        {/* Active Role Status Badge */}
+        <div className="hidden sm:flex items-center gap-1.5 bg-[#F7F3EC] px-3 py-1.5 rounded-lg border border-[#E8E0D6] text-xs font-semibold">
+          <span className="w-2 h-2 rounded-full bg-[#2D5A43]" />
+          <span className="text-[#172747] font-medium">{currentTitle}</span>
+          <span className="text-[10px] text-[#827B73] uppercase font-mono tracking-wider ml-1">
+            ({currentUser?.profile === 'admin' ? 'Director Console' : 'Operational Workspace'})
+          </span>
         </div>
 
         {/* Notifications Dropdown */}
@@ -271,17 +263,11 @@ export function Header({ onMenuClick }: AppHeaderProps) {
             aria-expanded={userMenuOpen}
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#172747] text-white text-xs font-bold">
-              {activeRole === 'admin' ? 'MV' : activeRole === 'lead' ? 'MK' : 'ER'}
+              {initials}
             </div>
             <div className="hidden md:block text-left leading-tight">
-              <p className="text-xs font-bold text-[#292522]">
-                {activeRole === 'admin'
-                  ? 'Marcus Vance'
-                  : activeRole === 'lead'
-                  ? 'Mateo Kowalski'
-                  : 'Elena Rostova'}
-              </p>
-              <p className="text-[10px] text-[#827B73] capitalize">{activeRole} Role</p>
+              <p className="text-xs font-bold text-[#292522]">{currentName}</p>
+              <p className="text-[10px] text-[#827B73] font-medium">{currentTitle}</p>
             </div>
             <ChevronDown className="h-4 w-4 text-[#827B73] hidden sm:block" />
           </button>

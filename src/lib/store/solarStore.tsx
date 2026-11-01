@@ -7,6 +7,79 @@ import { calculateBOM, type BOMResult } from '@/lib/bom/calculator'
 
 import { isSupabaseConfigured, backendMode } from '@/lib/supabase/client'
 
+
+export interface AuthUser {
+  profile: 'admin' | 'employee' | 'customer'
+  role: 'director' | 'sales' | 'survey' | 'warehouse' | 'coordinator' | 'finance' | 'support' | 'customer'
+  name: string
+  email: string
+}
+
+export interface DigitalPassport {
+  id: string
+  serialNumber: string
+  productName: string
+  sku: string
+  category: 'panel' | 'inverter' | 'battery' | 'structure'
+  manufacturer: string
+  model: string
+  ratedCapacity: string
+  specs: Record<string, string>
+  customerName?: string
+  customerPhone?: string
+  orderId?: string
+  installationId?: string
+  dispatchDate?: string
+  deliveryDate?: string
+  warrantyDurationYears: number
+  warrantyStatus: 'active' | 'expiring_soon' | 'expired' | 'unregistered'
+  qrToken: string
+  activityHistory: {
+    action: string
+    timestamp: string
+    actor: string
+    remarks?: string
+  }[]
+}
+
+export interface InstallationMilestoneEvent {
+  milestoneNumber: number
+  title: string
+  date: string
+  actor: string
+  status: 'completed' | 'current' | 'pending' | 'blocked'
+  remarks?: string
+}
+
+export type ServiceTicketStatus =
+  | 'new'
+  | 'open'
+  | 'under_review'
+  | 'warranty_verification'
+  | 'approved_for_service'
+  | 'awaiting_assignment'
+  | 'scheduled'
+  | 'in_progress'
+  | 'diagnosing'
+  | 'awaiting_customer_confirmation'
+  | 'resolved'
+  | 'closed'
+  | 'rejected'
+
+export interface PreventiveMaintenanceTask {
+  id: string
+  taskNo: string
+  customerName: string
+  siteAddress: string
+  capacityKw: number
+  lastMaintenanceDate: string
+  nextScheduledDate: string
+  status: 'upcoming' | 'overdue' | 'completed'
+  serviceType: string
+  assignedTechnician: string
+  remarks?: string
+}
+
 export interface Lead {
   id: string
   referenceNo: string
@@ -107,11 +180,16 @@ export interface InstallationJob {
   customerPhone: string
   siteAddress: string
   capacityKw: number
+  systemType?: 'on-grid' | 'off-grid'
   leadTechnician: string
   scheduledDate: string
-  status: 'assigned' | 'en_route' | 'in_progress' | 'testing' | 'commissioned'
+  deliveryDate?: string
+  status: 'assigned' | 'en_route' | 'in_progress' | 'testing' | 'commissioned' | 'completed'
+  currentMilestoneStage?: number
   startTime?: string
   completionTime?: string
+  handoverRemarks?: string
+  milestones?: InstallationMilestoneEvent[]
   checklist: {
     mountingStructureTorqueVerified: boolean
     isolationResistanceMeggerTestPassed: boolean
@@ -153,16 +231,22 @@ export interface ServiceTicket {
   siteAddress: string
   serialNumber: string
   productName: string
+  passportId?: string
   faultCode: string
   faultDescription: string
   priority: 'low' | 'medium' | 'high' | 'critical'
-  status: 'open' | 'assigned' | 'diagnosing' | 'resolved' | 'closed'
+  status: ServiceTicketStatus
   assignedTechnician: string
+  appointmentDate?: string
   warrantyStatus: 'covered_zero_cost' | 'chargeable_out_of_warranty'
+  adjudicationReason?: string
+  sparePartsUsed?: string[]
   estimatedCost: number
   finalCost: number
   repairDetails?: string
   customerConfirmationRecorded: boolean
+  customerSatisfaction?: 'satisfied' | 'unsatisfied'
+  closedAt?: string
   createdAt: string
   resolvedAt?: string
 }
@@ -741,6 +825,191 @@ const INITIAL_WARRANTIES: WarrantyRecord[] = [
   },
 ];
 
+
+const INITIAL_PASSPORTS: DigitalPassport[] = [
+  {
+    id: 'dp-01',
+    serialNumber: 'INV-3300-8491',
+    productName: 'Solis 3.3kW Single-Phase On-Grid Inverter',
+    sku: 'INV-SOLIS-3.3K',
+    category: 'inverter',
+    manufacturer: 'Ginlong Solis Technologies',
+    model: 'S5-GR1P3.3K',
+    ratedCapacity: '3.3 kW AC / 4.5 kW DC Input',
+    specs: {
+      'Max Efficiency': '97.7%',
+      'MPPT Voltage Range': '90V - 550V',
+      'Protection Degree': 'IP65 Weatherproof',
+      'Cooling': 'Natural Convection',
+    },
+    customerName: 'Anand Kumar Sharma',
+    customerPhone: '+91 98450 12345',
+    orderId: 'ord-01',
+    installationId: 'inst-01',
+    dispatchDate: '2026-10-25',
+    deliveryDate: '2026-10-26',
+    warrantyDurationYears: 5,
+    warrantyStatus: 'active',
+    qrToken: 'sunpower://passport/dp-01',
+    activityHistory: [
+      { action: 'Inward Warehouse Receipt', timestamp: '2026-10-15 10:30', actor: 'Vikram Singh (Warehouse Manager)', remarks: 'QC passed with OEM factory test calibration certificate.' },
+      { action: 'Allocated to Sales Order', timestamp: '2026-10-22 14:15', actor: 'Elena Rostova (Sales Exec)', remarks: 'Reserved for Anand Kumar Sharma 3kW rooftop project.' },
+      { action: 'Dispatched to Site', timestamp: '2026-10-25 09:00', actor: 'Vikram Singh (Warehouse Manager)', remarks: 'Loaded on delivery fleet vehicle KA-04-E-8812.' },
+      { action: 'Delivery Completed & Warranty Clock Started', timestamp: '2026-10-26 11:30', actor: 'Logistics Fleet Driver', remarks: 'Delivered at Indiranagar site. 5-Year warranty clock started.' },
+      { action: 'Commissioned & Safety Tested', timestamp: '2026-10-28 15:45', actor: 'Mateo Kowalski (Lead Tech)', remarks: 'Megger and anti-islanding passed.' }
+    ]
+  },
+  {
+    id: 'dp-02',
+    serialNumber: 'INV-4000-9102',
+    productName: 'Growatt 5.0kW Hybrid Energy Storage Inverter',
+    sku: 'INV-GW-5K-H',
+    category: 'inverter',
+    manufacturer: 'Shenzhen Growatt New Energy',
+    model: 'SPH 5000TL BL-UP',
+    ratedCapacity: '5.0 kW AC / 8.0 kW DC Peak',
+    specs: {
+      'Max Efficiency': '97.5%',
+      'Battery Voltage': '48V Low Voltage',
+      'EPS Switch Time': '< 10ms UPS grade',
+    },
+    customerName: 'Siddharth Varma',
+    customerPhone: '+91 98860 33412',
+    orderId: 'ord-02',
+    installationId: 'inst-02',
+    dispatchDate: '2026-10-28',
+    deliveryDate: '2026-10-29',
+    warrantyDurationYears: 5,
+    warrantyStatus: 'active',
+    qrToken: 'sunpower://passport/dp-02',
+    activityHistory: [
+      { action: 'Inward Warehouse Receipt', timestamp: '2026-10-18 11:00', actor: 'Vikram Singh (Warehouse Manager)' },
+      { action: 'Allocated to Order', timestamp: '2026-10-27 16:00', actor: 'Elena Rostova (Sales Exec)' },
+      { action: 'Delivered & Warranty Clock Started', timestamp: '2026-10-29 14:00', actor: 'Logistics Fleet', remarks: 'Warranty coverage active.' }
+    ]
+  },
+  {
+    id: 'dp-03',
+    serialNumber: 'BAT-48V-9932',
+    productName: 'Pylontech US3000C 3.55kWh LiFePO4 Battery Module',
+    sku: 'BAT-PYL-3.5K',
+    category: 'battery',
+    manufacturer: 'Pylon Technologies Co., Ltd.',
+    model: 'US3000C',
+    ratedCapacity: '3.55 kWh / 48V / 74Ah',
+    specs: {
+      'Chemistry': 'Lithium Iron Phosphate (LiFePO4)',
+      'DoD': '95%',
+      'Cycle Life': '> 6,000 Cycles @ 25°C',
+    },
+    customerName: 'Siddharth Varma',
+    customerPhone: '+91 98860 33412',
+    orderId: 'ord-02',
+    installationId: 'inst-02',
+    dispatchDate: '2026-10-28',
+    deliveryDate: '2026-10-29',
+    warrantyDurationYears: 5,
+    warrantyStatus: 'active',
+    qrToken: 'sunpower://passport/dp-03',
+    activityHistory: [
+      { action: 'Inward Warehouse Receipt', timestamp: '2026-10-18 11:30', actor: 'Vikram Singh (Warehouse Manager)' },
+      { action: 'Delivered to Site', timestamp: '2026-10-29 14:00', actor: 'Logistics Fleet' }
+    ]
+  },
+  {
+    id: 'dp-04',
+    serialNumber: 'PNL-550W-0041',
+    productName: 'Waaree 550W Bifacial TOPCon High Efficiency Module',
+    sku: 'PNL-WR-550W',
+    category: 'panel',
+    manufacturer: 'Waaree Energies Ltd.',
+    model: 'Arka Series 550W',
+    ratedCapacity: '550 Watts Peak (STC)',
+    specs: {
+      'Module Efficiency': '21.3%',
+      'Bifaciality Factor': '70 ± 5%',
+      'Cell Type': 'N-Type TOPCon 144 Half-Cells',
+      'Dimensions': '2278 x 1134 x 35 mm',
+    },
+    customerName: 'Anand Kumar Sharma',
+    customerPhone: '+91 98450 12345',
+    orderId: 'ord-01',
+    installationId: 'inst-01',
+    dispatchDate: '2026-10-25',
+    deliveryDate: '2026-10-26',
+    warrantyDurationYears: 25,
+    warrantyStatus: 'active',
+    qrToken: 'sunpower://passport/dp-04',
+    activityHistory: [
+      { action: 'Inward Warehouse Receipt', timestamp: '2026-10-12 09:15', actor: 'Vikram Singh (Warehouse Manager)' },
+      { action: 'Dispatched to Site', timestamp: '2026-10-25 09:00', actor: 'Vikram Singh (Warehouse Manager)' },
+      { action: 'Delivery Completed & 25-Yr Performance Guarantee Started', timestamp: '2026-10-26 11:30', actor: 'Logistics Fleet' }
+    ]
+  },
+  {
+    id: 'dp-05',
+    serialNumber: 'INV-2026-8819',
+    productName: 'Solis 5kW 3-Phase Grid-Tied Inverter',
+    sku: 'INV-SOLIS-5K-3P',
+    category: 'inverter',
+    manufacturer: 'Ginlong Solis Technologies',
+    model: 'S5-GR3P5K',
+    ratedCapacity: '5.0 kW AC',
+    specs: {
+      'Max Efficiency': '98.3%',
+      'MPPT Channels': '2 Dual MPPT',
+    },
+    warrantyDurationYears: 5,
+    warrantyStatus: 'unregistered',
+    qrToken: 'sunpower://passport/dp-05',
+    activityHistory: [
+      { action: 'Inward Warehouse Receipt', timestamp: '2026-10-28 14:00', actor: 'Vikram Singh (Warehouse Manager)', remarks: 'Stored in Bay B-04. Ready for allocation.' }
+    ]
+  }
+];
+
+const INITIAL_PREVENTIVE_TASKS: PreventiveMaintenanceTask[] = [
+  {
+    id: 'pm-01',
+    taskNo: 'PM-2026-0012',
+    customerName: 'Vikramaditya Rao',
+    siteAddress: '19, 1st Cross, Dollars Colony, Bengaluru',
+    capacityKw: 3,
+    lastMaintenanceDate: '2026-07-15',
+    nextScheduledDate: '2026-11-15',
+    status: 'upcoming',
+    serviceType: 'Quarterly Inverter & Array Inspection',
+    assignedTechnician: 'Rajesh Kumar',
+    remarks: 'Check DC terminal torque, clean PV module glass, inspect SPD cartridges.',
+  },
+  {
+    id: 'pm-02',
+    taskNo: 'PM-2026-0008',
+    customerName: 'Siddharth Varma',
+    siteAddress: '77, 8th Main, Koramangala 4th Block, Bengaluru',
+    capacityKw: 4,
+    lastMaintenanceDate: '2026-04-10',
+    nextScheduledDate: '2026-10-10',
+    status: 'overdue',
+    serviceType: 'Semi-Annual String & Megger Audit',
+    assignedTechnician: 'Mateo Kowalski',
+    remarks: 'Overdue by 21 days: Customer requested scheduling after Diwali festival.',
+  },
+  {
+    id: 'pm-03',
+    taskNo: 'PM-2026-0015',
+    customerName: 'Precision Tools & Castings Ltd',
+    siteAddress: 'Plot 12, Peenya Industrial Area Phase 2, Bengaluru',
+    capacityKw: 10,
+    lastMaintenanceDate: '2026-08-01',
+    nextScheduledDate: '2026-11-05',
+    status: 'upcoming',
+    serviceType: 'Annual Health Check & Thermography Scan',
+    assignedTechnician: 'Vikram Singh',
+    remarks: 'Thermal imaging of high-current DC combiner box and transformer interface.',
+  }
+];
+
 const INITIAL_SERVICE_TICKETS: ServiceTicket[] = [
   {
     id: 'tkt-01',
@@ -838,7 +1107,16 @@ interface SolarStoreContextType {
   subsidies: SubsidyRecord[]
   techPayments: TechnicianPaymentRecord[]
   backendMode: 'demo' | 'production'
-  isBackendConnected: boolean
+    isBackendConnected: boolean
+  currentUser: AuthUser
+  setAuthUser: (user: Partial<AuthUser>) => void
+  passports: DigitalPassport[]
+  registerPassport: (data: Omit<DigitalPassport, 'id' | 'qrToken' | 'activityHistory'>) => { passport?: DigitalPassport; error?: string }
+  completeDelivery: (orderId: string, deliveryDate: string) => void
+  updateInstallationMilestone: (jobId: string, milestoneIndex: number, status: 'completed' | 'current' | 'pending') => void
+  advanceServiceTicketStatus: (ticketNo: string, nextStatus: ServiceTicketStatus, remarks?: string) => { success: boolean; error?: string }
+  preventiveTasks: PreventiveMaintenanceTask[]
+  completePreventiveTask: (taskId: string, remarks: string) => void
 
   // Action Methods
   createLead: (data: Omit<Lead, 'id' | 'referenceNo' | 'createdAt' | 'status'>) => Lead
@@ -874,6 +1152,183 @@ interface SolarStoreContextType {
 const SolarStoreContext = createContext<SolarStoreContextType | null>(null)
 
 export function SolarStoreProvider({ children }: { children: React.ReactNode }) {
+
+  const [currentUser, setCurrentUser] = useState<AuthUser>(() => {
+    try {
+      const saved = localStorage.getItem('sunpower_current_user')
+      if (saved) return JSON.parse(saved)
+    } catch (e) {}
+    return {
+      profile: 'admin',
+      role: 'director',
+      name: 'Marcus Vance',
+      email: 'admin@sunpower-solutions.com',
+    }
+  })
+
+  const [passports, setPassports] = useState<DigitalPassport[]>(() => {
+    try {
+      const saved = localStorage.getItem('sunpower_passports')
+      if (saved) return JSON.parse(saved)
+    } catch (e) {}
+    return INITIAL_PASSPORTS
+  })
+
+  const [preventiveTasks, setPreventiveTasks] = useState<PreventiveMaintenanceTask[]>(() => {
+    try {
+      const saved = localStorage.getItem('sunpower_preventive')
+      if (saved) return JSON.parse(saved)
+    } catch (e) {}
+    return INITIAL_PREVENTIVE_TASKS
+  })
+
+  const setAuthUser: SolarStoreContextType['setAuthUser'] = (user) => {
+    setCurrentUser((prev) => {
+      const updated = { ...prev, ...user }
+      localStorage.setItem('sunpower_current_user', JSON.stringify(updated))
+      return updated
+    })
+  }
+
+  const registerPassport: SolarStoreContextType['registerPassport'] = (data) => {
+    // Prevent duplicate serial registration
+    const existing = passports.find(p => p.serialNumber.toUpperCase() === data.serialNumber.toUpperCase())
+    if (existing) {
+      return { error: `Duplicate Serial Conflict: ${data.serialNumber} is already registered under Passport #${existing.id}.` }
+    }
+
+    const count = passports.length + 1
+    const id = `dp-0${count}`
+    const newPassport: DigitalPassport = {
+      ...data,
+      id,
+      qrToken: `sunpower://passport/${id}`,
+      activityHistory: [
+        {
+          action: 'Equipment Registered into Digital Passport & QR Registry',
+          timestamp: new Date().toISOString().replace('T', ' ').slice(0, 16),
+          actor: currentUser.name,
+          remarks: 'Initial factory registration with unique QR identifier.'
+        }
+      ]
+    }
+
+    setPassports(prev => {
+      const updated = [newPassport, ...prev]
+      localStorage.setItem('sunpower_passports', JSON.stringify(updated))
+      return updated
+    })
+
+    return { passport: newPassport }
+  }
+
+  const completeDelivery: SolarStoreContextType['completeDelivery'] = (orderId, deliveryDate) => {
+    // 1. Update order status
+    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: 'installed' } : o))
+
+    // 2. Locate order and allocated serials
+    const targetOrder = orders.find(o => o.id === orderId)
+    if (!targetOrder) return
+
+    // 3. Update serials to active_under_warranty
+    setSerials(prev => prev.map(s => {
+      if (s.orderId === orderId || targetOrder.allocatedSerials.includes(s.serialNumber)) {
+        return { ...s, status: 'active_under_warranty' }
+      }
+      return s
+    }))
+
+    // 4. Update digital passports with deliveryDate and start warranty
+    setPassports(prev => prev.map(p => {
+      if (p.orderId === orderId || targetOrder.allocatedSerials.includes(p.serialNumber)) {
+        return {
+          ...p,
+          deliveryDate,
+          warrantyStatus: 'active',
+          activityHistory: [
+            ...p.activityHistory,
+            {
+              action: 'Delivery Completed at Customer Site & Warranty Clock Started',
+              timestamp: new Date().toISOString().replace('T', ' ').slice(0, 16),
+              actor: currentUser.name,
+              remarks: `Delivered to ${targetOrder.deliveryAddress}. Warranty clock officially started.`
+            }
+          ]
+        }
+      }
+      return p
+    }))
+
+    // 5. Activate or update warranty record with startDate = deliveryDate
+    setWarranties(prev => prev.map(w => {
+      if (w.orderId === orderId || targetOrder.allocatedSerials.includes(w.serialNumber)) {
+        const exp = new Date(deliveryDate)
+        exp.setFullYear(exp.getFullYear() + w.durationYears)
+        return {
+          ...w,
+          startDate: deliveryDate,
+          expiryDate: exp.toISOString().split('T')[0],
+          status: 'active'
+        }
+      }
+      return w
+    }))
+  }
+
+  const updateInstallationMilestone: SolarStoreContextType['updateInstallationMilestone'] = (jobId, milestoneIndex, status) => {
+    setInstallations(prev => prev.map(j => {
+      if (j.id === jobId) {
+        return {
+          ...j,
+          currentMilestoneStage: milestoneIndex
+        }
+      }
+      return j
+    }))
+  }
+
+  const advanceServiceTicketStatus: SolarStoreContextType['advanceServiceTicketStatus'] = (ticketNo, nextStatus, remarks) => {
+    const target = serviceTickets.find(t => t.ticketNo === ticketNo)
+    if (!target) return { success: false, error: 'Ticket not found' }
+
+    // Critical constraint: Cannot close ticket without customer confirmation
+    if (nextStatus === 'closed' && !target.customerConfirmationRecorded) {
+      return {
+        success: false,
+        error: 'Mandatory Policy: Service ticket cannot be closed without recorded customer confirmation.'
+      }
+    }
+
+    setServiceTickets(prev => prev.map(t => {
+      if (t.ticketNo === ticketNo) {
+        return {
+          ...t,
+          status: nextStatus,
+          repairDetails: remarks || t.repairDetails,
+          resolvedAt: nextStatus === 'resolved' ? new Date().toISOString() : t.resolvedAt,
+          closedAt: nextStatus === 'closed' ? new Date().toISOString() : t.closedAt
+        }
+      }
+      return t
+    }))
+
+    return { success: true }
+  }
+
+  const completePreventiveTask: SolarStoreContextType['completePreventiveTask'] = (taskId, remarks) => {
+    setPreventiveTasks(prev => prev.map(task => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          status: 'completed',
+          lastMaintenanceDate: new Date().toISOString().split('T')[0],
+          remarks: remarks || task.remarks
+        }
+      }
+      return task
+    }))
+  }
+
   const [leads, setLeads] = useState<Lead[]>(() => {
     const saved = localStorage.getItem('sunpower_leads')
     return saved ? JSON.parse(saved) : INITIAL_LEADS
@@ -1376,8 +1831,17 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   return (
     <SolarStoreContext.Provider
       value={{
-        leads,
+                leads,
         surveys,
+        currentUser,
+        setAuthUser,
+        passports,
+        registerPassport,
+        completeDelivery,
+        updateInstallationMilestone,
+        advanceServiceTicketStatus,
+        preventiveTasks,
+        completePreventiveTask,
         quotations,
         orders,
         serials,

@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useSolarStore, type WarrantyRecord } from '@/lib/store/solarStore'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { StatusChip } from '@/components/ui/StatusChip'
 import { DataTable } from '@/components/ui/DataTable'
 import {
   ShieldCheck,
+  QrCode,
   Search,
   Filter,
   CheckCircle2,
@@ -108,6 +110,30 @@ export function WarrantyPage() {
         />
       </div>
 
+      {/* Delivery Activation Rule Banner */}
+      <div className="p-4 rounded-2xl bg-[#F7F3EC] border border-[#E8E0D6] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <div className="p-2 rounded-xl bg-[#172747] text-white shrink-0 mt-0.5">
+            <ShieldCheck className="h-5 w-5" />
+          </div>
+          <div>
+            <h4 className="font-headline text-sm font-bold text-[#172747]">
+              Automated Delivery-Date Warranty Activation Engine
+            </h4>
+            <p className="text-xs text-[#827B73] mt-0.5">
+              Warranty clocks are strictly bound to confirmed physical site delivery (<code>deliveryDate</code>). Coverage begins on exact hardware ingress, ensuring customers and enterprise insurers enjoy guaranteed legal protection.
+            </p>
+          </div>
+        </div>
+        <Link
+          to="/app/inventory/passport"
+          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-[#E8E0D6] text-xs font-bold text-[#172747] hover:bg-[#FAF7F2] shrink-0"
+        >
+          <QrCode className="h-4 w-4 text-[#B68B55]" />
+          Digital Passport Registry
+        </Link>
+      </div>
+
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl bg-white p-4 shadow-sm border border-[#E8E0D6]">
         <div className="relative w-full sm:w-96">
@@ -190,13 +216,23 @@ export function WarrantyPage() {
                   />
                 </td>
                 <td className="py-3.5 px-4 text-right">
-                  <button
-                    onClick={() => setSelectedWarranty(w)}
-                    className="inline-flex items-center gap-1 rounded-lg border border-[#E8E0D6] bg-white px-2.5 py-1 text-[11px] font-bold text-[#172747] hover:bg-[#F7F3EC]"
-                  >
-                    <Eye className="h-3 w-3 text-[#493027]" />
-                    View
-                  </button>
+                  <div className="flex items-center justify-end gap-1.5">
+                    <Link
+                      to="/app/inventory/passport"
+                      className="inline-flex items-center gap-1 rounded-lg border border-[#B68B55]/50 bg-white px-2 py-1 text-[11px] font-bold text-[#493027] hover:bg-[#F7F3EC]"
+                      title="Inspect Digital Passport & QR"
+                    >
+                      <QrCode className="h-3 w-3 text-[#B68B55]" />
+                      Passport
+                    </Link>
+                    <button
+                      onClick={() => setSelectedWarranty(w)}
+                      className="inline-flex items-center gap-1 rounded-lg border border-[#E8E0D6] bg-white px-2.5 py-1 text-[11px] font-bold text-[#172747] hover:bg-[#F7F3EC]"
+                    >
+                      <Eye className="h-3 w-3 text-[#493027]" />
+                      View
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -252,12 +288,20 @@ export function WarrantyPage() {
               </div>
             </div>
 
-            <button
-              onClick={() => setSelectedWarranty(null)}
-              className="w-full rounded-xl bg-[#172747] py-3 text-xs font-bold text-white hover:bg-[#011232]"
-            >
-              Close Certificate
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                to="/app/inventory/passport"
+                className="flex-1 text-center rounded-xl border border-[#172747] py-3 text-xs font-bold text-[#172747] hover:bg-[#F7F3EC]"
+              >
+                Inspect Digital Passport
+              </Link>
+              <button
+                onClick={() => setSelectedWarranty(null)}
+                className="flex-1 rounded-xl bg-[#172747] py-3 text-xs font-bold text-white hover:bg-[#011232]"
+              >
+                Close Certificate
+              </button>
+            </div>
           </div>
         </div>
       )}

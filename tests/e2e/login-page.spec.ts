@@ -36,7 +36,8 @@ test.describe('SunPower One - Updated Login Page Verification', () => {
     expect(optionsText.some(t => t.includes('Solar Customer'))).toBe(false)
 
     // Confirm remaining roles are present
-    expect(optionsText.some(t => t.includes('Executive Director'))).toBe(true)
+    expect(optionsText.some(t => t.includes('Executive Director'))).toBe(false)
+    expect(optionsText.some(t => t.includes('Installation & Warranty Coordinator'))).toBe(true)
     expect(optionsText.some(t => t.includes('Sales Executive'))).toBe(true)
     expect(optionsText.some(t => t.includes('Site Survey Engineer'))).toBe(true)
     expect(optionsText.some(t => t.includes('Warehouse Manager'))).toBe(true)
