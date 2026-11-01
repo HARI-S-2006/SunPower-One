@@ -31,7 +31,7 @@ import {
 // 1. CUSTOMER PORTAL DASHBOARD
 // ==========================================
 export function PortalDashboardPage() {
-  const { orders, warranties, serviceTickets } = useSolarStore()
+  const { orders, warranties, serviceTickets, customerProfile } = useSolarStore()
   const navigate = useNavigate()
 
   // Primary customer demo context (Siddharth Varma / Vikramaditya Rao)
@@ -51,10 +51,10 @@ export function PortalDashboardPage() {
               BESCOM Grid Synchronized • Net Metered
             </div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans']">
-              Welcome back, {currentOrder?.customerName || 'Siddharth Varma'}
+              Welcome back, {customerProfile.name}
             </h1>
             <p className="text-sm text-[#F7F3EC]/80 max-w-xl">
-              {currentOrder?.capacityKw || 4.0} kW Rooftop Solar PV Microgrid at {currentOrder?.deliveryAddress || 'Koramangala, Bengaluru'}. High-efficiency Mono PERC array operating normally.
+              {customerProfile.solarCapacity} Rooftop Solar PV Microgrid at {customerProfile.address}. High-efficiency Mono PERC array operating normally.
             </p>
           </div>
 
@@ -231,7 +231,7 @@ export function PortalDashboardPage() {
 // 2. CUSTOMER QUOTATIONS PAGE
 // ==========================================
 export function PortalQuotationsPage() {
-  const { quotations } = useSolarStore()
+  const { quotations, customerProfile } = useSolarStore()
   const [selectedQuotation, setSelectedQuotation] = useState<Quotation | null>(null)
 
   return (
@@ -241,7 +241,7 @@ export function PortalQuotationsPage() {
           My Commercial Quotations
         </h1>
         <p className="text-sm text-[#6E7787]">
-          Review engineering proposals, component pricing breakdowns, and accepted agreements.
+          Review engineering proposals, component pricing breakdowns, and accepted agreements for {customerProfile.name} (Customer ID: {customerProfile.id} • Site #{customerProfile.siteId}).
         </p>
       </div>
 
@@ -343,7 +343,7 @@ export function PortalQuotationsPage() {
 // 3. CUSTOMER ORDERS & PAYMENTS PAGE
 // ==========================================
 export function PortalOrdersPage() {
-  const { orders } = useSolarStore()
+  const { orders, customerProfile } = useSolarStore()
 
   return (
     <div className="space-y-6 pb-12">
@@ -352,7 +352,7 @@ export function PortalOrdersPage() {
           My Orders & Payment Schedule
         </h1>
         <p className="text-sm text-[#6E7787]">
-          Track contract milestones: 30% Booking Advance, 50% Pre-Dispatch, and 20% Commissioning.
+          Track contract milestones for {customerProfile.name} (Customer ID: {customerProfile.id}): 30% Booking Advance, 50% Pre-Dispatch, and 20% Commissioning.
         </p>
       </div>
 
@@ -407,7 +407,7 @@ export function PortalOrdersPage() {
 // 4. CUSTOMER INSTALLATIONS PAGE
 // ==========================================
 export function PortalInstallationsPage() {
-  const { installations } = useSolarStore()
+  const { installations, customerProfile } = useSolarStore()
 
   return (
     <div className="space-y-6 pb-12">
@@ -416,7 +416,7 @@ export function PortalInstallationsPage() {
           Installation & Field Commissioning
         </h1>
         <p className="text-sm text-[#6E7787]">
-          Verified commissioning checklists, electrical meter readings, and technician sign-offs.
+          Verified commissioning checklists, electrical meter readings, and technician sign-offs for {customerProfile.name} (Site #{customerProfile.siteId} • {customerProfile.solarCapacity}).
         </p>
       </div>
 
@@ -426,7 +426,8 @@ export function PortalInstallationsPage() {
             <div className="flex items-center justify-between border-b border-[#E8E0D6] pb-3">
               <div>
                 <span className="font-mono text-xs font-bold text-[#6E7787]">{inst.jobNo}</span>
-                <h3 className="text-lg font-bold text-[#172747]">{inst.customerName} - {inst.capacityKw} kW System</h3>
+                <h3 className="text-lg font-bold text-[#172747]">{customerProfile.name} - {customerProfile.solarCapacity} System</h3>
+                <p className="text-xs text-[#6E7787]">Installation Site: {customerProfile.address}</p>
               </div>
               <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 uppercase">
                 {inst.status.replace('_', ' ')}
@@ -472,7 +473,7 @@ export function PortalInstallationsPage() {
 // 5. CUSTOMER EQUIPMENT & SERIALS PAGE
 // ==========================================
 export function PortalEquipmentPage() {
-  const { serials, passports } = useSolarStore()
+  const { serials, passports, customerProfile } = useSolarStore()
   const [selectedPassport, setSelectedPassport] = useState<any | null>(null)
 
   return (
@@ -484,13 +485,13 @@ export function PortalEquipmentPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               Verified Hardware Authenticity
             </span>
-            <span className="text-xs text-[#827B73]">Cryptographic Digital Passports</span>
+            <span className="text-xs text-[#827B73]">Site #{customerProfile.siteId} • {customerProfile.name}</span>
           </div>
           <h1 className="text-2xl font-bold text-[#172747] font-headline mt-1">
             Installed Solar Equipment & Digital Passports
           </h1>
           <p className="text-xs sm:text-sm text-[#827B73] mt-0.5">
-            Immutable physical serial numbers, tamper-proof QR tokens, and manufacturer-backed warranty bonds for your solar installation.
+            Immutable physical serial numbers, tamper-proof QR tokens, and manufacturer-backed warranty bonds for {customerProfile.name} ({customerProfile.id}).
           </p>
         </div>
       </div>
@@ -582,6 +583,14 @@ export function PortalEquipmentPage() {
 
             <div className="space-y-2 text-xs">
               <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
+                <span className="text-[#827B73]">Registered Beneficiary:</span>
+                <strong className="text-[#292522]">{customerProfile.name} ({customerProfile.id})</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
+                <span className="text-[#827B73]">Site Address:</span>
+                <strong className="text-[#292522] text-right truncate max-w-[220px]">{customerProfile.address}</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#E8E0D6]">
                 <span className="text-[#827B73]">Hardware Asset:</span>
                 <strong className="text-[#292522]">{selectedPassport.productName}</strong>
               </div>
@@ -616,7 +625,7 @@ export function PortalEquipmentPage() {
 // 6. CUSTOMER WARRANTIES PAGE
 // ==========================================
 export function PortalWarrantiesPage() {
-  const { warranties } = useSolarStore()
+  const { warranties, customerProfile } = useSolarStore()
   const navigate = useNavigate()
   const [selectedWarranty, setSelectedWarranty] = useState<WarrantyRecord | null>(null)
   const [activeCategory, setActiveCategory] = useState<'all' | 'panel' | 'inverter' | 'battery'>('all')
@@ -667,7 +676,7 @@ export function PortalWarrantiesPage() {
               Digital Warranty Certificates
             </h1>
             <p className="text-sm text-[#F7F3EC]/80 max-w-2xl">
-              Official manufacturer bonds and performance guarantees issued for Site #AZ-8422. Every key asset is backed by linear power output and rapid zero-cost hardware replacement.
+              Official manufacturer bonds and performance guarantees issued for {customerProfile.name} (Site #{customerProfile.siteId} • {customerProfile.solarCapacity}). Every key asset is backed by linear power output and rapid zero-cost hardware replacement.
             </p>
           </div>
 
@@ -1032,7 +1041,7 @@ export function PortalWarrantiesPage() {
 
 
 export function PortalServicePage() {
-  const { serviceTickets, logServiceTicket } = useSolarStore()
+  const { serviceTickets, logServiceTicket, customerProfile } = useSolarStore()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [formData, setFormData] = useState({
     customerName: 'Siddharth Varma',
@@ -1170,60 +1179,242 @@ export function PortalServicePage() {
 // 8. CUSTOMER PROFILE PAGE
 // ==========================================
 export function PortalProfilePage() {
-  const { orders } = useSolarStore()
-  const currentOrder = orders[0]
+  const { customerProfile, updateCustomerProfile } = useSolarStore()
+  const [isEditing, setIsEditing] = useState(false)
+  const [saveSuccess, setSaveSuccess] = useState(false)
+  const [editForm, setEditForm] = useState({
+    name: customerProfile.name,
+    phone: customerProfile.phone,
+    email: customerProfile.email,
+    address: customerProfile.address,
+    solarCapacity: customerProfile.solarCapacity,
+    discomConsumerId: customerProfile.discomConsumerId,
+  })
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault()
+    updateCustomerProfile(editForm)
+    setIsEditing(false)
+    setSaveSuccess(true)
+    setTimeout(() => setSaveSuccess(false), 3000)
+  }
+
+  const initials = customerProfile.name
+    .split(' ')
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
 
   return (
-    <div className="space-y-6 pb-12">
-      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6]">
-        <h1 className="text-2xl font-bold text-[#172747] font-['Plus_Jakarta_Sans']">
-          Customer Account Profile
-        </h1>
-        <p className="text-sm text-[#6E7787]">
-          Verified account credentials, DISCOM consumer number, and site installation details.
-        </p>
+    <div className="space-y-6 pb-12 animate-fade-in">
+      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#172747]/5 px-2.5 py-0.5 text-xs font-semibold text-[#172747] uppercase tracking-wider">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              Verified Customer Record
+            </span>
+            <span className="text-xs font-mono text-[#8C7A6B]">Customer ID: {customerProfile.id}</span>
+          </div>
+          <h1 className="text-2xl font-bold text-[#172747] font-['Plus_Jakarta_Sans'] mt-1">
+            Customer Account Profile
+          </h1>
+          <p className="text-sm text-[#6E7787]">
+            Unified credentials, DISCOM consumer record, and microgrid solar installation details.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {saveSuccess && (
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 flex items-center gap-1">
+              <Check className="h-3.5 w-3.5" /> Profile Updated Across System!
+            </span>
+          )}
+          <button
+            onClick={() => {
+              setEditForm({
+                name: customerProfile.name,
+                phone: customerProfile.phone,
+                email: customerProfile.email,
+                address: customerProfile.address,
+                solarCapacity: customerProfile.solarCapacity,
+                discomConsumerId: customerProfile.discomConsumerId,
+              })
+              setIsEditing(!isEditing)
+            }}
+            className="px-4 py-2 rounded-xl bg-[#172747] text-white text-xs font-semibold hover:bg-[#011232] transition-colors"
+          >
+            {isEditing ? 'Cancel Edit' : 'Edit Customer Profile'}
+          </button>
+        </div>
       </div>
 
-      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6] space-y-4">
-        <div className="flex items-center gap-4 border-b border-[#E8E0D6] pb-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#172747] text-white text-xl font-bold">
-            SV
+      {/* Edit Form Drawer */}
+      {isEditing && (
+        <div className="rounded-2xl bg-[#FCFBF8] p-6 shadow-sm border-2 border-[#172747] space-y-4">
+          <div className="flex items-center justify-between border-b border-[#E8E0D6] pb-3">
+            <h3 className="font-bold text-base text-[#172747] font-['Plus_Jakarta_Sans']">
+              Update Customer Information
+            </h3>
+            <span className="text-xs text-[#8C7A6B]">Changes propagate immediately to all portal views</span>
           </div>
-          <div>
-            <h3 className="text-lg font-bold text-[#172747]">{currentOrder?.customerName || 'Siddharth Varma'}</h3>
-            <p className="text-xs text-[#6E7787]">Active Solar Microgrid Consumer • BESCOM Net Metered</p>
+
+          <form onSubmit={handleSave} className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label className="block text-[#6E7787] font-medium mb-1">Customer Full Name</label>
+              <input
+                type="text"
+                required
+                value={editForm.name}
+                onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                className="w-full rounded-xl border border-[#E8E0D6] p-2.5 text-xs text-[#172747] bg-white focus:border-[#172747] focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-[#6E7787] font-medium mb-1">Primary Phone Number</label>
+              <input
+                type="text"
+                required
+                value={editForm.phone}
+                onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
+                className="w-full rounded-xl border border-[#E8E0D6] p-2.5 text-xs text-[#172747] bg-white focus:border-[#172747] focus:outline-none font-mono"
+              />
+            </div>
+            <div>
+              <label className="block text-[#6E7787] font-medium mb-1">Email Address</label>
+              <input
+                type="email"
+                required
+                value={editForm.email}
+                onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                className="w-full rounded-xl border border-[#E8E0D6] p-2.5 text-xs text-[#172747] bg-white focus:border-[#172747] focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-[#6E7787] font-medium mb-1">Solar System Capacity</label>
+              <input
+                type="text"
+                required
+                value={editForm.solarCapacity}
+                onChange={(e) => setEditForm({ ...editForm, solarCapacity: e.target.value })}
+                className="w-full rounded-xl border border-[#E8E0D6] p-2.5 text-xs text-[#172747] bg-white focus:border-[#172747] focus:outline-none"
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-[#6E7787] font-medium mb-1">Installation Site Address</label>
+              <input
+                type="text"
+                required
+                value={editForm.address}
+                onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
+                className="w-full rounded-xl border border-[#E8E0D6] p-2.5 text-xs text-[#172747] bg-white focus:border-[#172747] focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-[#6E7787] font-medium mb-1">DISCOM Consumer ID</label>
+              <input
+                type="text"
+                required
+                value={editForm.discomConsumerId}
+                onChange={(e) => setEditForm({ ...editForm, discomConsumerId: e.target.value })}
+                className="w-full rounded-xl border border-[#E8E0D6] p-2.5 text-xs text-[#172747] bg-white focus:border-[#172747] focus:outline-none font-mono"
+              />
+            </div>
+            <div className="flex items-end gap-2">
+              <button
+                type="submit"
+                className="w-full rounded-xl bg-[#172747] py-2.5 text-xs font-bold text-white hover:bg-[#011232] transition-colors"
+              >
+                Save Changes
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsEditing(false)}
+                className="w-full rounded-xl bg-gray-100 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-200 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Primary Customer Profile Card */}
+      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8E0D6] pb-5">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#172747] text-[#FFDDB7] text-2xl font-bold border-2 border-[#B68B55]/30 shadow-md">
+              {initials}
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-xl font-bold text-[#172747] font-['Plus_Jakarta_Sans']">{customerProfile.name}</h3>
+                <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 uppercase tracking-wider">
+                  Active Consumer
+                </span>
+              </div>
+              <p className="text-xs text-[#6E7787] mt-0.5">
+                {customerProfile.gridStatus} • Site #{customerProfile.siteId}
+              </p>
+            </div>
+          </div>
+
+          <div className="text-left sm:text-right">
+            <span className="text-[11px] uppercase tracking-wider text-[#8C7A6B] font-semibold block">Customer Account ID</span>
+            <span className="text-base font-mono font-bold text-[#172747] block">{customerProfile.id}</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="space-y-3">
-            <div>
-              <span className="text-[#6E7787] block font-medium">Primary Contact Phone</span>
-              <strong className="text-[#172747] font-mono">{currentOrder?.customerPhone || '+91 98860 33412'}</strong>
-            </div>
-            <div>
-              <span className="text-[#6E7787] block font-medium">Email Address</span>
-              <strong className="text-[#172747]">siddharth.varma@example.com</strong>
-            </div>
-            <div>
-              <span className="text-[#6E7787] block font-medium">Installation Site Address</span>
-              <strong className="text-[#172747]">{currentOrder?.deliveryAddress || '77, 8th Main, Koramangala 4th Block, Bengaluru'}</strong>
-            </div>
+        {/* 6 Key Attributes Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1">
+            <span className="text-[#8C7A6B] block font-medium">Customer Full Name</span>
+            <strong className="text-[#172747] text-sm block">{customerProfile.name}</strong>
+            <span className="text-[10px] text-[#6E7787]">Primary Registered Account Holder</span>
           </div>
 
-          <div className="space-y-3">
-            <div>
-              <span className="text-[#6E7787] block font-medium">DISCOM Consumer Account ID</span>
-              <strong className="font-mono text-[#172747]">BESCOM-S4-992014-A</strong>
-            </div>
-            <div>
-              <span className="text-[#6E7787] block font-medium">Installed Solar Capacity</span>
-              <strong className="text-[#172747]">{currentOrder?.capacityKw || 4.0} kW ({currentOrder?.systemType || 'On-Grid'})</strong>
-            </div>
-            <div>
-              <span className="text-[#6E7787] block font-medium">PM Surya Ghar Reference</span>
-              <strong className="font-mono text-[#172747]">SURYA-2026-KA-0941</strong>
-            </div>
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1">
+            <span className="text-[#8C7A6B] block font-medium">Primary Contact Phone</span>
+            <strong className="text-[#172747] font-mono text-sm block">{customerProfile.phone}</strong>
+            <span className="text-[10px] text-[#6E7787]">SMS OTP & Telemetry Alerts Enabled</span>
+          </div>
+
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1">
+            <span className="text-[#8C7A6B] block font-medium">Email Address</span>
+            <strong className="text-[#172747] text-sm block">{customerProfile.email}</strong>
+            <span className="text-[10px] text-[#6E7787]">Monthly Invoices & Warranty Bond Dispatch</span>
+          </div>
+
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1 md:col-span-2">
+            <span className="text-[#8C7A6B] block font-medium">Installation Site Address</span>
+            <strong className="text-[#172747] text-sm block">{customerProfile.address}</strong>
+            <span className="text-[10px] text-[#6E7787]">Rooftop PV Array Geotagged & Commissioned</span>
+          </div>
+
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1">
+            <span className="text-[#8C7A6B] block font-medium">Customer Identifier</span>
+            <strong className="font-mono text-[#172747] text-sm block">{customerProfile.id}</strong>
+            <span className="text-[10px] text-[#6E7787]">Unique Global Customer Record</span>
+          </div>
+
+          <div className="rounded-xl bg-emerald-50 p-4 border border-emerald-200 space-y-1">
+            <span className="text-emerald-800 block font-medium">Installed Solar Capacity</span>
+            <strong className="text-emerald-900 text-sm block">{customerProfile.solarCapacity}</strong>
+            <span className="text-[10px] text-emerald-700">Live Telemetry: {customerProfile.liveOutputKw} kW Operating</span>
+          </div>
+
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1">
+            <span className="text-[#8C7A6B] block font-medium">DISCOM Consumer Account</span>
+            <strong className="font-mono text-[#172747] text-sm block">{customerProfile.discomConsumerId}</strong>
+            <span className="text-[10px] text-[#6E7787]">Bi-Directional Net Meter Synchronized</span>
+          </div>
+
+          <div className="rounded-xl bg-[#F7F3EC] p-4 border border-[#E8E0D6] space-y-1">
+            <span className="text-[#8C7A6B] block font-medium">PM Surya Ghar Scheme Reference</span>
+            <strong className="font-mono text-[#172747] text-sm block">{customerProfile.schemeRef}</strong>
+            <span className="text-[10px] text-[#6E7787]">Direct Benefit Transfer (DBT) Approved</span>
           </div>
         </div>
       </div>

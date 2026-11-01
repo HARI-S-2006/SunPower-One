@@ -14,6 +14,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useSolarStore } from '@/lib/store/solarStore'
 
 const portalNavigation = [
   { name: 'System Overview', href: '/portal', icon: LayoutDashboard },
@@ -26,8 +27,17 @@ const portalNavigation = [
 ]
 
 export function PortalLayout() {
+  const { customerProfile } = useSolarStore()
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const initials = customerProfile.name
+    .split(' ')
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
 
   return (
     <div className="min-h-screen bg-[#F7F3EC] flex flex-col lg:flex-row">
@@ -81,12 +91,12 @@ export function PortalLayout() {
         {/* Customer Site Identification Card */}
         <div className="p-3 bg-[#38251D] border-b border-[#493027]">
           <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-full bg-[#172747] text-[#FFDDB7] flex items-center justify-center font-bold text-xs">
-              AK
+            <div className="h-7 w-7 rounded-full bg-[#172747] text-[#FFDDB7] flex items-center justify-center font-bold text-xs border border-[#FFDDB7]/20">
+              {initials}
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-semibold text-white truncate">Anand Kumar</p>
-              <p className="text-[10px] text-[#E5BEB1] truncate">Site #AZ-8422 • 3 kW On-Grid</p>
+              <p className="text-xs font-semibold text-white truncate">{customerProfile.name}</p>
+              <p className="text-[10px] text-[#E5BEB1] truncate">Site #{customerProfile.siteId} • {customerProfile.solarCapacity}</p>
             </div>
           </div>
         </div>
@@ -154,7 +164,7 @@ export function PortalLayout() {
           <div className="flex items-center gap-3 text-xs">
             <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#2D5A43]/10 text-[#2D5A43] font-semibold border border-[#2D5A43]/20">
               <Zap className="h-3.5 w-3.5" />
-              <span>Generating Clean Power</span>
+              <span>Generating Clean Power ({customerProfile.liveOutputKw} kW)</span>
             </div>
           </div>
         </header>

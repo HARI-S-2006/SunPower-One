@@ -45,7 +45,7 @@ const roleRedirectMap: Record<string, { email: string; name: string; url: string
   finance: { email: 'finance@demo.com', name: 'Priya Patel', url: '/app/invoices' },
   support: { email: 'support@demo.com', name: 'Aisha Khan', url: '/app/service' },
   technician: { email: 'tech@demo.com', name: 'Field Technician', url: '/technician/dashboard' },
-  customer: { email: 'customer@demo.com', name: 'Anand Kumar Sharma', url: '/portal/dashboard' },
+  customer: { email: 'customer@demo.com', name: 'Siddharth Varma', url: '/portal/dashboard' },
 }
 
 export function LoginPage() {

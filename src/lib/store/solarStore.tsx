@@ -42,6 +42,44 @@ export interface DigitalPassport {
   }[]
 }
 
+export interface CustomerProfile {
+  id: string
+  name: string
+  phone: string
+  email: string
+  address: string
+  siteId: string
+  discomConsumerId: string
+  solarCapacity: string
+  capacityKw: number
+  systemType: 'on-grid' | 'off-grid'
+  schemeRef: string
+  sanctionLoad: string
+  gridStatus: string
+  liveOutputKw: number
+  contractValue: number
+  installationDate: string
+}
+
+export const DEFAULT_CUSTOMER_PROFILE: CustomerProfile = {
+  id: 'CUST-2026-038',
+  name: 'Siddharth Varma',
+  phone: '+91 98860 33412',
+  email: 'customer@demo.com',
+  address: '77, 8th Main, Koramangala 4th Block, Bengaluru, KA 560034',
+  siteId: 'AZ-8422',
+  discomConsumerId: 'BESCOM-S4-992014-A',
+  solarCapacity: '4.3 kW On-Grid',
+  capacityKw: 4.3,
+  systemType: 'on-grid',
+  schemeRef: 'SURYA-2026-KA-0941',
+  sanctionLoad: '5.0 kW',
+  gridStatus: 'BESCOM Grid Synchronized • Net Metered',
+  liveOutputKw: 3.84,
+  contractValue: 245000,
+  installationDate: '2026-04-10',
+}
+
 export interface InstallationMilestoneEvent {
   milestoneNumber: number
   title: string
@@ -733,8 +771,7 @@ const INITIAL_WARRANTIES: WarrantyRecord[] = [
     serialNumber: 'INV-GW3K-8422',
     productName: 'Growatt 3.3kW Single-Phase Grid-Tied Inverter (MIN 3300TL-X)',
     category: 'inverter',
-    customerName: 'Anand Kumar',
-    customerPhone: '+91 98765 43210',
+    customerName: 'Siddharth Varma', customerPhone: '+91 98860 33412',
     installationId: 'inst-8422',
     orderId: 'ord-8422',
     startDate: '2026-04-10',
@@ -749,8 +786,7 @@ const INITIAL_WARRANTIES: WarrantyRecord[] = [
     serialNumber: 'PNL-WAA-540-0891',
     productName: 'Waaree 540W Mono PERC Bifacial Solar PV Array (6 Modules)',
     category: 'panel',
-    customerName: 'Anand Kumar',
-    customerPhone: '+91 98765 43210',
+    customerName: 'Siddharth Varma', customerPhone: '+91 98860 33412',
     installationId: 'inst-8422',
     orderId: 'ord-8422',
     startDate: '2026-04-10',
@@ -765,8 +801,7 @@ const INITIAL_WARRANTIES: WarrantyRecord[] = [
     serialNumber: 'BOS-STR-ALU-8422',
     productName: 'SunPower HDG Anodized Aluminium Mounting Structure & DC Balance of System',
     category: 'panel',
-    customerName: 'Anand Kumar',
-    customerPhone: '+91 98765 43210',
+    customerName: 'Siddharth Varma', customerPhone: '+91 98860 33412',
     installationId: 'inst-8422',
     orderId: 'ord-8422',
     startDate: '2026-04-10',
@@ -842,8 +877,8 @@ const INITIAL_PASSPORTS: DigitalPassport[] = [
       'Protection Degree': 'IP65 Weatherproof',
       'Cooling': 'Natural Convection',
     },
-    customerName: 'Anand Kumar Sharma',
-    customerPhone: '+91 98450 12345',
+    customerName: 'Siddharth Varma',
+    customerPhone: '+91 98860 33412',
     orderId: 'ord-01',
     installationId: 'inst-01',
     dispatchDate: '2026-10-25',
@@ -853,7 +888,7 @@ const INITIAL_PASSPORTS: DigitalPassport[] = [
     qrToken: 'sunpower://passport/dp-01',
     activityHistory: [
       { action: 'Inward Warehouse Receipt', timestamp: '2026-10-15 10:30', actor: 'Vikram Singh (Warehouse Manager)', remarks: 'QC passed with OEM factory test calibration certificate.' },
-      { action: 'Allocated to Sales Order', timestamp: '2026-10-22 14:15', actor: 'Elena Rostova (Sales Exec)', remarks: 'Reserved for Anand Kumar Sharma 3kW rooftop project.' },
+      { action: 'Allocated to Sales Order', timestamp: '2026-10-22 14:15', actor: 'Elena Rostova (Sales Exec)', remarks: 'Reserved for Siddharth Varma 4.3kW rooftop project.' },
       { action: 'Dispatched to Site', timestamp: '2026-10-25 09:00', actor: 'Vikram Singh (Warehouse Manager)', remarks: 'Loaded on delivery fleet vehicle KA-04-E-8812.' },
       { action: 'Delivery Completed & Warranty Clock Started', timestamp: '2026-10-26 11:30', actor: 'Logistics Fleet Driver', remarks: 'Delivered at Indiranagar site. 5-Year warranty clock started.' },
       { action: 'Commissioned & Safety Tested', timestamp: '2026-10-28 15:45', actor: 'Mateo Kowalski (Lead Tech)', remarks: 'Megger and anti-islanding passed.' }
@@ -1110,6 +1145,8 @@ interface SolarStoreContextType {
     isBackendConnected: boolean
   currentUser: AuthUser
   setAuthUser: (user: Partial<AuthUser>) => void
+  customerProfile: CustomerProfile
+  updateCustomerProfile: (updates: Partial<CustomerProfile>) => void
   passports: DigitalPassport[]
   registerPassport: (data: Omit<DigitalPassport, 'id' | 'qrToken' | 'activityHistory'>) => { passport?: DigitalPassport; error?: string }
   completeDelivery: (orderId: string, deliveryDate: string) => void
@@ -1182,13 +1219,42 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
     return INITIAL_PREVENTIVE_TASKS
   })
 
+  const [customerProfile, setCustomerProfile] = useState<CustomerProfile>(() => {
+    try {
+      const saved = localStorage.getItem('sunpower_customer_profile');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return DEFAULT_CUSTOMER_PROFILE;
+  });
+
+  const updateCustomerProfile: SolarStoreContextType['updateCustomerProfile'] = (updates) => {
+    setCustomerProfile((prev: CustomerProfile) => {
+      const updated = { ...prev, ...updates };
+      try {
+        localStorage.setItem('sunpower_customer_profile', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+  };
+
   const setAuthUser: SolarStoreContextType['setAuthUser'] = (user) => {
     setCurrentUser((prev) => {
-      const updated = { ...prev, ...user }
-      localStorage.setItem('sunpower_current_user', JSON.stringify(updated))
-      return updated
-    })
-  }
+      const updated = { ...prev, ...user };
+      try {
+        localStorage.setItem('sunpower_current_user', JSON.stringify(updated));
+      } catch (e) {}
+      if (updated.profile === 'customer' && updated.name) {
+        setCustomerProfile((cp: CustomerProfile) => {
+          const next = { ...cp, name: updated.name };
+          try {
+            localStorage.setItem('sunpower_customer_profile', JSON.stringify(next));
+          } catch (e) {}
+          return next;
+        });
+      }
+      return updated;
+    });
+  };
 
   const registerPassport: SolarStoreContextType['registerPassport'] = (data) => {
     // Prevent duplicate serial registration
@@ -1835,6 +1901,8 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
         surveys,
         currentUser,
         setAuthUser,
+        customerProfile,
+        updateCustomerProfile,
         passports,
         registerPassport,
         completeDelivery,
