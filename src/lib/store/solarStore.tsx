@@ -431,8 +431,9 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     gridSuitability: 'Optimal',
     structuralStrength: 'Good - RCC Slab',
     photos: [
-      'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1545209575-7076a5992a54?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-01-rcc-survey.jpg',
+      '/images/surveys/rooftop-02-inclinometer-survey.jpg',
+      '/images/surveys/rooftop-03-pv-array-completed.jpg',
     ],
     technicianNotes: 'RCC rooftop with zero shadowing between 9 AM and 4:30 PM. AC mains panel 28m away. High solar irradiance profile.',
     status: 'approved',
@@ -456,7 +457,8 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     gridSuitability: 'Requires Grid Tie Upgrade',
     structuralStrength: 'Tin Shed - Reinforcement Needed',
     photos: [
-      'https://images.unsplash.com/photo-1508873696983-2df57046475b?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-04-industrial-tin-shed.jpg',
+      '/images/surveys/rooftop-02-inclinometer-survey.jpg',
     ],
     technicianNotes: 'Requires purlin clamps and structure reinforcement for 5kW array. Cable run is 45 meters.',
     status: 'pending_approval',
@@ -478,7 +480,8 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     gridSuitability: 'Optimal',
     structuralStrength: 'Good - RCC Slab',
     photos: [
-      'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-01-rcc-survey.jpg',
+      '/images/surveys/rooftop-03-pv-array-completed.jpg',
     ],
     technicianNotes: 'Site visit scheduled for Wednesday. Client requested preliminary azimuth assessment.',
     status: 'scheduled',
@@ -500,7 +503,9 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     gridSuitability: 'Optimal',
     structuralStrength: 'Good - RCC Slab',
     photos: [
-      'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-01-rcc-survey.jpg',
+      '/images/surveys/rooftop-02-inclinometer-survey.jpg',
+      '/images/surveys/rooftop-03-pv-array-completed.jpg',
     ],
     technicianNotes: 'Clean south-facing roof terrace. Ready for 4 kW On-Grid installation.',
     status: 'approved',
@@ -524,7 +529,8 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     gridSuitability: 'Optimal',
     structuralStrength: 'Good - RCC Slab',
     photos: [
-      'https://images.unsplash.com/photo-1545209575-7076a5992a54?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-02-inclinometer-survey.jpg',
+      '/images/surveys/rooftop-01-rcc-survey.jpg',
     ],
     technicianNotes: 'Survey engineer currently on site measuring parapet shading and taking azimuth angle readings.',
     status: 'in_progress',
@@ -546,7 +552,8 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     gridSuitability: 'Requires Grid Tie Upgrade',
     structuralStrength: 'Tin Shed - Reinforcement Needed',
     photos: [
-      'https://images.unsplash.com/photo-1508873696983-2df57046475b?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-04-industrial-tin-shed.jpg',
+      '/images/surveys/rooftop-01-rcc-survey.jpg',
     ],
     technicianNotes: 'Adjacent communication tower creates afternoon shadow. High-mast drone thermography required to determine exact winter horizon angle.',
     status: 'revisit_required',
@@ -568,7 +575,10 @@ const INITIAL_SURVEYS: SiteSurvey[] = [
     cableDistanceMeters: 85,
     gridSuitability: 'Inadequate',
     structuralStrength: 'Tin Shed - Reinforcement Needed',
-    photos: [],
+    photos: [
+      '/images/surveys/rooftop-04-industrial-tin-shed.jpg',
+      '/images/surveys/rooftop-02-inclinometer-survey.jpg',
+    ],
     technicianNotes: 'Asbestos fiber cement roofing sheets degraded. High structural risk under 150 km/h wind shear.',
     status: 'rejected',
     rejectionReason: 'Brittle asbestos roof structure fails statutory IS 875 load testing. BESCOM feeder transformer operating at 98% capacity with zero net-metering headroom.',
@@ -757,7 +767,8 @@ const INITIAL_INSTALLATIONS: InstallationJob[] = [
     testedEarthResistanceOhms: 2.4,
     solarGenerationKwReading: 3.12,
     photos: [
-      'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+      '/images/surveys/rooftop-03-pv-array-completed.jpg',
+      '/images/surveys/rooftop-02-inclinometer-survey.jpg',
     ],
     customerSignature: 'Vikramaditya Rao (Digitally Accepted)',
     commissioningDate: '2025-04-15',
@@ -1401,8 +1412,25 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   })
 
   const [surveys, setSurveys] = useState<SiteSurvey[]>(() => {
-    const saved = localStorage.getItem('sunpower_surveys')
-    return saved ? JSON.parse(saved) : INITIAL_SURVEYS
+    try {
+      const saved = localStorage.getItem('sunpower_surveys')
+      if (saved) {
+        const parsed: SiteSurvey[] = JSON.parse(saved)
+        return parsed.map((s) => {
+          const validPhotos = (s.photos || []).filter(
+            (p) => !p.includes('unsplash.com') && p.trim() !== ''
+          )
+          if (validPhotos.length === 0) {
+            const defaults = (s.id === 'srv-02' || s.id === 'srv-06' || s.id === 'srv-07')
+              ? ['/images/surveys/rooftop-04-industrial-tin-shed.jpg', '/images/surveys/rooftop-02-inclinometer-survey.jpg']
+              : ['/images/surveys/rooftop-01-rcc-survey.jpg', '/images/surveys/rooftop-02-inclinometer-survey.jpg', '/images/surveys/rooftop-03-pv-array-completed.jpg']
+            return { ...s, photos: defaults }
+          }
+          return { ...s, photos: validPhotos }
+        })
+      }
+    } catch (e) {}
+    return INITIAL_SURVEYS
   })
 
   const [quotations, setQuotations] = useState<Quotation[]>(() => {
@@ -1421,8 +1449,25 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   })
 
   const [installations, setInstallations] = useState<InstallationJob[]>(() => {
-    const saved = localStorage.getItem('sunpower_installations')
-    return saved ? JSON.parse(saved) : INITIAL_INSTALLATIONS
+    try {
+      const saved = localStorage.getItem('sunpower_installations')
+      if (saved) {
+        const parsed: InstallationJob[] = JSON.parse(saved)
+        return parsed.map((inst) => {
+          const validPhotos = (inst.photos || []).filter(
+            (p) => !p.includes('unsplash.com') && p.trim() !== ''
+          )
+          if (validPhotos.length === 0) {
+            return {
+              ...inst,
+              photos: ['/images/surveys/rooftop-01-rcc-survey.jpg', '/images/surveys/rooftop-02-inclinometer-survey.jpg']
+            }
+          }
+          return { ...inst, photos: validPhotos }
+        })
+      }
+    } catch (e) {}
+    return INITIAL_INSTALLATIONS
   })
 
   const [warranties, setWarranties] = useState<WarrantyRecord[]>(() => {
@@ -1515,7 +1560,8 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
       gridSuitability: 'Optimal',
       structuralStrength: 'Good - RCC Slab',
       photos: [
-        'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+        '/images/surveys/rooftop-01-rcc-survey.jpg',
+        '/images/surveys/rooftop-02-inclinometer-survey.jpg',
       ],
       technicianNotes: 'Scheduled rooftop inspection.',
       status: 'scheduled',

@@ -732,48 +732,103 @@ export function SurveysPage() {
                                   </div>
 
                                   {/* Rooftop Inspection Photographs */}
-                                  <div className="space-y-2">
-                                    <span className="font-bold text-[#172747] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                                      <Camera className="h-3.5 w-3.5 text-[#172747]" />
-                                      Rooftop Inspection Photographs ({survey.photos.length} Captured)
-                                    </span>
+                                  <div className="space-y-2.5">
+                                    <div className="flex items-center justify-between">
+                                      <span className="font-bold text-[#172747] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                                        <Camera className="h-3.5 w-3.5 text-[#172747]" />
+                                        Rooftop Inspection Photographs ({survey.photos && survey.photos.length > 0 ? survey.photos.length : 3} Captured)
+                                      </span>
+                                      <span className="text-[10px] font-mono text-[#827B73] bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E8E0D6]">
+                                        Drone Photogrammetry • Azimuth {survey.roofDirection}
+                                      </span>
+                                    </div>
 
-                                    {survey.photos.length > 0 ? (
-                                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                                        {survey.photos.map((src, i) => (
-                                          <button
-                                            key={i}
-                                            type="button"
-                                            aria-label={`View full rooftop photograph ${i + 1}`}
-                                            onClick={() =>
-                                              setActivePhotoModal({
-                                                src,
-                                                title: `Rooftop Perspective #${i + 1} • Azimuth ${survey.roofDirection}`,
-                                                surveyNo: survey.surveyNo,
-                                              })
-                                            }
-                                            className="group/photo relative rounded-xl overflow-hidden h-28 border border-[#E8E0D6] cursor-pointer shadow-sm hover:border-[#172747] transition-all text-left focus:outline-none focus:ring-2 focus:ring-[#172747]"
-                                          >
-                                            <img
-                                              src={src}
-                                              alt={`Rooftop inspection photograph ${i + 1}`}
-                                              className="w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-300 pointer-events-none"
-                                            />
-                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/photo:opacity-100 transition-opacity flex items-center justify-center text-white gap-1 text-xs font-semibold pointer-events-none">
-                                              <Eye className="h-4 w-4" />
-                                              <span>Enlarge</span>
-                                            </div>
-                                            <span className="absolute bottom-1 right-1 bg-black/75 text-white text-[9px] px-1.5 py-0.5 rounded font-mono pointer-events-none">
-                                              Photo #{i + 1}
-                                            </span>
-                                          </button>
-                                        ))}
-                                      </div>
-                                    ) : (
-                                      <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E0D6] text-center text-xs text-[#827B73]">
-                                        No photographs submitted for this site.
-                                      </div>
-                                    )}
+                                    {(() => {
+                                      const defaultGallery = (survey.id === 'srv-02' || survey.id === 'srv-06' || survey.id === 'srv-07')
+                                        ? [
+                                            '/images/surveys/rooftop-04-industrial-tin-shed.jpg',
+                                            '/images/surveys/rooftop-02-inclinometer-survey.jpg',
+                                            '/images/surveys/rooftop-01-rcc-survey.jpg',
+                                          ]
+                                        : [
+                                            '/images/surveys/rooftop-01-rcc-survey.jpg',
+                                            '/images/surveys/rooftop-02-inclinometer-survey.jpg',
+                                            '/images/surveys/rooftop-03-pv-array-completed.jpg',
+                                          ];
+
+                                      const rawPhotos = survey.photos && survey.photos.length > 0 ? survey.photos : defaultGallery;
+                                      const activePhotos = rawPhotos.map((p, idx) =>
+                                        p.includes('unsplash.com') ? defaultGallery[idx % defaultGallery.length] : p
+                                      );
+
+                                      const photoTags = [
+                                        'Rooftop Plane (4kW Array Layout)',
+                                        'Tilt Inclinometer Reading (14°)',
+                                        'PV Array & Inverter Mounting',
+                                        'Horizon Shading Analysis',
+                                      ];
+
+                                      return (
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                          {activePhotos.map((src, i) => {
+                                            const tagLabel = photoTags[i % photoTags.length];
+
+                                            return (
+                                              <button
+                                                key={i}
+                                                type="button"
+                                                aria-label={`View full rooftop photograph ${i + 1}`}
+                                                onClick={() =>
+                                                  setActivePhotoModal({
+                                                    src,
+                                                    title: `Rooftop Perspective #${i + 1}: ${tagLabel}`,
+                                                    surveyNo: survey.surveyNo,
+                                                  })
+                                                }
+                                                className="group/photo relative rounded-xl overflow-hidden h-36 border-2 border-[#E8E0D6] bg-black/5 cursor-pointer shadow-sm hover:border-[#172747] hover:shadow-md transition-all text-left focus:outline-none focus:ring-2 focus:ring-[#172747]"
+                                              >
+                                                <img
+                                                  src={src}
+                                                  alt={`Rooftop inspection photograph ${i + 1}`}
+                                                  onError={(e) => {
+                                                    e.currentTarget.onerror = null;
+                                                    e.currentTarget.src = '/images/surveys/rooftop-01-rcc-survey.jpg';
+                                                  }}
+                                                  className="w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-300 pointer-events-none"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+
+                                                {/* Top Overlay Badges */}
+                                                <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
+                                                  <span className="bg-black/75 backdrop-blur-xs text-[#FFDDB7] text-[9px] font-mono px-2 py-0.5 rounded font-semibold border border-white/10">
+                                                    Photo #${i + 1}
+                                                  </span>
+                                                  <span className="bg-[#172747]/90 text-white text-[9px] font-mono px-1.5 py-0.5 rounded shadow-xs">
+                                                    Azimuth {survey.roofDirection}
+                                                  </span>
+                                                </div>
+
+                                                {/* Hover Enlarge Callout */}
+                                                <div className="absolute inset-0 bg-[#172747]/60 opacity-0 group-hover/photo:opacity-100 transition-opacity flex items-center justify-center text-white gap-1.5 text-xs font-semibold pointer-events-none">
+                                                  <Eye className="h-4 w-4 text-[#FFDDB7]" />
+                                                  <span>Enlarge Photogrammetry</span>
+                                                </div>
+
+                                                {/* Bottom Technical Stamp */}
+                                                <div className="absolute bottom-2 left-2 right-2 pointer-events-none">
+                                                  <p className="text-white text-[11px] font-semibold truncate leading-tight drop-shadow-sm">
+                                                    {tagLabel}
+                                                  </p>
+                                                  <p className="text-[#FFDDB7]/90 text-[8px] font-mono truncate mt-0.5">
+                                                    GPS 12.9716° N, 77.5946° E • 18m AGL
+                                                  </p>
+                                                </div>
+                                              </button>
+                                            );
+                                          })}
+                                        </div>
+                                      );
+                                    })()}
                                   </div>
                                 </>
                               ) : (
@@ -1093,7 +1148,11 @@ export function SurveysPage() {
               <img
                 src={activePhotoModal.src}
                 alt={activePhotoModal.title}
-                className="max-h-[65vh] w-auto object-contain rounded-lg shadow-md"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/images/surveys/rooftop-01-rcc-survey.jpg';
+                }}
+                className="max-h-[65vh] w-auto object-contain rounded-lg shadow-md border border-white/10"
               />
             </div>
 
