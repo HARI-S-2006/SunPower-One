@@ -24,7 +24,8 @@ import {
   AlertCircle,
   Calendar,
   BadgeCheck,
-  QrCode
+  QrCode,
+  Camera
 } from 'lucide-react'
 
 // ==========================================
@@ -460,6 +461,53 @@ export function PortalInstallationsPage() {
                 <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Insulation Resistance &gt; 1.0 MΩ</span>
                 <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Earthing Pit Reading &lt; 5.0 Ohms</span>
                 <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Anti-Islanding Grid Cut Functional</span>
+              </div>
+            </div>
+
+            {/* Official Installation & Rooftop Commissioning Photographs */}
+            <div className="space-y-2 pt-2 border-t border-[#E8E0D6]">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-[#172747] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                  <Camera className="h-3.5 w-3.5 text-[#172747]" />
+                  Official Rooftop & Inverter Commissioning Photographs
+                </span>
+                <span className="text-[10px] font-mono text-[#827B73] bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E8E0D6]">
+                  Verified IEC 62446 Audit
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="relative rounded-xl overflow-hidden h-44 border border-[#E8E0D6] group shadow-xs">
+                  <img
+                    src="/images/surveys/rooftop-03-pv-array-completed.jpg"
+                    alt="Completed Rooftop PV Array"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute top-2 left-2 bg-[#172747]/90 text-white text-[10px] font-mono px-2 py-0.5 rounded font-semibold">
+                    Commissioned Solar Array • {customerProfile.solarCapacity}
+                  </div>
+                  <div className="absolute bottom-2 left-2 right-2 text-white">
+                    <p className="text-xs font-semibold">Verified Rooftop PV Array & SS304 Clamps</p>
+                    <p className="text-[#FFDDB7] text-[10px] font-mono mt-0.5">IEC 61215 Certified • 25-Yr Performance Bond</p>
+                  </div>
+                </div>
+
+                <div className="relative rounded-xl overflow-hidden h-44 border border-[#E8E0D6] group shadow-xs">
+                  <img
+                    src="/images/surveys/rooftop-02-inclinometer-survey.jpg"
+                    alt="Inverter & Structure Angle Verification"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute top-2 left-2 bg-[#172747]/90 text-white text-[10px] font-mono px-2 py-0.5 rounded font-semibold">
+                    Inclinometer Audit • 14° Tilt South
+                  </div>
+                  <div className="absolute bottom-2 left-2 right-2 text-white">
+                    <p className="text-xs font-semibold">Solar Inverter & Safety Isolation Switch</p>
+                    <p className="text-[#FFDDB7] text-[10px] font-mono mt-0.5">Dual MPPT Sync • Anti-Islanding Pass</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1044,14 +1092,18 @@ export function PortalServicePage() {
   const { serviceTickets, logServiceTicket, customerProfile } = useSolarStore()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [formData, setFormData] = useState({
-    customerName: 'Siddharth Varma',
-    customerPhone: '+91 98860 33412',
-    siteAddress: '77, 8th Main, Koramangala 4th Block, Bengaluru',
-    serialNumber: 'INV-4000-9102',
+    customerName: customerProfile.name,
+    customerPhone: customerProfile.phone,
+    siteAddress: customerProfile.address,
+    serialNumber: 'INV-GW3K-8422',
     faultCode: 'ERR-F04',
     description: 'Inverter tripping on overvoltage alarm during midday peak.',
     priority: 'high' as ServiceTicket['priority'],
   })
+
+  const myTickets = serviceTickets.filter(
+    (t) => t.customerName === customerProfile.name || t.customerPhone === customerProfile.phone || t.id === 'tkt-02'
+  )
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

@@ -977,8 +977,8 @@ const INITIAL_PASSPORTS: DigitalPassport[] = [
       'Cell Type': 'N-Type TOPCon 144 Half-Cells',
       'Dimensions': '2278 x 1134 x 35 mm',
     },
-    customerName: 'Anand Kumar Sharma',
-    customerPhone: '+91 98450 12345',
+    customerName: 'Siddharth Varma',
+    customerPhone: '+91 98860 33412',
     orderId: 'ord-01',
     installationId: 'inst-01',
     dispatchDate: '2026-10-25',
@@ -1076,6 +1076,27 @@ const INITIAL_SERVICE_TICKETS: ServiceTicket[] = [
     repairDetails: 'Warranty active until 2027-04-12. Technician assigned to inspect AC surge arrester & grid frequency relay.',
     customerConfirmationRecorded: false,
     createdAt: '2026-10-31T08:30:00Z',
+  },
+  {
+    id: 'tkt-02',
+    ticketNo: 'SRV-TKT-2026-095',
+    customerName: 'Siddharth Varma',
+    customerPhone: '+91 98860 33412',
+    siteAddress: '77, 8th Main, Koramangala 4th Block, Bengaluru, KA 560034',
+    serialNumber: 'INV-GW3K-8422',
+    productName: 'Growatt 3.3kW Single-Phase Grid-Tied Inverter (MIN 3300TL-X)',
+    faultCode: 'WAR-INSP: Scheduled 6-Month Inverter Firmware & MPPT Healthcheck',
+    faultDescription: 'Preventative MPPT tracking diagnostics and thermal imaging audit. System performing at 98.4% nominal generation.',
+    priority: 'low',
+    status: 'resolved',
+    assignedTechnician: 'Rajesh Kumar',
+    warrantyStatus: 'covered_zero_cost',
+    estimatedCost: 0,
+    finalCost: 0,
+    repairDetails: 'Covered under active 5-year replacement warranty (#WAR-INV-2026-8422). DC isolator verified, firmware upgraded to v3.12.',
+    customerConfirmationRecorded: true,
+    createdAt: '2026-10-28T10:15:00Z',
+    resolvedAt: '2026-10-28T14:30:00Z',
   },
 ]
 
@@ -1204,7 +1225,15 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   const [currentUser, setCurrentUser] = useState<AuthUser>(() => {
     try {
       const saved = localStorage.getItem('sunpower_current_user')
-      if (saved) return JSON.parse(saved)
+      if (saved) {
+        const u = JSON.parse(saved)
+        if (u.profile === 'customer' && (!u.name || u.name.includes('Anand'))) {
+          u.name = 'Siddharth Varma'
+          u.email = 'customer@demo.com'
+          try { localStorage.setItem('sunpower_current_user', JSON.stringify(u)) } catch (e) {}
+        }
+        return u
+      }
     } catch (e) {}
     return {
       profile: 'admin',
@@ -1233,7 +1262,14 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   const [customerProfile, setCustomerProfile] = useState<CustomerProfile>(() => {
     try {
       const saved = localStorage.getItem('sunpower_customer_profile');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const p = JSON.parse(saved);
+        if (!p.name || p.name.includes('Anand')) {
+          try { localStorage.setItem('sunpower_customer_profile', JSON.stringify(DEFAULT_CUSTOMER_PROFILE)); } catch (e) {}
+          return DEFAULT_CUSTOMER_PROFILE;
+        }
+        return { ...DEFAULT_CUSTOMER_PROFILE, ...p };
+      }
     } catch (e) {}
     return DEFAULT_CUSTOMER_PROFILE;
   });
@@ -1928,6 +1964,7 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
 
   const resetToDefaultData = () => {
     localStorage.clear()
+    setCustomerProfile(DEFAULT_CUSTOMER_PROFILE)
     setLeads(INITIAL_LEADS)
     setSurveys(INITIAL_SURVEYS)
     setQuotations(INITIAL_QUOTATIONS)

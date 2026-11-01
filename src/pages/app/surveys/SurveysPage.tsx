@@ -36,6 +36,8 @@ import { useSolarStore, SiteSurvey } from '@/lib/store/solarStore'
 
 type SurveyFilterStatus = 'all' | 'pending_approval' | 'approved' | 'in_progress' | 'scheduled' | 'revisit_required' | 'rejected'
 
+const FALLBACK_PHOTO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%23172747"/><g stroke="%232D3F65" stroke-width="1.5"><line x1="0" y1="100" x2="600" y2="100"/><line x1="0" y1="200" x2="600" y2="200"/><line x1="0" y1="300" x2="600" y2="300"/><line x1="150" y1="0" x2="150" y2="400"/><line x1="300" y1="0" x2="300" y2="400"/><line x1="450" y1="0" x2="450" y2="400"/></g><rect x="60" y="60" width="480" height="280" rx="12" fill="%230F1B30" stroke="%23B68B55" stroke-width="2"/><g fill="%231E3A8A" stroke="%2360A5FA" stroke-width="1"><rect x="90" y="90" width="95" height="100" rx="4"/><rect x="200" y="90" width="95" height="100" rx="4"/><rect x="310" y="90" width="95" height="100" rx="4"/><rect x="420" y="90" width="95" height="100" rx="4"/><rect x="90" y="210" width="95" height="100" rx="4"/><rect x="200" y="210" width="95" height="100" rx="4"/><rect x="310" y="210" width="95" height="100" rx="4"/><rect x="420" y="210" width="95" height="100" rx="4"/></g><text x="300" y="370" fill="%23B68B55" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" letter-spacing="2">SUNPOWER PHOTOGRAMMETRY AUDIT</text></svg>`
+
 export function SurveysPage() {
   const { surveys, approveSurvey, rejectSurvey, revisitSurvey, startInspection } = useSolarStore()
   const navigate = useNavigate()
@@ -749,23 +751,35 @@ export function SurveysPage() {
                                             '/images/surveys/rooftop-04-industrial-tin-shed.jpg',
                                             '/images/surveys/rooftop-02-inclinometer-survey.jpg',
                                             '/images/surveys/rooftop-01-rcc-survey.jpg',
+                                            '/images/surveys/rooftop-rcc-aerial.jpg',
                                           ]
                                         : [
                                             '/images/surveys/rooftop-01-rcc-survey.jpg',
                                             '/images/surveys/rooftop-02-inclinometer-survey.jpg',
                                             '/images/surveys/rooftop-03-pv-array-completed.jpg',
+                                            '/images/surveys/rooftop-rcc-aerial.jpg',
                                           ];
 
-                                      const rawPhotos = survey.photos && survey.photos.length > 0 ? survey.photos : defaultGallery;
+                                      const rawPhotos = (survey.photos && survey.photos.length > 0)
+                                        ? survey.photos
+                                        : defaultGallery;
+                                      
                                       const activePhotos = rawPhotos.map((p, idx) =>
-                                        p.includes('unsplash.com') ? defaultGallery[idx % defaultGallery.length] : p
+                                        (!p || p.includes('unsplash.com') || p.trim() === '')
+                                          ? defaultGallery[idx % defaultGallery.length]
+                                          : p
                                       );
+
+                                      // Ensure at least 3 high-resolution photo perspectives are presented
+                                      while (activePhotos.length < 3) {
+                                        activePhotos.push(defaultGallery[activePhotos.length % defaultGallery.length]);
+                                      }
 
                                       const photoTags = [
                                         'Rooftop Plane (4kW Array Layout)',
                                         'Tilt Inclinometer Reading (14°)',
                                         'PV Array & Inverter Mounting',
-                                        'Horizon Shading Analysis',
+                                        'Horizon Shading & Aerial Layout',
                                       ];
 
                                       return (
@@ -792,7 +806,7 @@ export function SurveysPage() {
                                                   alt={`Rooftop inspection photograph ${i + 1}`}
                                                   onError={(e) => {
                                                     e.currentTarget.onerror = null;
-                                                    e.currentTarget.src = '/images/surveys/rooftop-01-rcc-survey.jpg';
+                                                    e.currentTarget.src = FALLBACK_PHOTO_SVG;
                                                   }}
                                                   className="w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-300 pointer-events-none"
                                                 />
@@ -801,7 +815,7 @@ export function SurveysPage() {
                                                 {/* Top Overlay Badges */}
                                                 <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
                                                   <span className="bg-black/75 backdrop-blur-xs text-[#FFDDB7] text-[9px] font-mono px-2 py-0.5 rounded font-semibold border border-white/10">
-                                                    Photo #${i + 1}
+                                                    Photo #{i + 1}
                                                   </span>
                                                   <span className="bg-[#172747]/90 text-white text-[9px] font-mono px-1.5 py-0.5 rounded shadow-xs">
                                                     Azimuth {survey.roofDirection}
@@ -1150,7 +1164,7 @@ export function SurveysPage() {
                 alt={activePhotoModal.title}
                 onError={(e) => {
                   e.currentTarget.onerror = null;
-                  e.currentTarget.src = '/images/surveys/rooftop-01-rcc-survey.jpg';
+                  e.currentTarget.src = FALLBACK_PHOTO_SVG;
                 }}
                 className="max-h-[65vh] w-auto object-contain rounded-lg shadow-md border border-white/10"
               />
