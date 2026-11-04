@@ -8,12 +8,159 @@ import { calculateBOM, type BOMResult } from '@/lib/bom/calculator'
 import { isSupabaseConfigured, backendMode } from '@/lib/supabase/client'
 
 
-export interface AuthUser {
-  profile: 'admin' | 'employee' | 'customer'
-  role: 'director' | 'sales' | 'survey' | 'warehouse' | 'coordinator' | 'finance' | 'support' | 'customer'
+export interface UserAccount {
+  id: string
   name: string
   email: string
+  password: string
+  phone: string
+  profile: 'admin' | 'employee' | 'customer'
+  role: 'director' | 'sales' | 'survey' | 'warehouse' | 'coordinator' | 'finance' | 'support' | 'technician' | 'customer'
+  title: string
+  department: string
+  organization: string
+  address?: string
+  category?: 'residential' | 'commercial' | 'epc_partner'
+  customerSiteId?: string
+  solarCapacity?: string
+  createdAt: string
+  lastLoginAt?: string
 }
+
+export type AuthUser = UserAccount
+
+export const INITIAL_USER_ACCOUNTS: UserAccount[] = [
+  {
+    id: 'usr-01',
+    name: 'Marcus Vance',
+    email: 'admin@sunpower-solutions.com',
+    password: 'password123',
+    phone: '+91 98450 10001',
+    profile: 'admin',
+    role: 'director',
+    title: 'Executive Director',
+    department: 'Executive Governance & Engineering Strategy',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-01-15T09:00:00Z',
+    lastLoginAt: '2026-11-01T10:00:00Z',
+  },
+  {
+    id: 'usr-02',
+    name: 'Elena Rostova',
+    email: 'sales@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10002',
+    profile: 'employee',
+    role: 'sales',
+    title: 'Lead Sales Executive',
+    department: 'CRM Pipeline & Commercial Origination',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-02-01T10:30:00Z',
+    lastLoginAt: '2026-11-01T09:45:00Z',
+  },
+  {
+    id: 'usr-03',
+    name: 'Mateo Kowalski',
+    email: 'survey@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10003',
+    profile: 'employee',
+    role: 'survey',
+    title: 'Certified Solar PV Field Surveyor',
+    department: 'Engineering Feasibility & Drone Photogrammetry',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-02-10T11:15:00Z',
+    lastLoginAt: '2026-11-01T08:30:00Z',
+  },
+  {
+    id: 'usr-04',
+    name: 'Vikram Singh',
+    email: 'warehouse@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10004',
+    profile: 'employee',
+    role: 'warehouse',
+    title: 'Warehouse & Inventory Manager',
+    department: 'Supply Chain, Hardware QC & Serial Dispatch',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-02-15T09:45:00Z',
+    lastLoginAt: '2026-11-01T09:15:00Z',
+  },
+  {
+    id: 'usr-05',
+    name: "David O'Connor",
+    email: 'coordinator@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10005',
+    profile: 'employee',
+    role: 'coordinator',
+    title: 'Installation & Warranty Coordinator',
+    department: 'Field Operations & Warranty Registry',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-03-01T14:20:00Z',
+    lastLoginAt: '2026-10-31T16:00:00Z',
+  },
+  {
+    id: 'usr-06',
+    name: 'Priya Patel',
+    email: 'finance@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10006',
+    profile: 'employee',
+    role: 'finance',
+    title: 'Commercial Finance Controller',
+    department: 'Treasury, PM Surya Ghar Subsidies & Escrow',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-03-10T08:30:00Z',
+    lastLoginAt: '2026-11-01T09:00:00Z',
+  },
+  {
+    id: 'usr-07',
+    name: 'Aisha Khan',
+    email: 'support@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10007',
+    profile: 'employee',
+    role: 'support',
+    title: 'Customer Service & Support Lead',
+    department: 'Service Desk & RMA Adjudication',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-03-15T12:00:00Z',
+    lastLoginAt: '2026-10-31T17:30:00Z',
+  },
+  {
+    id: 'usr-08',
+    name: 'Mateo Kowalski',
+    email: 'tech@demo.com',
+    password: 'password123',
+    phone: '+91 98450 10008',
+    profile: 'employee',
+    role: 'technician',
+    title: 'Lead Field Commissioning Technician',
+    department: 'Mobile Installation Crew #04',
+    organization: 'SunPower Solutions Enterprise',
+    createdAt: '2026-03-20T07:45:00Z',
+    lastLoginAt: '2026-11-01T07:00:00Z',
+  },
+  {
+    id: 'usr-09',
+    name: 'Siddharth Varma',
+    email: 'customer@demo.com',
+    password: 'password123',
+    phone: '+91 98860 33412',
+    profile: 'customer',
+    role: 'customer',
+    title: 'Rooftop Solar PV Microgrid Consumer',
+    department: 'Residential Consumer Portal',
+    organization: 'Varma Residence',
+    address: '77, 8th Main, Koramangala 4th Block, Bengaluru, KA 560034',
+    category: 'residential',
+    customerSiteId: 'AZ-8422',
+    solarCapacity: '4.3 kW On-Grid',
+    createdAt: '2026-04-10T10:00:00Z',
+    lastLoginAt: '2026-11-01T10:30:00Z',
+  },
+]
 
 export interface DigitalPassport {
   id: string
@@ -1177,6 +1324,10 @@ interface SolarStoreContextType {
     isBackendConnected: boolean
   currentUser: AuthUser
   setAuthUser: (user: Partial<AuthUser>) => void
+  userAccounts: UserAccount[]
+  authenticateUser: (email: string, password?: string) => { success: boolean; user?: UserAccount; error?: string }
+  registerUser: (account: Omit<UserAccount, 'id' | 'createdAt'>) => { success: boolean; user?: UserAccount; error?: string }
+  updateUserAccount: (id: string, updates: Partial<UserAccount>) => { success: boolean; user?: UserAccount }
   customerProfile: CustomerProfile
   updateCustomerProfile: (updates: Partial<CustomerProfile>) => void
   passports: DigitalPassport[]
@@ -1221,6 +1372,172 @@ interface SolarStoreContextType {
 const SolarStoreContext = createContext<SolarStoreContextType | null>(null)
 
 export function SolarStoreProvider({ children }: { children: React.ReactNode }) {
+  const [userAccounts, setUserAccounts] = useState<UserAccount[]>(() => {
+    try {
+      const saved = localStorage.getItem('sunpower_user_accounts')
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed
+      }
+    } catch (e) {}
+    return INITIAL_USER_ACCOUNTS
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('sunpower_user_accounts', JSON.stringify(userAccounts))
+    } catch (e) {}
+  }, [userAccounts])
+
+  const authenticateUser: SolarStoreContextType['authenticateUser'] = (email, password) => {
+    const cleanEmail = email.trim().toLowerCase()
+    const user = userAccounts.find(
+      (u) =>
+        u.email.toLowerCase() === cleanEmail ||
+        (cleanEmail.includes('customer') && u.role === 'customer') ||
+        (cleanEmail.includes('admin') && u.profile === 'admin') ||
+        (cleanEmail.includes('sales') && u.role === 'sales')
+    )
+
+    if (!user) {
+      return {
+        success: false,
+        error: 'Account not found. Please verify your email or register a new account.',
+      }
+    }
+
+    const isDemoBypass =
+      !password ||
+      password === '••••••••••••••••' ||
+      password === 'password123' ||
+      password === `${user.role}123` ||
+      password === `${user.profile}123` ||
+      password === user.password
+
+    if (!isDemoBypass) {
+      return {
+        success: false,
+        error: 'Invalid password. Please check your credentials or reset your password.',
+      }
+    }
+
+    const updatedUser: UserAccount = {
+      ...user,
+      lastLoginAt: new Date().toISOString(),
+    }
+
+    setUserAccounts((prev) => prev.map((u) => (u.id === user.id ? updatedUser : u)))
+    setCurrentUser(updatedUser)
+    try {
+      localStorage.setItem('sunpower_current_user', JSON.stringify(updatedUser))
+    } catch (e) {}
+
+    if (updatedUser.profile === 'customer') {
+      updateCustomerProfile({
+        name: updatedUser.name,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        address: updatedUser.address || customerProfile.address,
+      })
+    }
+
+    return { success: true, user: updatedUser }
+  }
+
+  const registerUser: SolarStoreContextType['registerUser'] = (accountData) => {
+    const cleanEmail = accountData.email.trim().toLowerCase()
+    const existing = userAccounts.find((u) => u.email.toLowerCase() === cleanEmail)
+
+    if (existing) {
+      const updated: UserAccount = {
+        ...existing,
+        ...accountData,
+        lastLoginAt: new Date().toISOString(),
+      }
+      setUserAccounts((prev) => prev.map((u) => (u.id === existing.id ? updated : u)))
+      setCurrentUser(updated)
+      try {
+        localStorage.setItem('sunpower_current_user', JSON.stringify(updated))
+      } catch (e) {}
+      return { success: true, user: updated }
+    }
+
+    const newId = `usr-${Date.now()}`
+    const newUser: UserAccount = {
+      ...accountData,
+      id: newId,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString(),
+    }
+
+    setUserAccounts((prev) => [newUser, ...prev])
+    setCurrentUser(newUser)
+    try {
+      localStorage.setItem('sunpower_current_user', JSON.stringify(newUser))
+    } catch (e) {}
+
+    if (newUser.profile === 'customer') {
+      const siteId = `AZ-${Math.floor(1000 + Math.random() * 9000)}`
+      updateCustomerProfile({
+        name: newUser.name,
+        email: newUser.email,
+        phone: newUser.phone,
+        address: newUser.address || 'Bengaluru Installation Site',
+        siteId,
+      })
+
+      createLead({
+        customerName: newUser.name,
+        phone: newUser.phone,
+        email: newUser.email,
+        address: newUser.address || 'Bengaluru Installation Site',
+        city: 'Bengaluru',
+        capacityKw: 3.5,
+        systemType: 'on-grid',
+        monthlyBill: 4500,
+        roofAreaSqFt: 550,
+        assignedSalesExec: 'Elena Rostova',
+        notes: 'Self-registered through customer portal.',
+      })
+    }
+
+    return { success: true, user: newUser }
+  }
+
+  const updateUserAccount: SolarStoreContextType['updateUserAccount'] = (id, updates) => {
+    let updated: UserAccount | undefined
+    setUserAccounts((prev) =>
+      prev.map((u) => {
+        if (u.id === id || u.email.toLowerCase() === id.toLowerCase()) {
+          updated = { ...u, ...updates }
+          return updated
+        }
+        return u
+      })
+    )
+
+    if (updated) {
+      if (
+        currentUser?.id === updated.id ||
+        currentUser?.email.toLowerCase() === updated.email.toLowerCase()
+      ) {
+        setCurrentUser(updated)
+        try {
+          localStorage.setItem('sunpower_current_user', JSON.stringify(updated))
+        } catch (e) {}
+      }
+      if (updated.profile === 'customer') {
+        updateCustomerProfile({
+          name: updated.name,
+          email: updated.email,
+          phone: updated.phone,
+          address: updated.address,
+        })
+      }
+    }
+
+    return { success: Boolean(updated), user: updated }
+  }
 
   const [currentUser, setCurrentUser] = useState<AuthUser>(() => {
     try {
@@ -1285,24 +1602,48 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   };
 
   const setAuthUser: SolarStoreContextType['setAuthUser'] = (user) => {
-    setCurrentUser((prev) => {
-      const updated = { ...prev, ...user };
-      try {
-        localStorage.setItem('sunpower_current_user', JSON.stringify(updated));
-      } catch (e) {}
-      if (updated.profile === 'customer' && updated.name) {
-        setCustomerProfile((cp: CustomerProfile) => {
-          const next = { ...cp, name: updated.name };
-          try {
-            localStorage.setItem('sunpower_customer_profile', JSON.stringify(next));
-          } catch (e) {}
-          return next;
-        });
-      }
-      return updated;
-    });
-  };
+    const matchingAccount = userAccounts.find(
+      (a) =>
+        (user.email && a.email.toLowerCase() === user.email.toLowerCase()) ||
+        (user.role && a.role === user.role)
+    )
 
+    const fullUser: UserAccount = matchingAccount
+      ? { ...matchingAccount, ...user }
+      : {
+          id: `usr-${Date.now()}`,
+          name: user.name || 'Marcus Vance',
+          email: user.email || 'admin@sunpower-solutions.com',
+          password: 'password123',
+          phone: '+91 98450 10001',
+          profile: user.profile || 'admin',
+          role: user.role || 'director',
+          title:
+            user.title ||
+            (user.profile === 'admin' ? 'Executive Director' : 'Solar Operations Lead'),
+          department: user.department || 'Executive Operations',
+          organization: 'SunPower Solutions Enterprise',
+          createdAt: new Date().toISOString(),
+          lastLoginAt: new Date().toISOString(),
+          ...user,
+        }
+
+    setCurrentUser(fullUser)
+    try {
+      localStorage.setItem('sunpower_current_user', JSON.stringify(fullUser))
+    } catch (e) {}
+
+    if (fullUser.profile === 'customer' && fullUser.name) {
+      updateCustomerProfile({
+        name: fullUser.name,
+        email: fullUser.email,
+        phone: fullUser.phone,
+        address: fullUser.address,
+      })
+    }
+
+
+  }
   const registerPassport: SolarStoreContextType['registerPassport'] = (data) => {
     // Prevent duplicate serial registration
     const existing = passports.find(p => p.serialNumber.toUpperCase() === data.serialNumber.toUpperCase())
@@ -1964,6 +2305,8 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
 
   const resetToDefaultData = () => {
     localStorage.clear()
+    setUserAccounts(INITIAL_USER_ACCOUNTS)
+    setCurrentUser(INITIAL_USER_ACCOUNTS[0])
     setCustomerProfile(DEFAULT_CUSTOMER_PROFILE)
     setLeads(INITIAL_LEADS)
     setSurveys(INITIAL_SURVEYS)
@@ -1984,6 +2327,10 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
         surveys,
         currentUser,
         setAuthUser,
+        userAccounts,
+        authenticateUser,
+        registerUser,
+        updateUserAccount,
         customerProfile,
         updateCustomerProfile,
         passports,

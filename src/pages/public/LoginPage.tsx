@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eye, EyeOff, ArrowRight, Shield, RefreshCw, Search } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight, Shield, RefreshCw, Search, Key } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useSolarStore } from '@/lib/store/solarStore'
 
@@ -50,7 +50,7 @@ const roleRedirectMap: Record<string, { email: string; name: string; url: string
 
 export function LoginPage() {
   const navigate = useNavigate()
-  const { setAuthUser } = useSolarStore()
+  const { setAuthUser, authenticateUser, userAccounts } = useSolarStore()
   const [selectedProfile, setSelectedProfile] = useState<'admin' | 'employee' | 'customer'>('admin')
   const [selectedCred, setSelectedCred] = useState<DemoCredential>(demoCredentials[0])
   const [selectedRole, setSelectedRole] = useState('sales')
@@ -88,11 +88,32 @@ export function LoginPage() {
     }
   }
 
-    const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setAuthState('verifying')
-    setStatusMessage('Authentication successful! Launching workspace...')
 
+    // 1. Authenticate against database user accounts
+    const authResult = authenticateUser(email, password)
+    if (authResult.success && authResult.user) {
+      const u = authResult.user
+      let destination = '/app/dashboard'
+      if (u.profile === 'customer' || u.role === 'customer') {
+        destination = '/portal/dashboard'
+      } else if (u.role === 'technician') {
+        destination = '/technician/jobs'
+      } else if (roleRedirectMap[u.role]?.url) {
+        destination = roleRedirectMap[u.role].url
+      }
+
+      setStatusMessage(`Authenticated as ${u.name} (${u.title}). Launching workspace...`)
+      setTimeout(() => {
+        setAuthState('success')
+        navigate(destination)
+      }, 150)
+      return
+    }
+
+    // 2. Fallback for custom or simulation credentials
     let destination = '/app/dashboard'
     let activeRole: any = 'director'
     if (selectedProfile === 'customer' || email.toLowerCase().includes('customer')) {
@@ -114,6 +135,7 @@ export function LoginPage() {
       email: info.email || email,
     })
 
+    setStatusMessage('Authentication successful! Launching workspace...')
     setTimeout(() => {
       setAuthState('success')
       navigate(destination)
@@ -501,6 +523,110 @@ export function LoginPage() {
                     <span className="font-medium">{statusMessage}</span>
                   </div>
                 )}
+
+{/* Database Verified Credentials Fast-Access Strip */}
+                <div className="mt-6 pt-4 border-t border-[#E8E0D6]">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold text-[#172747] uppercase tracking-wider flex items-center gap-1.5">
+                      <Key className="h-3 w-3 text-[#B18751]" />
+                      Database Test Accounts (Auto-fill)
+                    </span>
+                    <span className="text-[10px] text-[#827B73] font-semibold">
+                      Password: password123
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile('admin')
+                        setEmail('admin@sunpower-solutions.com')
+                        setPassword('password123')
+                      }}
+                      className="p-2 rounded-lg bg-white border border-[#E8E0D6] hover:border-[#172747] text-left transition-colors cursor-pointer"
+                    >
+                      <div className="font-bold text-[#172747] text-[11px] truncate">Marcus Vance</div>
+                      <div className="text-[10px] text-[#B18751] font-semibold">Admin / Director</div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile('employee')
+                        setSelectedRole('sales')
+                        setEmail('sales@demo.com')
+                        setPassword('password123')
+                      }}
+                      className="p-2 rounded-lg bg-white border border-[#E8E0D6] hover:border-[#172747] text-left transition-colors cursor-pointer"
+                    >
+                      <div className="font-bold text-[#172747] text-[11px] truncate">Elena Rostova</div>
+                      <div className="text-[10px] text-[#B18751] font-semibold">Lead Sales Exec</div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile('customer')
+                        setEmail('customer@demo.com')
+                        setPassword('password123')
+                      }}
+                      className="p-2 rounded-lg bg-white border border-[#E8E0D6] hover:border-[#172747] text-left transition-colors cursor-pointer"
+                    >
+                      <div className="font-bold text-[#172747] text-[11px] truncate">Siddharth Varma</div>
+                      <div className="text-[10px] text-[#B18751] font-semibold">Solar Customer</div>
+                    </button>
+                  </div>
+                </div>
+
+{/* Database Verified Credentials Fast-Access Strip */}
+                <div className="mt-6 pt-4 border-t border-[#E8E0D6]">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold text-[#172747] uppercase tracking-wider flex items-center gap-1.5">
+                      <Key className="h-3 w-3 text-[#B18751]" />
+                      Database Test Accounts (Auto-fill)
+                    </span>
+                    <span className="text-[10px] text-[#827B73] font-semibold">
+                      Password: password123
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile('admin')
+                        setEmail('admin@sunpower-solutions.com')
+                        setPassword('password123')
+                      }}
+                      className="p-2 rounded-lg bg-white border border-[#E8E0D6] hover:border-[#172747] text-left transition-colors cursor-pointer"
+                    >
+                      <div className="font-bold text-[#172747] text-[11px] truncate">Marcus Vance</div>
+                      <div className="text-[10px] text-[#B18751] font-semibold">Admin / Director</div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile('employee')
+                        setSelectedRole('sales')
+                        setEmail('sales@demo.com')
+                        setPassword('password123')
+                      }}
+                      className="p-2 rounded-lg bg-white border border-[#E8E0D6] hover:border-[#172747] text-left transition-colors cursor-pointer"
+                    >
+                      <div className="font-bold text-[#172747] text-[11px] truncate">Elena Rostova</div>
+                      <div className="text-[10px] text-[#B18751] font-semibold">Lead Sales Exec</div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile('customer')
+                        setEmail('customer@demo.com')
+                        setPassword('password123')
+                      }}
+                      className="p-2 rounded-lg bg-white border border-[#E8E0D6] hover:border-[#172747] text-left transition-colors cursor-pointer"
+                    >
+                      <div className="font-bold text-[#172747] text-[11px] truncate">Siddharth Varma</div>
+                      <div className="text-[10px] text-[#B18751] font-semibold">Solar Customer</div>
+                    </button>
+                  </div>
+                </div>
 
                 {/* SSO Divider */}
                 <div className="relative my-6 text-center">

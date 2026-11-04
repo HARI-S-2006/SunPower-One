@@ -404,16 +404,20 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* User Card & Active Role Footprint */}
         <div className="p-3 border-t border-[#493027] bg-[#261914]">
-          <div className="flex items-center gap-2.5 rounded-lg bg-[#302019] p-2 border border-[#493027]">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#172747] text-white font-bold text-xs border border-[#FFDDB7]/30">
-              MV
+          <Link
+            to="/app/settings"
+            className="flex items-center gap-2.5 rounded-lg bg-[#302019] p-2 border border-[#493027] hover:border-[#B18751]/50 hover:bg-[#38251D] transition-colors group"
+            title="View User Account & Security Settings"
+          >
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#172747] text-white font-bold text-xs border border-[#FFDDB7]/30 group-hover:scale-105 transition-transform">
+              {initials}
             </div>
             <div className="min-w-0 flex-1 leading-tight">
-              <p className="truncate text-xs font-semibold text-white">Marcus Vance</p>
-              <p className="truncate text-[10px] text-[#E5BEB1]">Executive Director</p>
+              <p className="truncate text-xs font-semibold text-white group-hover:text-[#FFDDB7] transition-colors">{currentName}</p>
+              <p className="truncate text-[10px] text-[#E5BEB1]">{currentTitle}</p>
             </div>
-            <span className="h-2 w-2 rounded-full bg-[#4ADE80]" title="Session Verified" />
-          </div>
+            <span className="h-2 w-2 rounded-full bg-[#4ADE80]" title="Session Verified & Online" />
+          </Link>
         </div>
       </aside>
 

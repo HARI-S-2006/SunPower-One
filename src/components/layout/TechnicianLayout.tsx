@@ -12,6 +12,7 @@ import {
   PhoneCall,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useSolarStore } from '@/lib/store/solarStore'
 
 const techNavigation = [
   { name: 'Field Jobs', href: '/technician', icon: ListTodo, badge: '3 Assigned' },
@@ -22,6 +23,7 @@ const techNavigation = [
 export function TechnicianLayout() {
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { currentUser } = useSolarStore()
 
   return (
     <div className="min-h-screen bg-[#F7F3EC] flex flex-col lg:flex-row">
@@ -76,7 +78,9 @@ export function TechnicianLayout() {
         <div className="p-3 bg-[#38251D] border-b border-[#493027] flex items-center justify-between text-xs">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-[#4ADE80] animate-pulse" />
-            <span className="font-semibold text-white">Mateo Kowalski</span>
+            <span className="font-semibold text-white">
+              {currentUser?.role === 'technician' ? currentUser.name : 'Mateo Kowalski'}
+            </span>
           </div>
           <span className="text-[10px] font-mono uppercase bg-[#172747] text-[#FFDDB7] px-1.5 py-0.5 rounded">
             Crew Lead #04

@@ -33,10 +33,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { StatusChip } from '@/components/ui/StatusChip'
 import { useSolarStore, SiteSurvey } from '@/lib/store/solarStore'
+import { DEFAULT_SURVEY_PHOTOS, FALLBACK_PHOTO_SVG } from '@/lib/assets/photogrammetrySvgs'
 
 type SurveyFilterStatus = 'all' | 'pending_approval' | 'approved' | 'in_progress' | 'scheduled' | 'revisit_required' | 'rejected'
-
-const FALLBACK_PHOTO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%23172747"/><g stroke="%232D3F65" stroke-width="1.5"><line x1="0" y1="100" x2="600" y2="100"/><line x1="0" y1="200" x2="600" y2="200"/><line x1="0" y1="300" x2="600" y2="300"/><line x1="150" y1="0" x2="150" y2="400"/><line x1="300" y1="0" x2="300" y2="400"/><line x1="450" y1="0" x2="450" y2="400"/></g><rect x="60" y="60" width="480" height="280" rx="12" fill="%230F1B30" stroke="%23B68B55" stroke-width="2"/><g fill="%231E3A8A" stroke="%2360A5FA" stroke-width="1"><rect x="90" y="90" width="95" height="100" rx="4"/><rect x="200" y="90" width="95" height="100" rx="4"/><rect x="310" y="90" width="95" height="100" rx="4"/><rect x="420" y="90" width="95" height="100" rx="4"/><rect x="90" y="210" width="95" height="100" rx="4"/><rect x="200" y="210" width="95" height="100" rx="4"/><rect x="310" y="210" width="95" height="100" rx="4"/><rect x="420" y="210" width="95" height="100" rx="4"/></g><text x="300" y="370" fill="%23B68B55" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" letter-spacing="2">SUNPOWER PHOTOGRAMMETRY AUDIT</text></svg>`
 
 export function SurveysPage() {
   const { surveys, approveSurvey, rejectSurvey, revisitSurvey, startInspection } = useSolarStore()
@@ -746,19 +745,7 @@ export function SurveysPage() {
                                     </div>
 
                                     {(() => {
-                                      const defaultGallery = (survey.id === 'srv-02' || survey.id === 'srv-06' || survey.id === 'srv-07')
-                                        ? [
-                                            '/images/surveys/rooftop-04-industrial-tin-shed.jpg',
-                                            '/images/surveys/rooftop-02-inclinometer-survey.jpg',
-                                            '/images/surveys/rooftop-01-rcc-survey.jpg',
-                                            '/images/surveys/rooftop-rcc-aerial.jpg',
-                                          ]
-                                        : [
-                                            '/images/surveys/rooftop-01-rcc-survey.jpg',
-                                            '/images/surveys/rooftop-02-inclinometer-survey.jpg',
-                                            '/images/surveys/rooftop-03-pv-array-completed.jpg',
-                                            '/images/surveys/rooftop-rcc-aerial.jpg',
-                                          ];
+                                      const defaultGallery = DEFAULT_SURVEY_PHOTOS;
 
                                       const rawPhotos = (survey.photos && survey.photos.length > 0)
                                         ? survey.photos
@@ -806,7 +793,7 @@ export function SurveysPage() {
                                                   alt={`Rooftop inspection photograph ${i + 1}`}
                                                   onError={(e) => {
                                                     e.currentTarget.onerror = null;
-                                                    e.currentTarget.src = FALLBACK_PHOTO_SVG;
+                                                    e.currentTarget.src = DEFAULT_SURVEY_PHOTOS[i % DEFAULT_SURVEY_PHOTOS.length];
                                                   }}
                                                   className="w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-300 pointer-events-none"
                                                 />

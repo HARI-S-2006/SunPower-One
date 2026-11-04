@@ -7,6 +7,7 @@ import {
   ChevronDown,
   LogOut,
   Settings,
+  User,
   Sparkles,
   ShieldCheck,
   CheckCircle2,
@@ -274,9 +275,17 @@ export function Header({ onMenuClick }: AppHeaderProps) {
 
           {userMenuOpen && (
             <div className="absolute right-0 mt-2 w-56 rounded-xl border border-[#E8E0D6] bg-white p-2 shadow-warm-lg z-50 animate-fade-in">
-              <div className="p-2 border-b border-[#E8E0D6]">
-                <p className="text-xs font-bold text-[#292522]">SunPower Solutions</p>
-                <p className="text-[11px] text-[#827B73]">Enterprise License #C46-1049281</p>
+              <div className="p-2.5 border-b border-[#E8E0D6] bg-[#FAF7F2] rounded-t-xl">
+                <p className="text-xs font-bold text-[#172747] truncate">{currentName}</p>
+                <p className="text-[11px] text-[#827B73] truncate">{currentUser?.email || 'admin@sunpower-solutions.com'}</p>
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className="text-[9px] font-mono uppercase bg-[#172747] text-[#FFDDB7] px-1.5 py-0.5 rounded font-semibold">
+                    {currentTitle}
+                  </span>
+                  <span className="text-[9px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-medium border border-emerald-200">
+                    Active Session
+                  </span>
+                </div>
               </div>
 
               <div className="py-1">
@@ -285,8 +294,16 @@ export function Header({ onMenuClick }: AppHeaderProps) {
                   onClick={() => setUserMenuOpen(false)}
                   className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#292522] hover:bg-[#F7F3EC] rounded-lg transition-colors"
                 >
+                  <User className="h-4 w-4 text-[#B18751]" />
+                  My Account Profile & Credentials
+                </Link>
+                <Link
+                  to="/app/settings"
+                  onClick={() => setUserMenuOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#292522] hover:bg-[#F7F3EC] rounded-lg transition-colors"
+                >
                   <Settings className="h-4 w-4 text-[#827B73]" />
-                  Platform Settings
+                  Platform & Policy Parameters
                 </Link>
                 <Link
                   to="/technician"

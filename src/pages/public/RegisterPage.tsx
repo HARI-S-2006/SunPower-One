@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, ArrowRight, Shield, RefreshCw, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useSolarStore } from '@/lib/store/solarStore'
 
 type AccountCategory = 'residential' | 'commercial' | 'epc_partner'
 type AuthMode = 'register' | 'login'
@@ -79,6 +80,7 @@ const roleRedirectMap: Record<string, { email: string; name: string; url: string
 
 export function RegisterPage() {
   const navigate = useNavigate()
+  const { registerUser, authenticateUser, setAuthUser } = useSolarStore()
   const [authMode, setAuthMode] = useState<AuthMode>('register')
 
   // Register state
@@ -154,6 +156,21 @@ export function RegisterPage() {
     setRegisterState('submitting')
     setStatusMessage('Provisioning secure account credentials and configuring solar workspace...')
 
+    // Register real user into the system database
+    registerUser({
+      name: fullName,
+      email: regEmail,
+      password: regPassword,
+      phone: phone,
+      profile: selectedCategory === 'residential' ? 'customer' : (selectedCategory === 'commercial' ? 'admin' : 'employee'),
+      role: selectedCategory === 'residential' ? 'customer' : (selectedCategory === 'commercial' ? 'director' : 'sales'),
+      title: selectedCategory === 'residential' ? 'Residential Solar Customer' : (selectedCategory === 'commercial' ? 'Commercial PV Partner' : 'Solar EPC Partner'),
+      department: selectedCategory === 'residential' ? 'Residential Rooftop Microgrid' : 'Commercial Solar Operations',
+      organization: companyOrProperty || 'Independent Microgrid Asset',
+      address: installationAddress,
+      category: selectedCategory,
+    })
+
     const selectedOption = accountCategories.find((c) => c.id === selectedCategory)
     const targetUrl = selectedOption?.defaultRedirect || '/portal/dashboard'
 
@@ -162,15 +179,34 @@ export function RegisterPage() {
       setStatusMessage('Registration complete! Launching your personalized solar control center...')
       setTimeout(() => {
         navigate(targetUrl)
-      }, 1200)
-    }, 1000)
+      }, 500)
+    }, 500)
   }
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
     setLoginState('verifying')
-    setStatusMessage('Authentication successful! Launching workspace...')
+
+    // Authenticate against database accounts
+    const authRes = authenticateUser(loginEmail, loginPassword)
+    if (authRes.success && authRes.user) {
+      const u = authRes.user
+      let destination = '/app/dashboard'
+      if (u.profile === 'customer' || u.role === 'customer') {
+        destination = '/portal/dashboard'
+      } else if (u.role === 'technician') {
+        destination = '/technician/jobs'
+      } else if (roleRedirectMap[u.role]?.url) {
+        destination = roleRedirectMap[u.role].url
+      }
+      setStatusMessage(`Authenticated as ${u.name}. Launching workspace...`)
+      setTimeout(() => {
+        setLoginState('success')
+        navigate(destination)
+      }, 150)
+      return
+    }
 
     let destination = '/app/dashboard'
     if (selectedProfile === 'customer' || loginEmail.toLowerCase().includes('customer')) {
@@ -181,6 +217,14 @@ export function RegisterPage() {
       destination = roleRedirectMap[selectedRole]?.url || '/app/dashboard'
     }
 
+    setAuthUser({
+      profile: selectedProfile,
+      role: selectedProfile === 'customer' ? 'customer' : (selectedProfile === 'admin' ? 'director' : selectedRole as any),
+      name: roleRedirectMap[selectedRole]?.name || 'SunPower User',
+      email: loginEmail,
+    })
+
+    setStatusMessage('Authentication successful! Launching workspace...')
     setTimeout(() => {
       setLoginState('success')
       navigate(destination)
