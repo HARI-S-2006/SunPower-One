@@ -737,7 +737,7 @@ export function SurveysPage() {
                                     <div className="flex items-center justify-between">
                                       <span className="font-bold text-[#172747] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
                                         <Camera className="h-3.5 w-3.5 text-[#172747]" />
-                                        Rooftop Inspection Photographs ({survey.photos && survey.photos.length > 0 ? survey.photos.length : 3} Captured)
+                                        Rooftop Inspection Photographs ({survey.photos && survey.photos.length >= 3 ? survey.photos.length : 3} Captured)
                                       </span>
                                       <span className="text-[10px] font-mono text-[#827B73] bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E8E0D6]">
                                         Drone Photogrammetry • Azimuth {survey.roofDirection}

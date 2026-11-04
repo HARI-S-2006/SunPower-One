@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSolarStore, type Quotation, type ServiceTicket, type WarrantyRecord } from '@/lib/store/solarStore'
 import { MetricCard } from '@/components/ui/MetricCard'
+import { DEFAULT_SURVEY_PHOTOS, FALLBACK_PHOTO_SVG } from '@/lib/assets/photogrammetrySvgs'
 import {
   Sun,
   Zap,
@@ -481,6 +482,10 @@ export function PortalInstallationsPage() {
                   <img
                     src="/images/surveys/rooftop-03-pv-array-completed.jpg"
                     alt="Completed Rooftop PV Array"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = DEFAULT_SURVEY_PHOTOS[2];
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
@@ -497,6 +502,10 @@ export function PortalInstallationsPage() {
                   <img
                     src="/images/surveys/rooftop-02-inclinometer-survey.jpg"
                     alt="Inverter & Structure Angle Verification"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = DEFAULT_SURVEY_PHOTOS[1];
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
