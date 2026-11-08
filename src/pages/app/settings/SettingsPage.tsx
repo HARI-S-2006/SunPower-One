@@ -239,12 +239,14 @@ export function SettingsPage() {
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs font-semibold text-[#827B73]">Quick Account Switcher:</span>
                 <select
+                  id="settings-quick-switch-select"
                   value={currentUser?.email || 'admin@sunpower-solutions.com'}
                   onChange={(e) => {
                     const match = userAccounts.find(a => a.email.toLowerCase() === e.target.value.toLowerCase())
                     if (match) handleQuickSwitchAccount(match)
                   }}
                   className="rounded-xl border border-[#E8E0D6] bg-[#F7F3EC] px-3 py-1.5 text-xs font-bold text-[#172747] focus:border-[#172747] focus:outline-none cursor-pointer"
+                  aria-label="Quick Account Switcher"
                 >
                   {userAccounts.map((u) => (
                     <option key={u.id} value={u.email}>
@@ -252,6 +254,33 @@ export function SettingsPage() {
                     </option>
                   ))}
                 </select>
+              </div>
+            </div>
+
+            {/* 1-Click Role Switcher Pill Buttons */}
+            <div className="pt-3 border-t border-[#E8E0D6]">
+              <span className="text-[10px] font-bold text-[#827B73] uppercase tracking-wider block mb-2">
+                1-Click Role Switcher (Instant Impersonation):
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {userAccounts.map((account) => {
+                  const isCurrent = currentUser?.email.toLowerCase() === account.email.toLowerCase()
+                  return (
+                    <button
+                      key={account.id}
+                      type="button"
+                      onClick={() => handleQuickSwitchAccount(account)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border flex items-center gap-1.5 cursor-pointer ${
+                        isCurrent
+                          ? 'bg-[#172747] text-white border-[#172747] shadow-sm'
+                          : 'bg-[#F7F3EC] text-[#292522] border-[#E8E0D6] hover:bg-white hover:border-[#B18751]'
+                      }`}
+                    >
+                      <span>{account.name}</span>
+                      <span className="text-[10px] opacity-75 font-mono">({account.role})</span>
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
@@ -453,8 +482,9 @@ export function SettingsPage() {
                               type="button"
                               onClick={() => handleQuickSwitchAccount(account)}
                               className="inline-flex items-center gap-1 rounded-lg border border-[#E8E0D6] bg-white px-2.5 py-1 text-xs font-semibold text-[#172747] hover:bg-[#172747] hover:text-white transition-all shadow-2xs"
+                              aria-label={`Switch account to ${account.name}`}
                             >
-                              <span>Switch To</span>
+                              <span>Switch To {account.name}</span>
                               <ArrowRight className="h-3 w-3" />
                             </button>
                           )}

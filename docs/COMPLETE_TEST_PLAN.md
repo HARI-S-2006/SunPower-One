@@ -27,38 +27,32 @@ SunPower One maintains a zero-defect automated testing policy. The test harness 
 
 ## 2. Test Suite Distribution & Verification Results
 
-### Phase 12 Regression Suites (12 Core Verification Suites)
+### Canonical Test Specification Inventory (21 Test Files • 121 Tests)
 
-| Suite Name | File Location | Tests | Pass Rate | Key Capabilities Verified |
-|---|---|:---:|:---:|---|
-| **1. Authentication & RBAC Suite** | `tests/e2e/auth.spec.ts` | 5 | **100% (5/5)** | Director, Customer, and 6 Employee role authentications, invalid credential rejection, session persistence, and sign-out. |
-| **2. Customer Journey Suite** | `tests/e2e/customer-journey.spec.ts` | 3 | **100% (3/3)** | Public solar calculator ROI estimates, enquiry form submission with CRM lead generation, and customer portal navigation. |
-| **3. Admin Operations Suite** | `tests/e2e/admin-workflow.spec.ts` | 3 | **100% (3/3)** | Executive SCADA telemetry, financial summaries without NaN errors, interactive quick links, and 1-click role switcher. |
-| **4. Employee Workflows Suite** | `tests/e2e/employee-workflow.spec.ts` | 6 | **100% (6/6)** | Independent end-to-end verification for all 6 employee roles: Sales, Survey, Warehouse, Coordinator, Finance, Support. |
-| **5. Sales & Quotations Suite** | `tests/e2e/sales-and-quotation.spec.ts` | 4 | **100% (4/4)** | CRM lead assignment, survey approval gate enforcement, PV array configurator, and dynamic BOM engine with gross margin analysis. |
-| **6. Payment & Escrow Suite** | `tests/e2e/payment-workflow.spec.ts` | 3 | **100% (3/3)** | Customer milestone escrow schedule (10/40/40/10 & 30/50/20), payment execution, and ERP payment reconciliation ledger. |
-| **7. Inventory & QR Dispatch Suite** | `tests/e2e/inventory-and-qr.spec.ts` | 4 | **100% (4/4)** | Warehouse stock levels, low-stock warnings, serial number registry with QR tokens, dispatch staging, and audited stock ledger. |
-| **8. Installation & Warranty Suite** | `tests/e2e/installation-and-warranty.spec.ts` | 4 | **100% (4/4)** | Installation project milestones, certified crew scheduling, 10-point commissioning checklist, and 25-year warranty activation. |
-| **9. Service & Maintenance Suite** | `tests/e2e/service-and-maintenance.spec.ts` | 3 | **100% (3/3)** | Customer RMA ticket filing, zero-cost (₹0) covered warranty repairs, and scheduled preventive maintenance visits. |
-| **10. Financial Control Suite** | `tests/e2e/finance.spec.ts` | 5 | **100% (5/5)** | GST tax invoices, project job expenses, technician milestone disbursements, PM Surya Ghar subsidy claims, and unit profitability. |
-| **11. Security & RBAC Suite** | `tests/e2e/security-and-rbac.spec.ts` | 4 | **100% (4/4)** | Public ERP route protection, cross-role horizontal isolation, SQL/XSS input sanitization, and session tampering resistance. |
-| **12. Responsive & A11y Suite** | `tests/e2e/responsive-and-accessibility.spec.ts` | 5 | **100% (5/5)** | Mobile (375x667), Tablet (768x1024), Desktop (1440x900) responsive layouts, form label association, and keyboard tab navigation. |
-
----
-
-### End-to-End Enterprise Scenario & Crawler Suites (9 Verification Suites)
-
-| Suite Name | File Location | Tests | Pass Rate | Key Capabilities Verified |
-|---|---|:---:|:---:|---|
-| **13. Competition Scenarios** | `tests/e2e/competition-scenarios.spec.ts` | 8 | **100% (8/8)** | Formal competition benchmark: Rooftop Inquiry, Kit Sizing BOM, Dispatch & Serials, Installation Completion, RMA, Escrow, PM Surya Ghar, Net-Metering. |
-| **14. Multi-Pass Autonomous Crawler** | `tests/e2e/all-pages-crawler.spec.ts` | 3 | **100% (3/3)** | Pass 1: Crawl all 48 routes unauthenticated. Pass 2: Re-crawl all 48 routes with active Admin Director session. Pass 3: Re-crawl Customer Portal with active Customer session. Zero uncaught errors. |
-| **15. Comprehensive Audit & DB** | `tests/e2e/comprehensive-audit-and-database.spec.ts` | 6 | **100% (6/6)** | Database user profile persistence, photogrammetry image integrity, customer portal consistency, new registration flow, mobile portal, and multi-role directory. |
-| **16. AI Copilot Suite** | `tests/e2e/ai-assistant.spec.ts` | 3 | **100% (3/3)** | Natural language ERP query assistant: Monthly revenue aggregations, low-stock product queries, structured telemetry output. |
-| **17. Login & Registration Suite** | `tests/e2e/login-page.spec.ts` | 10 | **100% (10/10)** | Stitch design styling, role selector tabs, registration bidirectional navigation, input masks, and session cookies. |
-| **18. Photogrammetry Audit** | `tests/e2e/photogrammetry-customer-audit.spec.ts` | 3 | **100% (3/3)** | High-resolution rooftop inspection imagery, zoom lightbox modal, RCC tilt calculation, and azimuth inspection. |
-| **19. Site Survey Timeline** | `tests/e2e/surveys-timeline.spec.ts` | 4 | **100% (4/4)** | Vertical ticket timeline, collapsible accordion cards, status filtering, photo lightbox, and structural feasibility adjudication. |
-| **20. Google Stitch Fidelity** | `tests/e2e/stitch-fidelity.spec.ts` | 9 | **100% (9/9)** | Warm Architectural Precision design tokens: Navy `#172747`, Espresso `#493027`, Sand `#F7F3EC`, Gold `#B18751`, typography, border radius. |
-| **21. Complete Lifecycle Workflow** | `tests/e2e/workflow.spec.ts` | 10 | **100% (10/10)** | Unified macro workflow across Public, ERP, Mobile, and Customer portals without context breaks. |
+| # | Test Specification File | Suite Category | Tests | Pass Rate | Key Capabilities Verified |
+|---|---|---|:---:|:---:|---|
+| **1** | `tests/e2e/admin-workflow.spec.ts` | Phase 12.3 Operations | 3 | **100% (3/3)** | Director SCADA telemetry, financial summaries without NaN errors, interactive quick links, 1-click role switcher. |
+| **2** | `tests/e2e/ai-assistant.spec.ts` | AI Copilot | 3 | **100% (3/3)** | Natural language ERP assistant: Monthly revenue aggregation, low stock inventory queries, telemetry cards. |
+| **3** | `tests/e2e/all-pages-crawler.spec.ts` | Multi-Pass Crawler | 3 | **100% (3/3)** | Pass 1: Public 48-route crawl. Pass 2: Authenticated Admin crawl. Pass 3: Authenticated Customer Portal crawl. Zero exceptions. |
+| **4** | `tests/e2e/auth.spec.ts` | Phase 12.1 Authentication | 5 | **100% (5/5)** | Director, Customer, and 6 Employee authentications, invalid credential denial, session persistence, and sign-out. |
+| **5** | `tests/e2e/competition-scenarios.spec.ts` | Lifecycle Benchmark | 24 | **100% (24/24)** | Comprehensive 24-test scenario suite: Lead inquiry, survey, BOM sizing, serial dispatch, 5-point checklist, warranty, RMA, PM Surya Ghar, Net-Metering, deduplication, audit trails. |
+| **6** | `tests/e2e/comprehensive-audit-and-database.spec.ts` | Database & Audit | 6 | **100% (6/6)** | Database account persistence, survey photogrammetry images, customer portal consistency, new registration, field tech mobile, multi-role directory. |
+| **7** | `tests/e2e/customer-journey.spec.ts` | Phase 12.2 Customer | 3 | **100% (3/3)** | Solar calculator instant sizing, lead capture in CRM, and multi-tab Customer Portal verification. |
+| **8** | `tests/e2e/customer-warranty.spec.ts` | Customer Warranty | 4 | **100% (4/4)** | Portal warranty navigation, category filtering, digital bond modal rendering, and dual URL alias resolution. |
+| **9** | `tests/e2e/deep-audit-inspector.spec.ts` | Reliability Loop | 6 | **100% (6/6)** | 48-page image integrity and console error loop, calculator formula loop, survey lead loop, serial scan loop, signature canvas loop, warranty modal loop. |
+| **10** | `tests/e2e/employee-workflow.spec.ts` | Phase 12.4 Workflows | 6 | **100% (6/6)** | Dedicated end-to-end workflows for all 6 employee roles: Sales, Survey, Warehouse, Coordinator, Finance, Support. |
+| **11** | `tests/e2e/finance.spec.ts` | Phase 12.10 Finance | 5 | **100% (5/5)** | GST tax invoices, direct project job expenses, technician milestone payouts, PM Surya Ghar claims, and unit gross margin. |
+| **12** | `tests/e2e/installation-and-warranty.spec.ts` | Phase 12.8 Field Operations | 4 | **100% (4/4)** | Installation project milestones, certified crew scheduling, 10-point commissioning checklist, and 25-year warranty activation. |
+| **13** | `tests/e2e/inventory-and-qr.spec.ts` | Phase 12.7 Warehousing | 4 | **100% (4/4)** | Warehouse stock levels, low-stock alerts, serial number registry with QR tokens, dispatch staging, and audited stock ledger. |
+| **14** | `tests/e2e/login-page.spec.ts` | UI & Authentication | 9 | **100% (9/9)** | Stitch design styling, role selector tabs, registration bidirectional navigation, input masks, and session cookies. |
+| **15** | `tests/e2e/payment-workflow.spec.ts` | Phase 12.6 Escrow | 3 | **100% (3/3)** | Milestone escrow schedule (30/50/20 & 10/40/40/10), payment gateway sandbox badges, and ERP payment reconciliation ledger. |
+| **16** | `tests/e2e/responsive-and-accessibility.spec.ts` | Phase 12.12 Responsive | 5 | **100% (5/5)** | Mobile (375px), Tablet (768px), Desktop (1440px) viewports without horizontal overflow, form labels, and tab navigation. |
+| **17** | `tests/e2e/sales-and-quotation.spec.ts` | Phase 12.5 Quotations | 4 | **100% (4/4)** | CRM lead pipeline, mandatory survey approval gatekeeper, PV array configurator, and dynamic BOM engine with gross margin. |
+| **18** | `tests/e2e/security-and-rbac.spec.ts` | Phase 12.11 AppSec | 4 | **100% (4/4)** | Public ERP route protection, cross-role horizontal isolation, credential masking in DOM, and role-based sidebar menus. |
+| **19** | `tests/e2e/service-and-maintenance.spec.ts` | Phase 12.9 Service & RMA | 3 | **100% (3/3)** | Customer RMA ticket filing, zero-cost (₹0) covered warranty repairs, and scheduled preventive maintenance visits. |
+| **20** | `tests/e2e/surveys-timeline.spec.ts` | Site Survey Timeline | 5 | **100% (5/5)** | Vertical ticket timeline, collapsible accordion cards, status filtering, photo lightbox, and structural feasibility adjudication. |
+| **21** | `tests/e2e/workflow.spec.ts` | Enterprise Macro E2E | 12 | **100% (12/12)** | Master unified workflow across Public, ERP, Mobile, and Customer portals without context breaks. |
+| **TOTAL** | **21 Specification Files** | **Master Regression** | **121** | **100% (121/121)** | **121 Tests Executed • 121 Tests Passed • 0 Failed • 0 Flaky** |
 
 ---
 

@@ -7,14 +7,25 @@
 
 ---
 
-## 1. Executive Summary
+## 1. Executive Summary & Route Reconciliation
 
-SunPower One implements **64 authoritative route patterns** across five dedicated experience domains:
-1. **Public Marketing & Lead Acquisition Portal** (11 routes)
-2. **Operations & ERP Command Center** (34 routes)
-3. **Field Technician Mobile Experience** (7 routes)
-4. **Customer Self-Service Portal** (11 routes)
-5. **System Routing & Error Recovery** (1 catch-all route)
+### Definitive Route Count Reconciliation
+Across different historical project logs and audit checkpoints, three distinct counts appeared:
+- **64 Authoritative Route Patterns (`src/App.tsx`):** The exact number of declared `<Route>` definitions in the React Router v6 router configuration, consisting of:
+  - 51 primary standalone views
+  - 6 ergonomic URL redirects (e.g., `/app` $\rightarrow$ `/app/dashboard`, `/calculator` $\rightarrow$ `/solar-calculator`, `/portal/payments` $\rightarrow$ `/portal/orders`)
+  - 3 parameterized dynamic route templates (`/technician/jobs/:id`, `/technician/checklist/:id`, `/technician/completion/:id`)
+  - 3 plural/convenience aliases (`/app/leads`, `/portal`, `/portal/warranties`)
+  - 1 branded catch-all 404 handler (`*`)
+- **52 Crawlable Target View URLs (`all-pages-crawler.spec.ts`):** The exact list of concrete, non-redirecting, parameterized URLs tested in the autonomous multi-pass crawler suite (10 public + 31 ERP + 4 technician instances + 7 customer views).
+- **48 Legacy Baseline Views:** The initial page count before the addition of `/register`, `/app/inventory/passport`, `/solutions/on-grid`, and `/solutions/off-grid`.
+
+### Experience Domain Summary
+1. **Public Marketing & Lead Acquisition Portal:** 11 routes (10 views + 1 alias)
+2. **Operations & ERP Command Center:** 34 routes (31 views + 3 aliases)
+3. **Field Technician Mobile Experience:** 7 routes (3 templates + 3 views + 1 alias)
+4. **Customer Self-Service Portal:** 11 routes (8 views + 3 aliases)
+5. **System Routing & Error Recovery:** 1 catch-all route (`*`)
 
 All routes are governed by centralized layout wrappers, atomic session management, role-based access control (RBAC), and automated regression test coverage (121 Playwright tests).
 

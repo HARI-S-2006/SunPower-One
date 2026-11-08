@@ -67,7 +67,7 @@ const mockNotifications: NotificationItem[] = [
 
 export function Header({ onMenuClick }: AppHeaderProps) {
   const navigate = useNavigate()
-  const { backendMode, currentUser } = useSolarStore()
+  const { backendMode, currentUser, userAccounts, setAuthUser } = useSolarStore()
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -170,13 +170,43 @@ export function Header({ onMenuClick }: AppHeaderProps) {
           <span className="text-[#827B73] font-mono tabular-nums">74.2 MW DC</span>
         </div>
 
-        {/* Active Role Status Badge */}
-        <div className="hidden sm:flex items-center gap-1.5 bg-[#F7F3EC] px-3 py-1.5 rounded-lg border border-[#E8E0D6] text-xs font-semibold">
-          <span className="w-2 h-2 rounded-full bg-[#2D5A43]" />
-          <span className="text-[#172747] font-medium">{currentTitle}</span>
-          <span className="text-[10px] text-[#827B73] uppercase font-mono tracking-wider ml-1">
-            ({currentUser?.profile === 'admin' ? 'Director Console' : 'Operational Workspace'})
-          </span>
+        {/* Active Role Status Badge & 1-Click Quick Role Switcher */}
+        <div className="hidden sm:flex items-center gap-1.5 bg-[#FAF7F2] px-2.5 py-1 rounded-xl border border-[#E8E0D6] shadow-2xs text-xs font-semibold">
+          <label htmlFor="header-role-switcher" className="text-[10px] font-bold text-[#827B73] uppercase tracking-wider flex items-center gap-1 cursor-pointer select-none">
+            <span className="w-2 h-2 rounded-full bg-[#2D5A43]" />
+            Role:
+          </label>
+          <select
+            id="header-role-switcher"
+            value={currentUser?.email || 'admin@sunpower-solutions.com'}
+            onChange={(e) => {
+              const match = userAccounts.find(a => a.email.toLowerCase() === e.target.value.toLowerCase())
+              if (match) {
+                setAuthUser(match)
+                const roleRoutes: Record<string, string> = {
+                  director: '/app/dashboard',
+                  sales: '/app/crm/leads',
+                  survey: '/app/surveys',
+                  warehouse: '/app/inventory',
+                  coordinator: '/app/installations',
+                  finance: '/app/invoices',
+                  support: '/app/service',
+                  technician: '/technician/dashboard',
+                  customer: '/portal/dashboard',
+                }
+                const target = roleRoutes[match.role] || '/app/dashboard'
+                navigate(target)
+              }
+            }}
+            className="rounded-lg border-0 bg-transparent text-xs font-bold text-[#172747] focus:outline-none cursor-pointer py-0.5"
+            aria-label="1-Click Quick Role Switcher"
+          >
+            {userAccounts.map((u) => (
+              <option key={u.id} value={u.email}>
+                {u.name} ({u.role.toUpperCase()})
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Notifications Dropdown */}
