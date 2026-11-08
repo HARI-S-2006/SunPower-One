@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Phase 12.12: Responsive Viewports & Accessibility Compliance Suite', () => {
 
-  test('Mobile Viewport (375px × 667px): Public Homepage & Login Page render responsively without horizontal scroll overflow', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 })
+  test('Mobile Viewport (390px × 844px): Public Homepage & Login Page render responsively without horizontal scroll overflow', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/')
     await page.waitForLoadState('networkidle')
 
@@ -13,6 +13,7 @@ test.describe('Phase 12.12: Responsive Viewports & Accessibility Compliance Suit
     // Ensure document width matches viewport (no horizontal overflow)
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth)
     expect(scrollWidth).toBeLessThanOrEqual(400)
+    await page.screenshot({ path: 'docs/screenshots/responsive/mobile-390x844-home.png' })
 
     // Mobile Login Page
     await page.goto('/login')
@@ -20,6 +21,7 @@ test.describe('Phase 12.12: Responsive Viewports & Accessibility Compliance Suit
     await expect(page.locator('button[type="submit"]')).toBeVisible()
     const loginScrollWidth = await page.evaluate(() => document.documentElement.scrollWidth)
     expect(loginScrollWidth).toBeLessThanOrEqual(400)
+    await page.screenshot({ path: 'docs/screenshots/responsive/mobile-390x844-login.png' })
   })
 
   test('Tablet Viewport (768px × 1024px): Solar Calculator renders responsive grid and controls', async ({ page }) => {
@@ -30,6 +32,7 @@ test.describe('Phase 12.12: Responsive Viewports & Accessibility Compliance Suit
     await expect(page.getByText(/Estimate Your Solar Requirements/i)).toBeVisible()
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth)
     expect(scrollWidth).toBeLessThanOrEqual(775)
+    await page.screenshot({ path: 'docs/screenshots/responsive/tablet-768x1024-calculator.png' })
   })
 
   test('Desktop Viewport (1440px × 900px): Admin Operations Command Center renders full multi-column Stitch layout', async ({ page }) => {
@@ -46,6 +49,7 @@ test.describe('Phase 12.12: Responsive Viewports & Accessibility Compliance Suit
     await expect(page.locator('aside')).toBeVisible()
     await expect(page.locator('header')).toBeVisible()
     await expect(page.locator('main')).toBeVisible()
+    await page.screenshot({ path: 'docs/screenshots/responsive/desktop-1440x900-dashboard.png' })
   })
 
   test('Accessibility: Form fields have matching label associations and aria attributes', async ({ page }) => {
