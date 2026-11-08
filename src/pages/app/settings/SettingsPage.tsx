@@ -236,53 +236,57 @@ export function SettingsPage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-semibold text-[#827B73]">Quick Account Switcher:</span>
-                <select
-                  id="settings-quick-switch-select"
-                  value={currentUser?.email || 'admin@sunpower-solutions.com'}
-                  onChange={(e) => {
-                    const match = userAccounts.find(a => a.email.toLowerCase() === e.target.value.toLowerCase())
-                    if (match) handleQuickSwitchAccount(match)
-                  }}
-                  className="rounded-xl border border-[#E8E0D6] bg-[#F7F3EC] px-3 py-1.5 text-xs font-bold text-[#172747] focus:border-[#172747] focus:outline-none cursor-pointer"
-                  aria-label="Quick Account Switcher"
-                >
-                  {userAccounts.map((u) => (
-                    <option key={u.id} value={u.email}>
-                      {u.name} ({u.title})
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {currentUser?.profile === 'admin' && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold text-[#827B73]">Quick Account Switcher (Director Console):</span>
+                  <select
+                    id="settings-quick-switch-select"
+                    value={currentUser?.email || 'admin@sunpower-solutions.com'}
+                    onChange={(e) => {
+                      const match = userAccounts.find(a => a.email.toLowerCase() === e.target.value.toLowerCase())
+                      if (match) handleQuickSwitchAccount(match)
+                    }}
+                    className="rounded-xl border border-[#E8E0D6] bg-[#F7F3EC] px-3 py-1.5 text-xs font-bold text-[#172747] focus:border-[#172747] focus:outline-none cursor-pointer"
+                    aria-label="Quick Account Switcher"
+                  >
+                    {userAccounts.map((u) => (
+                      <option key={u.id} value={u.email}>
+                        {u.name} ({u.title})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
 
-            {/* 1-Click Role Switcher Pill Buttons */}
-            <div className="pt-3 border-t border-[#E8E0D6]">
-              <span className="text-[10px] font-bold text-[#827B73] uppercase tracking-wider block mb-2">
-                1-Click Role Switcher (Instant Impersonation):
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {userAccounts.map((account) => {
-                  const isCurrent = currentUser?.email.toLowerCase() === account.email.toLowerCase()
-                  return (
-                    <button
-                      key={account.id}
-                      type="button"
-                      onClick={() => handleQuickSwitchAccount(account)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border flex items-center gap-1.5 cursor-pointer ${
-                        isCurrent
-                          ? 'bg-[#172747] text-white border-[#172747] shadow-sm'
-                          : 'bg-[#F7F3EC] text-[#292522] border-[#E8E0D6] hover:bg-white hover:border-[#B18751]'
-                      }`}
-                    >
-                      <span>{account.name}</span>
-                      <span className="text-[10px] opacity-75 font-mono">({account.role})</span>
-                    </button>
-                  )
-                })}
+            {/* 1-Click Role Switcher Pill Buttons (Restricted Exclusively to Admin Director) */}
+            {currentUser?.profile === 'admin' && (
+              <div className="pt-3 border-t border-[#E8E0D6]">
+                <span className="text-[10px] font-bold text-[#827B73] uppercase tracking-wider block mb-2">
+                  1-Click Role Switcher (Admin Emulation Only):
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {userAccounts.map((account) => {
+                    const isCurrent = currentUser?.email.toLowerCase() === account.email.toLowerCase()
+                    return (
+                      <button
+                        key={account.id}
+                        type="button"
+                        onClick={() => handleQuickSwitchAccount(account)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border flex items-center gap-1.5 cursor-pointer ${
+                          isCurrent
+                            ? 'bg-[#172747] text-white border-[#172747] shadow-sm'
+                            : 'bg-[#F7F3EC] text-[#292522] border-[#E8E0D6] hover:bg-white hover:border-[#B18751]'
+                        }`}
+                      >
+                        <span>{account.name}</span>
+                        <span className="text-[10px] opacity-75 font-mono">({account.role})</span>
+                      </button>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Quick Metrics Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
@@ -477,7 +481,7 @@ export function SettingsPage() {
                             <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg">
                               Current User
                             </span>
-                          ) : (
+                          ) : currentUser?.profile === 'admin' ? (
                             <button
                               type="button"
                               onClick={() => handleQuickSwitchAccount(account)}
@@ -487,6 +491,10 @@ export function SettingsPage() {
                               <span>Switch To {account.name}</span>
                               <ArrowRight className="h-3 w-3" />
                             </button>
+                          ) : (
+                            <span className="text-[10px] text-[#827B73] font-mono px-2 py-0.5 rounded bg-gray-100">
+                              Restricted Clearance
+                            </span>
                           )}
                         </td>
                       </tr>

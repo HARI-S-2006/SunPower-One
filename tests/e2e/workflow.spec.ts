@@ -39,7 +39,7 @@ test.describe('SunPower One - Complete Enterprise Lifecycle & Competition Scenar
   test('Scenario 1: CRM Lead pipeline lists enquiries and customers', async ({ page }) => {
     await page.goto('/app/crm/leads')
     await expect(page.getByText(/Customer Inquiries & Leads/i)).toBeVisible()
-    await expect(page.getByText(/Siddharth Varma/i)).toBeVisible()
+    await expect(page.locator('main').getByText(/Siddharth Varma/i).first()).toBeVisible()
   })
 
   // Test 5: Scenario 2 - Survey Feasibility & Commercial Approval Gatekeeper

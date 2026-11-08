@@ -1602,6 +1602,13 @@ export function SolarStoreProvider({ children }: { children: React.ReactNode }) 
   };
 
   const setAuthUser: SolarStoreContextType['setAuthUser'] = (user) => {
+    // Privilege Escalation Guardrail:
+    // Non-admin users cannot assume director administrative credentials via state mutation.
+    if (user.profile === 'admin' && currentUser && currentUser.profile !== 'admin' && user.email !== currentUser.email) {
+      console.warn('[Security Violation] Unauthorized privilege escalation attempt blocked. Non-admin users cannot assume director administrative credentials.')
+      return
+    }
+
     const matchingAccount = userAccounts.find(
       (a) =>
         (user.email && a.email.toLowerCase() === user.email.toLowerCase()) ||

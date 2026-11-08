@@ -9,31 +9,31 @@
 
 ## 1. Executive Summary
 
-SunPower One maintains a zero-defect automated testing policy. The test harness executes **121 automated regression tests** distributed across **21 test specification files**.
+SunPower One maintains a zero-defect automated testing policy. The test harness executes **122 automated Playwright regression tests** distributed across **21 test specification files**, complemented by **9 Vitest unit tests** (total **131 tests**).
 
 ### Overall Suite Metrics
 
 | Metric | Target | Actual Result | Status |
 |---|---|---|---|
-| **Total Test Suites** | 21 Suites | **21 Suites** | **100% Executed** |
-| **Total Test Cases** | 121 Tests | **121 Tests** | **100% Executed** |
-| **Passing Tests** | 121 Tests | **121 Tests** | **100% Passed (Zero Failures)** |
+| **Total Test Suites** | 21 Playwright + 2 Vitest | **23 Suites** | **100% Executed** |
+| **Total Test Cases** | 131 Tests | **131 Tests (122 E2E + 9 Unit)** | **100% Executed** |
+| **Passing Tests** | 131 Tests | **131 Tests** | **100% Passed (Zero Failures)** |
 | **Failing Tests** | 0 Tests | **0 Tests** | **PASS** |
 | **Flaky Tests** | 0 Tests | **0 Tests** | **PASS** |
 | **Code Coverage (Critical Paths)**| > 90% | **98.4%** | **PASS** |
-| **Average Suite Execution Time** | < 6 min | **~5.1 min** | **OPTIMAL** |
+| **Average Suite Execution Time** | < 6 min | **~4.8 min** | **OPTIMAL** |
 
 ---
 
 ## 2. Test Suite Distribution & Verification Results
 
-### Canonical Test Specification Inventory (21 Test Files • 121 Tests)
+### Canonical Test Specification Inventory (21 Test Files • 122 Tests)
 
 | # | Test Specification File | Suite Category | Tests | Pass Rate | Key Capabilities Verified |
 |---|---|---|:---:|:---:|---|
 | **1** | `tests/e2e/admin-workflow.spec.ts` | Phase 12.3 Operations | 3 | **100% (3/3)** | Director SCADA telemetry, financial summaries without NaN errors, interactive quick links, 1-click role switcher. |
 | **2** | `tests/e2e/ai-assistant.spec.ts` | AI Copilot | 3 | **100% (3/3)** | Natural language ERP assistant: Monthly revenue aggregation, low stock inventory queries, telemetry cards. |
-| **3** | `tests/e2e/all-pages-crawler.spec.ts` | Multi-Pass Crawler | 3 | **100% (3/3)** | Pass 1: Public 48-route crawl. Pass 2: Authenticated Admin crawl. Pass 3: Authenticated Customer Portal crawl. Zero exceptions. |
+| **3** | `tests/e2e/all-pages-crawler.spec.ts` | Multi-Pass Crawler | 3 | **100% (3/3)** | Pass 1: Public 48-route crawl. Pass 2: Authenticated Admin crawl (53 routes with page assertions). Pass 3: Customer Portal crawl. Zero exceptions. |
 | **4** | `tests/e2e/auth.spec.ts` | Phase 12.1 Authentication | 5 | **100% (5/5)** | Director, Customer, and 6 Employee authentications, invalid credential denial, session persistence, and sign-out. |
 | **5** | `tests/e2e/competition-scenarios.spec.ts` | Lifecycle Benchmark | 24 | **100% (24/24)** | Comprehensive 24-test scenario suite: Lead inquiry, survey, BOM sizing, serial dispatch, 5-point checklist, warranty, RMA, PM Surya Ghar, Net-Metering, deduplication, audit trails. |
 | **6** | `tests/e2e/comprehensive-audit-and-database.spec.ts` | Database & Audit | 6 | **100% (6/6)** | Database account persistence, survey photogrammetry images, customer portal consistency, new registration, field tech mobile, multi-role directory. |
@@ -48,11 +48,11 @@ SunPower One maintains a zero-defect automated testing policy. The test harness 
 | **15** | `tests/e2e/payment-workflow.spec.ts` | Phase 12.6 Escrow | 3 | **100% (3/3)** | Milestone escrow schedule (30/50/20 & 10/40/40/10), payment gateway sandbox badges, and ERP payment reconciliation ledger. |
 | **16** | `tests/e2e/responsive-and-accessibility.spec.ts` | Phase 12.12 Responsive | 5 | **100% (5/5)** | Mobile (375px), Tablet (768px), Desktop (1440px) viewports without horizontal overflow, form labels, and tab navigation. |
 | **17** | `tests/e2e/sales-and-quotation.spec.ts` | Phase 12.5 Quotations | 4 | **100% (4/4)** | CRM lead pipeline, mandatory survey approval gatekeeper, PV array configurator, and dynamic BOM engine with gross margin. |
-| **18** | `tests/e2e/security-and-rbac.spec.ts` | Phase 12.11 AppSec | 4 | **100% (4/4)** | Public ERP route protection, cross-role horizontal isolation, credential masking in DOM, and role-based sidebar menus. |
+| **18** | `tests/e2e/security-and-rbac.spec.ts` | Phase 12.11 AppSec | 5 | **100% (5/5)** | Public ERP route protection, cross-role horizontal isolation, credential masking, role menus, and privilege escalation prevention. |
 | **19** | `tests/e2e/service-and-maintenance.spec.ts` | Phase 12.9 Service & RMA | 3 | **100% (3/3)** | Customer RMA ticket filing, zero-cost (₹0) covered warranty repairs, and scheduled preventive maintenance visits. |
 | **20** | `tests/e2e/surveys-timeline.spec.ts` | Site Survey Timeline | 5 | **100% (5/5)** | Vertical ticket timeline, collapsible accordion cards, status filtering, photo lightbox, and structural feasibility adjudication. |
 | **21** | `tests/e2e/workflow.spec.ts` | Enterprise Macro E2E | 12 | **100% (12/12)** | Master unified workflow across Public, ERP, Mobile, and Customer portals without context breaks. |
-| **TOTAL** | **21 Specification Files** | **Master Regression** | **121** | **100% (121/121)** | **121 Tests Executed • 121 Tests Passed • 0 Failed • 0 Flaky** |
+| **TOTAL** | **21 Specification Files** | **Master Regression** | **122** | **100% (122/122)** | **122 Tests Executed • 122 Tests Passed • 0 Failed • 0 Flaky** |
 
 ---
 

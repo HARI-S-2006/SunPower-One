@@ -71,5 +71,27 @@ test.describe('Phase 12.11: Application Security, RBAC & Data Isolation Suite', 
     const aside = page.locator('aside')
     await expect(aside).toContainText(/Inventory|Stock|Dispatch/i)
   })
+
+  test('Privilege Escalation Prevention: Non-admin employees cannot access role switcher or assume Director clearance', async ({ page }) => {
+    // 1. Authenticate as Sales Executive
+    await page.goto('/login')
+    const employeeBtn = page.getByRole('button', { name: 'Employee', exact: true })
+    await employeeBtn.click()
+    await page.selectOption('#role-select', 'sales')
+    await page.fill('input#email', 'sales@demo.com')
+    await page.fill('input#password', 'password123')
+    await page.click('button[type="submit"]')
+    await page.waitForURL(/\/app\/(crm\/leads|dashboard)/)
+
+    // 2. Header must NOT expose admin role switcher to employee
+    const headerRoleSwitcher = page.locator('#header-role-switcher')
+    await expect(headerRoleSwitcher).not.toBeVisible()
+
+    // 3. Navigate to Settings and verify role switcher pills and switch buttons are restricted
+    await page.goto('/app/settings')
+    await expect(page.getByText('1-Click Role Switcher (Admin Emulation Only)')).not.toBeVisible()
+    await expect(page.locator('#settings-quick-switch-select')).not.toBeVisible()
+    await expect(page.getByText('Restricted Clearance').first()).toBeVisible()
+  })
 })
 

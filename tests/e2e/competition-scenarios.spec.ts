@@ -192,7 +192,7 @@ test.describe('SunPower One - Competition Scenario Tests', () => {
     test('Customer deduplication - same phone creates single customer', async ({ page }) => {
       await page.goto('/app/customers')
       await expect(page.getByText(/Customer Directory/i).first()).toBeVisible()
-      await expect(page.getByText(/Siddharth Varma/i).first()).toBeVisible()
+      await expect(page.locator('main').getByText(/Siddharth Varma/i).first()).toBeVisible()
     })
 
     test('Quotation blocked without survey approval', async ({ page }) => {
