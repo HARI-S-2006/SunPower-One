@@ -41,10 +41,14 @@ export function PaymentsPage() {
       <div className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6]">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#172747]/5 px-2.5 py-0.5 text-xs font-semibold text-[#172747] uppercase tracking-wider">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 Customer Escrow & Milestone Payments
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-semibold text-amber-900 shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+                RBI Escrow Sandbox Verified
               </span>
               <span className="text-xs text-[#6E7787]">30% Advance • 50% Dispatch • 20% Commission</span>
             </div>

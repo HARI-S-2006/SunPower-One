@@ -92,50 +92,62 @@ export function LoginPage() {
     e.preventDefault()
     setAuthState('verifying')
 
-    // 1. Authenticate against database user accounts
-    const authResult = authenticateUser(email, password)
-    if (authResult.success && authResult.user) {
-      const u = authResult.user
-      let destination = '/app/dashboard'
-      if (u.profile === 'customer' || u.role === 'customer') {
-        destination = '/portal/dashboard'
-      } else if (u.role === 'technician') {
-        destination = '/technician/jobs'
-      } else if (roleRedirectMap[u.role]?.url) {
-        destination = roleRedirectMap[u.role].url
-      }
-
-      setStatusMessage(`Authenticated as ${u.name} (${u.title}). Launching workspace...`)
-      setTimeout(() => {
-        setAuthState('success')
-        navigate(destination)
-      }, 150)
+    // 1. Mandatory input validation
+    if (!email.trim() || !password.trim()) {
+      setAuthState('idle')
+      setStatusMessage('Please enter both email address and password.')
       return
     }
 
-    // 2. Fallback for custom or simulation credentials
-    let destination = '/app/dashboard'
-    let activeRole: any = 'director'
-    if (selectedProfile === 'customer' || email.toLowerCase().includes('customer')) {
-      destination = '/portal/dashboard'
-      activeRole = 'customer'
-    } else if (selectedProfile === 'admin') {
-      destination = '/app/dashboard'
-      activeRole = 'director'
-    } else {
-      activeRole = selectedRole
-      destination = roleRedirectMap[selectedRole]?.url || '/app/dashboard'
+    // 2. Authenticate against database user accounts (no mock bypass)
+    const authResult = authenticateUser(email, password)
+    if (!authResult.success || !authResult.user) {
+      setAuthState('idle')
+      setStatusMessage(authResult.error || 'Authentication failed. Please verify your credentials.')
+      return
     }
 
-    const info = roleRedirectMap[activeRole] || { name: 'SunPower User', email }
-    setAuthUser({
-      profile: selectedProfile,
-      role: activeRole,
-      name: info.name,
-      email: info.email || email,
-    })
+    const u = authResult.user
 
-    setStatusMessage('Authentication successful! Launching workspace...')
+    // 3. Enforce Profile & Operational Role Authorization
+    if (selectedProfile === 'admin') {
+      if (u.profile !== 'admin') {
+        setAuthState('idle')
+        setStatusMessage('Access Denied: This account does not possess Executive Administrator privileges.')
+        return
+      }
+    } else if (selectedProfile === 'employee') {
+      if (u.profile === 'customer' || u.role === 'customer') {
+        setAuthState('idle')
+        setStatusMessage('Access Denied: Customer accounts cannot sign in to the Employee Operations Terminal.')
+        return
+      }
+      // Verify assigned role matches selected operational terminal (directors retain universal access)
+      if (u.role !== selectedRole && u.role !== 'director' && u.profile !== 'admin') {
+        setAuthState('idle')
+        setStatusMessage(`Access Denied: Account ${u.name} is authorized as ${u.title} (${u.role}), which does not match selected terminal "${selectedRole}". Unauthorized role selection rejected.`)
+        return
+      }
+    } else if (selectedProfile === 'customer') {
+      if (u.profile !== 'customer' && u.role !== 'customer') {
+        setAuthState('idle')
+        setStatusMessage('Access Denied: Employee accounts must use the Employee or Admin terminal.')
+        return
+      }
+    }
+
+    // 4. Resolve Trusted Destination
+    let destination = '/app/dashboard'
+    if (u.profile === 'customer' || u.role === 'customer') {
+      destination = '/portal/dashboard'
+    } else if (u.role === 'director' || u.profile === 'admin') {
+      destination = '/app/dashboard'
+    } else if (roleRedirectMap[u.role]?.url) {
+      destination = roleRedirectMap[u.role].url
+    }
+
+    setAuthUser(u)
+    setStatusMessage(`Authenticated as ${u.name} (${u.title}). Launching workspace...`)
     setTimeout(() => {
       setAuthState('success')
       navigate(destination)
@@ -516,7 +528,13 @@ export function LoginPage() {
                   </div>
                 </form>
 
-                {/* Audit Status Notice */}
+                {/* Audit Status Notice / Error Alert */}
+                {statusMessage && authState === 'idle' && (
+                  <div className="mt-4 p-3 rounded-lg bg-[#FDF2F2] text-xs text-[#9E3A3A] flex items-center gap-2 border border-[#F8B4B4] animate-fade-in" role="alert">
+                    <span className="material-symbols-outlined text-[18px] shrink-0 text-[#9E3A3A]">error</span>
+                    <span className="font-semibold">{statusMessage}</span>
+                  </div>
+                )}
                 {authState !== 'idle' && (
                   <div className="mt-4 p-3 rounded-lg bg-[#F5ECE7] text-xs text-[#172747] flex items-center gap-2 border border-[#E8E0D6] animate-fade-in">
                     <RefreshCw className="h-4 w-4 animate-spin text-[#493027] shrink-0" />

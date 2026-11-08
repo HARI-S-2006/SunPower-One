@@ -8,7 +8,7 @@ test.describe('SunPower One - Database, Authentication & Role Verification Suite
     await page.waitForLoadState('networkidle')
 
     // Click employee profile simulation tab
-    const employeeTab = page.locator('button:has-text("Operational Role")').first()
+    const employeeTab = page.locator('button:has-text("Operational Role"), button:has-text("Employee")').first()
     if (await employeeTab.isVisible()) {
       await employeeTab.click()
     }
@@ -56,7 +56,7 @@ test.describe('SunPower One - Database, Authentication & Role Verification Suite
     await page.goto('/login')
     await page.waitForLoadState('networkidle')
 
-    const adminTab = page.locator('button:has-text("Director Console")').first()
+    const adminTab = page.locator('button:has-text("Director Console"), button:has-text("Admin")').first()
     if (await adminTab.isVisible()) {
       await adminTab.click()
     }
@@ -110,7 +110,7 @@ test.describe('SunPower One - Database, Authentication & Role Verification Suite
     await page.goto('/login')
     await page.waitForLoadState('networkidle')
 
-    const customerTab = page.locator('button:has-text("Solar Customer")').first()
+    const customerTab = page.locator('button:has-text("Solar Customer"), button:has-text("Customer")').first()
     if (await customerTab.isVisible()) {
       await customerTab.click()
     }

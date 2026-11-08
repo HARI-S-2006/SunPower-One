@@ -123,7 +123,11 @@ test.describe('SunPower One - 48-Page Multi-Pass Autonomous Crawler Audit', () =
   test('Pass 3: Re-crawl Customer Portal with authenticated Customer profile (Siddharth Varma)', async ({ page }) => {
     // Authenticate as Customer
     await page.goto('/login')
-    await page.waitForLoadState('networkidle')
+    await page.waitForLoadState('domcontentloaded')
+    const customerTab = page.locator('button:has-text("Customer")').first()
+    if (await customerTab.isVisible()) {
+      await customerTab.click()
+    }
     await page.fill('input#email', 'customer@demo.com')
     await page.fill('input#password', 'password123')
     await page.click('button[type="submit"]:has-text("LOGIN")')

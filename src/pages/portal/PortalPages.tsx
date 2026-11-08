@@ -350,12 +350,22 @@ export function PortalOrdersPage() {
   return (
     <div className="space-y-6 pb-12">
       <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E8E0D6]">
-        <h1 className="text-2xl font-bold text-[#172747] font-['Plus_Jakarta_Sans']">
-          My Orders & Payment Schedule
-        </h1>
-        <p className="text-sm text-[#6E7787]">
-          Track contract milestones for {customerProfile.name} (Customer ID: {customerProfile.id}): 30% Booking Advance, 50% Pre-Dispatch, and 20% Commissioning.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-[#172747] font-['Plus_Jakarta_Sans']">
+              My Orders & Payment Schedule
+            </h1>
+            <p className="text-sm text-[#6E7787] mt-1">
+              Track contract milestones for {customerProfile.name} (Customer ID: {customerProfile.id}): 30% Booking Advance, 50% Pre-Dispatch, and 20% Commissioning.
+            </p>
+          </div>
+          <div className="shrink-0 flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-xs font-semibold text-amber-900 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              Payment Gateway Sandbox (Cashfree / Razorpay Escrow)
+            </span>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-4">

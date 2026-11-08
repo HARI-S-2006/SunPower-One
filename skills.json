@@ -1,0 +1,68 @@
+{
+  "skills": [
+    {
+      "source": "cloudflare/skills",
+      "skills": [
+        "agents-sdk",
+        "basin",
+        "cf-cli",
+        "cloudflare",
+        "cloudflare-email-service",
+        "cloudflare-one",
+        "cloudflare-one-migrations",
+        "durable-objects",
+        "gateway-workers",
+        "k2",
+        "nextjs-on-cloudflare",
+        "sandbox-migrate-to-next",
+        "sandbox-next",
+        "sandbox-stable",
+        "turnstile-spin",
+        "web-perf",
+        "workers-best-practices",
+        "workers-profiling",
+        "wrangler"
+      ]
+    },
+    {
+      "source": "composiohq/skills",
+      "skills": [
+        "composio",
+        "skill-creator"
+      ]
+    },
+    {
+      "source": "datadog-labs/agent-skills",
+      "skills": [
+        "dd-docs",
+        "dd-logs",
+        "dd-monitors",
+        "dd-pup"
+      ]
+    },
+    {
+      "source": "developersglobal/ai-agent-skills",
+      "skills": [
+        "think-before-coding"
+      ]
+    },
+    {
+      "source": "getsentry/sentry-for-ai",
+      "skills": [
+        "sentry-fix-issues"
+      ]
+    },
+    {
+      "source": "tyecode/skills",
+      "skills": [
+        "karpathy-guidelines"
+      ]
+    },
+    {
+      "source": "vercel-labs/skills",
+      "skills": [
+        "find-skills"
+      ]
+    }
+  ]
+}
